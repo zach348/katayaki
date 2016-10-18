@@ -30,3 +30,11 @@ User.all.each do |user|
   group = Group.offset(random_index).first
   FactoryGirl.create(:affiliation, user: user, group: group)
 end
+
+300.times do
+  user_index = rand(User.count)
+  user = User.offset(user_index).first
+  aspiration_index = rand(Aspiration.count)
+  aspiration = Aspiration.offset(aspiration_index).first
+  FactoryGirl.create(:vote, user: user, aspiration: aspiration )
+end
