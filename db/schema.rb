@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018160834) do
+ActiveRecord::Schema.define(version: 20161018161102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "affiliations", force: :cascade do |t|
+    t.integer "user_id",                   null: false
+    t.integer "group_id",                  null: false
+    t.boolean "moderator", default: false, null: false
+    t.index ["group_id"], name: "index_affiliations_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_affiliations_on_user_id", using: :btree
+  end
 
   create_table "aspirations", force: :cascade do |t|
     t.integer "user_id"
