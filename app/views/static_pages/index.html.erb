@@ -4,7 +4,7 @@
   <ul>
     <% @trending.each do |goal| %>
       <div>
-        <h3/> <%= goal.title %>
+        <h3/> <%= link_to goal.title, goals_path %>
       </div>
       <% end %>
   </ul>
