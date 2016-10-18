@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :aspirations
   has_many :goals, through: :aspirations
   has_many :groups, through: :affiliations
+  has_many :votes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
