@@ -1,0 +1,11 @@
+<h1/>Group Show Page
+
+<h3/> <%= @group.name %> <br/>
+<h4/> Members:
+<ul>
+  <% @group.users.each do |user| %>
+  <div>
+    <p/> <%= user.full_name %>
+  </div>
+  <% end %>
+</ul>
