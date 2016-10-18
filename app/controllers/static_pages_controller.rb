@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def index
-    binding.pry
+     if current_user then redirect_to user_path(current_user) end
+
   end
 
 end
