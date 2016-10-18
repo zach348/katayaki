@@ -7,10 +7,10 @@
 </div>
   <h3/>Aspirations
     <ul>
-      <% @goals.each do |goal| %>
+      <% @aspirations.each do |aspiration| %>
         <div>
-          <h5/> <%= goal.title %> <br/>
-          <p/> <%= goal.description %>
+          <h5/> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %> <br/>
+          <p/> <%= aspiration.goal.description %>
         </div>
       <% end %>
     </ul>
@@ -20,7 +20,7 @@
   <ul>
     <% @groups.each do |group| %>
       <div>
-        <h5/> <%= group.name %> <br/>
+        <h5/> <%= link_to group.name, group_path(group) %> <br/>
       </div>
     <% end %>
   </ul>

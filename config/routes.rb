@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:index, :show, :update, :edit, :destroy]
-  resources :goals, only: [:new]
+  resources :goals, only: [:new, :show]
   resources :aspirations, only: [:new, :create, :show, :destroy]
   resources :static_pages, only: [:index]
+  resources :groups, only: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

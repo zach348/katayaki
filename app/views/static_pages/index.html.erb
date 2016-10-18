@@ -3,8 +3,8 @@
 <h1>Welcome to Katayaki. Here's what's trending: </h1>
   <ul>
     <% @trending.each do |goal| %>
-      <div>
-        <h3/> <%= link_to goal.title, goals_path %>
+      <div class="trending_goal">
+        <h3/> <%= link_to goal.title, goal_path(goal) %>
       </div>
       <% end %>
   </ul>
