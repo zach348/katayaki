@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+50.times do
+  FactoryGirl.create(:user)
+end
+
+3.times do
+  FactoryGirl.create(:group)
+end
+
+100.times do
+  FactoryGirl.create(:goal)
+end
+
+User.all.each do |user|
+  3.times do
+    random_index = rand(Goal.count)
+    goal = Goal.offset(random_index).first
+    FactoryGirl.create(:aspiration, user: user, goal: goal)
+  end
+  random_index = rand(Group.count)
+  group = Group.offset(random_index).first
+  FactoryGirl.create(:affiliation, user: user, group: group)
+end

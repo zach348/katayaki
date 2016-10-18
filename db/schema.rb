@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 20161018161102) do
   enable_extension "plpgsql"
 
   create_table "affiliations", force: :cascade do |t|
-    t.integer "user_id",                   null: false
-    t.integer "group_id",                  null: false
-    t.boolean "moderator", default: false, null: false
+    t.integer "user_id",                     null: false
+    t.integer "group_id",                    null: false
+    t.string  "moderator", default: "false", null: false
     t.index ["group_id"], name: "index_affiliations_on_group_id", using: :btree
     t.index ["user_id"], name: "index_affiliations_on_user_id", using: :btree
   end
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20161018161102) do
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string  "name",                      null: false
-    t.boolean "moderated", default: false, null: false
+    t.string "name",                        null: false
+    t.string "moderated", default: "false", null: false
   end
 
   create_table "users", force: :cascade do |t|
