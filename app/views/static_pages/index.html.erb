@@ -1,1 +1,10 @@
-<h1>Welcome to the root!</h1>
+<%= stylesheet_link_tag    'application', media: 'all' %>
+
+<h1>Welcome to Katayaki. Here's what's trending: </h1>
+  <ul>
+    <% @trending.each do |goal| %>
+      <div>
+        <h3/> <%= goal.title %>
+      </div>
+      <% end %>
+  </ul>
