@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20161018191744) do
   create_table "aspirations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "goal_id"
-    t.string  "group_id"
+    t.integer "group_id"
     t.index ["goal_id"], name: "index_aspirations_on_goal_id", using: :btree
     t.index ["user_id"], name: "index_aspirations_on_user_id", using: :btree
   end
