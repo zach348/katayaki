@@ -20,9 +20,11 @@ end
 
 User.all.each do |user|
   3.times do
-    random_index = rand(Goal.count)
-    goal = Goal.offset(random_index).first
-    FactoryGirl.create(:aspiration, user: user, goal: goal)
+    goal_index = rand(Goal.count)
+    goal = Goal.offset(goal_index).first
+    group_index = rand(Group.count)
+    group = Group.offset(group_index).first
+    FactoryGirl.create(:aspiration, user: user, goal: goal, group: group)
   end
   random_index = rand(Group.count)
   group = Group.offset(random_index).first
