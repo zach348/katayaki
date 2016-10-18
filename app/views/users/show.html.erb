@@ -2,4 +2,31 @@
 
 <div>
   <h2>Welcome, <%= current_user.full_name %>!</h2>
+
+
+</div>
+  <h3/>Active Goals
+    <ul>
+      <% @goals.each do |goal| %>
+        <div>
+          <h5/> <%= goal.title %> <br/>
+          <p/> <%= goal.description %>
+        </div>
+      <% end %>
+    </ul>
+
+<div>
+  <h3/>Your Groups
+  <ul>
+    <% @groups.each do |group| %>
+      <div>
+        <h5/> <%= group.name %> <br/>
+      </div>
+    <% end %>
+  </ul>
+
+</div>
+
+<div>
+
 </div>
