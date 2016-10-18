@@ -7,9 +7,9 @@ $(document).ready(function(){
 });
 
 
-var updateVotes = function() {
-  var ratingElements = $(".rating");
-  ratingElements.each(function(index){
+var updateTrending = function() {
+  var trendingElements = $(".trending_goal");
+  trendingElements.each(function(index){
     var rating = ratingElements[index];
     var rating_id = rating.getAttribute('id');
     $.ajax({
