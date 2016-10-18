@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:index, :show, :update, :edit, :destroy]
-  resources :goals, only: [:new]
+  resources :goals, only: [:new, :show]
   resources :aspirations, only: [:new, :create, :show, :destroy]
   resources :static_pages, only: [:index]
 

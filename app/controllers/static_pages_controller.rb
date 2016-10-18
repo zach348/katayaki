@@ -5,7 +5,6 @@ class StaticPagesController < ApplicationController
       redirect_to user_path(current_user)
     else
       @trending = Goal.top(5)
-      binding.pry
     end
   end
 end
