@@ -15,6 +15,7 @@ class Aspiration < ActiveRecord::Base
         aspirations.push(aspiration)
       end
     end
+    aspirations.shuffle.slice(0,num)
   end
 
   def self.to_hash(aspiration)
