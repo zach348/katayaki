@@ -7,7 +7,7 @@ class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+      aspirations: []
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -22,9 +22,11 @@ class RateApp extends Component {
       contentType: 'application/json'
     })
     .done(function(data) {
+      debugger;
       app.setState({ aspirations: data });
     });
   }
+
 
   componentDidMount(){
     this.getAspirations();
@@ -34,9 +36,21 @@ class RateApp extends Component {
 
 
   render(){
-    return (
-      <h1>Hello</h1>
-    );
+    var aspiration = this.state.aspirations.pop();
+
+    if(aspiration === undefined){
+      return (
+        <div></div>
+      );
+    }else{
+      return (
+        <div>
+          <h1>text</h1>
+          <Katayaki info={aspiration}/>
+        </div>
+
+      );
+    }
   }
 }
 

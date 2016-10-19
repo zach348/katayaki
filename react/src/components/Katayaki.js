@@ -1,13 +1,16 @@
 import React from 'react';
 
 const Katayaki = props => {
-  let goal = props.goal;
-  let id = props.id;
-  let url = "/figures/" + props.id
+  var goal = props.info.goal;
+  var id = props.info.id;
+  var description = props.info.description;
+  var user = props.info.user;
 
   return (
     <div className="katayaki">
-      
+      <h3>{goal}</h3>
+      <h4>{description}</h4>
+      <h5>{user}</h5>
     </div>
   );
 };
