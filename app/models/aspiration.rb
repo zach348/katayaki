@@ -11,7 +11,7 @@ class Aspiration < ActiveRecord::Base
     aspirations = []
     groups = user.groups.pluck(:id)
     self.select do |aspiration|
-      if groups.include?(aspiration.group_id) && !self.voted?(aspiration, user)
+      if groups.include?(aspiration.group_id) && self.voted?(aspiration, user)
         aspirations.push(aspiration)
       end
     end
