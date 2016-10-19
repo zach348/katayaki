@@ -5,9 +5,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :update, :edit, :destroy]
   resources :goals, only: [:new, :show]
-  resources :aspirations, only: [:new, :create, :show, :destroy]
+  resources :aspirations, only: [:new, :index, :create, :show, :destroy]
   resources :static_pages, only: [:index]
   resources :groups, only: [:show]
+
+  get 'rate' => 'ratings#rate'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
