@@ -7,7 +7,7 @@ class Aspiration < ActiveRecord::Base
   validates :user_id, presence: true
   validates :goal_id, presence: true
 
-  def self.rate_items_for(user, num)
+  def self.rating_items_for(user, num)
     aspirations = []
     groups = user.groups.pluck(:id)
     groups.each do |group_id|
@@ -20,7 +20,8 @@ class Aspiration < ActiveRecord::Base
     {
       user: User.find(aspiration.user).full_name,
       title: Goal.find(aspiration.goal).title,
-      description: Goal.find(aspiration.goal).description
+      description: Goal.find(aspiration.goal).description,
+      id: aspiration.id
     }
   end
 end
