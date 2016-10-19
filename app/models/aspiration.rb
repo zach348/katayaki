@@ -13,6 +13,9 @@ class Aspiration < ActiveRecord::Base
     groups.each do |group_id|
       aspirations += self.where(group: group_id)
     end
+    aspirations = aspirations.select do |aspiration|
+      Vote.where(user: user).where(aspiration: aspiration).empty?
+    end
     aspirations.shuffle.slice(0,10)
   end
 
