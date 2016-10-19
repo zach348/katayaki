@@ -19,7 +19,7 @@ class Aspiration < ActiveRecord::Base
   def self.to_hash(aspiration)
     {
       user: User.find(aspiration.user).full_name,
-      title: Goal.find(aspiration.goal).title,
+      goal: Goal.find(aspiration.goal).title,
       description: Goal.find(aspiration.goal).description,
       id: aspiration.id
     }

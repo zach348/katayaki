@@ -1,12 +1,13 @@
 //RateApp.js
 import React, {Component} from 'react';
+import Katayaki from './Katayaki';
 
 
 class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-      'key': 'hello'
+
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -26,7 +27,7 @@ class RateApp extends Component {
   }
 
   componentDidMount(){
-    setTimeout(this.getAspirations, 3000);
+    this.getAspirations();
   }
 
 
