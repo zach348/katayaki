@@ -6,10 +6,12 @@ class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+      'key': 'hello'
     };
-
+    this.getAspirations = this.getAspirations.bind(this);
   }
+
+
 
   getAspirations() {
     let app = this;
@@ -23,9 +25,16 @@ class RateApp extends Component {
     });
   }
 
+  componentDidMount(){
+    setTimeout(this.getAspirations, 3000);
+  }
+
+
+
+
   render(){
     return (
-      <h1> Test </h1>
+      <h1>Hello</h1>
     );
   }
 }
