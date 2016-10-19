@@ -10,10 +10,12 @@ class Aspiration < ActiveRecord::Base
   def self.rating_items_for(user, num)
     aspirations = []
     groups = user.groups.pluck(:id)
-    groups.each do |group_id|
-      aspirations += self.where(group: group_id)
+    self.select do |aspiration|
+      if groups.include?(aspiration.group_id) && !self.voted?(aspiration, user)
+        aspirations.push(aspiration)
+      end
     end
-    aspirations.shuffle.slice(0,10)
+    aspirations.shuffle.slice(0,num)
   end
 
   def self.to_hash(aspiration)
@@ -23,5 +25,9 @@ class Aspiration < ActiveRecord::Base
       description: Goal.find(aspiration.goal).description,
       id: aspiration.id
     }
+  end
+
+  def self.voted?(aspiration, user)
+    !Vote.where(user: user).where(aspiration: aspiration).empty?
   end
 end
