@@ -3,38 +3,15 @@ $teal: #008BB2;
 $turquoise: #93E7FF;
 
 
-* {
-    margin: 0;
-}
-html, body {
-    height: 100%;
-    background-image: url("./community-web2.jpg");
-    background-size: 100%;
-}
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-}
-.footer, .push {
-    height: 142px; /* .push must be the same height as .footer */
-}
-
-#flash {
-  text-align: center;
-  font-size: 1rem;
-  background-color: red;
-  margin: auto;
-  color: white;
-  border-radius: 10px;
-}
 
 .katayaki {
   width: 66%;
+  height: 66%;
   text-align: center;
-  margin: 0 auto;
-  border: 0.5rem solid $orange;
+  margin-top: 20%;
+  border: 0.25rem solid $turquoise;
   background-color: $teal;
+  float: none !important;
 }
 
 .card{

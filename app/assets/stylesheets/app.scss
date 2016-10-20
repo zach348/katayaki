@@ -15,14 +15,12 @@ html, body {
     height: auto !important;
     height: 100%;
 }
-.footer, .push {
-    height: 142px; /* .push must be the same height as .footer */
-}
+
 
 #flash {
   text-align: center;
-  font-size: 1rem;
-  background-color: red;
+  font-size: 2rem;
+  background-color: $orange;
   margin: auto;
   color: white;
   border-radius: 10px;

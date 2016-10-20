@@ -1,10 +1,10 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
-
-<h1>Trending</h1>
-  <ul>
+<div class="row">
+  <div>
     <% @trending.each do |goal| %>
-      <div class="trending_goal">
-        <h3/> <%= link_to goal.title, goal_path(goal) %>
+      <div class="katayaki small-9 small-centered columns">
+        <h3 class="white-text-override"> <%= link_to goal.title, goal_path(goal) %></h3>
       </div>
-      <% end %>
-  </ul>
+    <% end %>
+  </div>
+</div>

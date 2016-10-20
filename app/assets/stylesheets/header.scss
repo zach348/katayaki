@@ -5,13 +5,19 @@ $subnav-link-opacity: 0.15;
 $header-height: 2.5rem;
 $transition: all .35s ease-in-out;
 
+$orange: #FF7D00;
+$teal: #008BB2;
+$turquoise: #93E7FF;
+
+
+
 .header {
   text-align: center;
   background: $header-bg;
   background-size: cover;
   position: relative;
   overflow: visible;
-  border: 0.5em solid #93E7FF;
+  border: 0.5em solid $turquoise;
   padding-top: $header-height;
   padding-bottom: $header-height + ($subnav-link-padding * 2 + $subnav-font-size - 0.15rem);
 

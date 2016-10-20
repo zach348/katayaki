@@ -14,8 +14,9 @@
  *= require_self
  *= require foundation_and_overrides
  *= require app
- *= require index
  *= require react
+ *= require index
+
 
 
 
