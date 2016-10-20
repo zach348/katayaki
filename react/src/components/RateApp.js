@@ -1,12 +1,13 @@
 //RateApp.js
 import React, {Component} from 'react';
+import Katayaki from './Katayaki';
 
 
 class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-      'key': 'hello'
+      aspirations: []
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -25,17 +26,33 @@ class RateApp extends Component {
     });
   }
 
+
   componentDidMount(){
-    setTimeout(this.getAspirations, 3000);
+    this.getAspirations();
+    if(this.state.aspirations.length < 3){
+      this.getAspirations();
+    }
   }
 
 
 
 
   render(){
-    return (
-      <h1>Hello</h1>
-    );
+    var aspiration = this.state.aspirations.pop();
+
+    if(aspiration === undefined){
+      return (
+        <div className='katayaki small-9 small-centered columns'></div>
+      );
+    }else{
+      return (
+        <div className='row'>
+            <div className='katayaki small-9 small-centered columns'>
+              <Katayaki info={aspiration}/>
+            </div>
+        </div>
+      )
+    }
   }
 }
 

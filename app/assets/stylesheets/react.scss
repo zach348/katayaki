@@ -1,0 +1,19 @@
+$orange: #FF7D00;
+$teal: #008BB2;
+$turquoise: #93E7FF;
+
+
+
+.katayaki {
+  width: 66%;
+  height: 66% !important;
+  text-align: center;
+  margin-top: 20%;
+  border: 0.25rem solid $turquoise;
+  background-color: $teal;
+  float: none !important;
+}
+
+.card{
+  padding: 5rem;
+}

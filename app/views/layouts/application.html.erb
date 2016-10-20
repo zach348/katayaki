@@ -2,15 +2,18 @@
 <html>
   <head>
     <title>Katayaki</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <nav>
-      <ul class="navBar">
+    <header class="header">
+      <h1 class="headline">Katayaki</h1>
+      <ul class="header-subnav">
         <%- if user_signed_in? -%>
         <li class="navItem"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <li class="navItem"><%= link_to 'Profile', user_path(current_user) %></li>
@@ -23,10 +26,19 @@
         <li class="navItem"><%= link_to 'Trending', static_pages_path %></li>
         <%- end -%>
       </ul>
+    </header>
+    <nav>
+      <ul class="navBar">
+
+      </ul>
     </nav>
-    <% flash.each do |key, value| %>
-      <p id="flash"><%=value%></p>
-    <% end %>
-    <%= yield %>
+    <div class='row'>
+      <% flash.each do |key, value| %>
+        <p class='small-8 small-centered columns'id="flash"><%=value%></p>
+      <% end %>
+    </div>
+    <div className="wrapper">
+      <%= yield %>
+    </div>
   </body>
 </html>
