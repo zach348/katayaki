@@ -6,6 +6,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.min.css">
+
   </head>
 
   <body>
@@ -24,9 +26,11 @@
         <%- end -%>
       </ul>
     </nav>
-    <% flash.each do |key, value| %>
-      <p id="flash"><%=value%></p>
-    <% end %>
+    <div class='row'>
+      <% flash.each do |key, value| %>
+        <p class='small-8 small-centered large-8 large-centered columns'id="flash"><%=value%></p>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

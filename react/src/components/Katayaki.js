@@ -7,10 +7,12 @@ const Katayaki = props => {
   var user = props.info.user;
 
   return (
-    <div className="katayaki">
-      <h3>{goal}</h3>
-      <h4>{description}</h4>
-      <h5>{user}</h5>
+    <div className=>
+      <div className="katayaki callout small-4 small-centered columns">
+        <h3>{goal}</h3>
+        <h4>{description}</h4>
+        <h5>{user}</h5>
+      </div>
     </div>
   );
 };

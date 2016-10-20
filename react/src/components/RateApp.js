@@ -30,6 +30,9 @@ class RateApp extends Component {
 
   componentDidMount(){
     this.getAspirations();
+    if(this.state.aspirations.length < 3){
+      this.getAspirations();
+    }
   }
 
 
@@ -46,7 +49,7 @@ class RateApp extends Component {
       return (
         <div>
           <h1>text</h1>
-          <Katayaki info={aspiration}/>
+          <Katayaki className=""info={aspiration}/>
         </div>
 
       );
