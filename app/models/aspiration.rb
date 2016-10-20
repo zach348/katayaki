@@ -8,20 +8,18 @@ class Aspiration < ActiveRecord::Base
   validates :goal_id, presence: true
 
   def self.rating_items_for(user, num)
-    aspirations = []
-    groups = user.groups.pluck(:id)
-    self.select do |aspiration|
-      if groups.include?(aspiration.group_id) && !self.voted?(aspiration, user)
-        aspirations.push(aspiration)
-      end
+    result = []
+    aspirations = self.where(group: user.groups)
+    aspirations.find_each do |aspiration|
+      if !self.voted?(aspiration, user) then result.push(aspiration) end
     end
-    aspirations.shuffle.slice(0,num)
+    result.shuffle.slice(0, num)
   end
 
   def self.to_hash(aspiration)
     {
       user: User.find(aspiration.user).full_name,
-      title: Goal.find(aspiration.goal).title,
+      goal: Goal.find(aspiration.goal).title,
       description: Goal.find(aspiration.goal).description,
       id: aspiration.id
     }
