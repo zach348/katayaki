@@ -8,10 +8,12 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'dotenv'
 gem 'dotenv-rails'
+gem 'foundation-rails'
+gem 'factory_girl_rails'
+
 
 group :development, :test do
   gem 'capybara'
-  gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
   gem 'shoulda'
@@ -26,6 +28,5 @@ group :test do
 end
 
 group :production do
-  gem 'factory_girl_rails'
   gem 'rails_12factor'
 end
