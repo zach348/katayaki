@@ -22,7 +22,6 @@ class RateApp extends Component {
       contentType: 'application/json'
     })
     .done(function(data) {
-      debugger;
       app.setState({ aspirations: data });
     });
   }
@@ -47,12 +46,12 @@ class RateApp extends Component {
       );
     }else{
       return (
-        <div>
-          <h1>text</h1>
-          <Katayaki className=""info={aspiration}/>
+        <div className="row">
+            <div className="katayaki">
+              <Katayaki info={aspiration}/>
+            </div>
         </div>
-
-      );
+      )
     }
   }
 }
