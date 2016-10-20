@@ -2,7 +2,6 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
-
 * {
     margin: 0;
 }
@@ -27,16 +26,4 @@ html, body {
   margin: auto;
   color: white;
   border-radius: 10px;
-}
-
-.katayaki {
-  width: 66%;
-  text-align: center;
-  margin: 0 auto;
-  border: 0.5rem solid $orange;
-  background-color: $teal;
-}
-
-.card{
-  padding: 5rem;
 }

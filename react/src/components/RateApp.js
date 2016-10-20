@@ -42,12 +42,12 @@ class RateApp extends Component {
 
     if(aspiration === undefined){
       return (
-        <div></div>
+        <div className='katayaki small-9 small-centered columns'></div>
       );
     }else{
       return (
-        <div className="row">
-            <div className="katayaki">
+        <div className='row'>
+            <div className='katayaki small-9 small-centered columns'>
               <Katayaki info={aspiration}/>
             </div>
         </div>
