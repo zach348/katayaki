@@ -19,7 +19,7 @@ end
 end
 
 User.all.each do |user|
-  3.times do
+  5.times do
     goal_index = rand(Goal.count)
     goal = Goal.offset(goal_index).first
     group_index = rand(Group.count)

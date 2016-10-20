@@ -1,19 +1,16 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 
-<div>
-  <h2>Welcome, <%= current_user.full_name %>!</h2>
-
-
+<div class="row">
+  <div>
+    <h3 class="">Katayakies</h3>
+    <% @aspirations.each do |aspiration| %>
+      <div class="katayaki small-9 small-centered columns">
+        <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
+      </div>
+    <% end %>
+  </div>
 </div>
-  <h3/>Aspirations
-    <ul>
-      <% @aspirations.each do |aspiration| %>
-        <div>
-          <h5/> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %> <br/>
-          <p/> <%= aspiration.goal.description %>
-        </div>
-      <% end %>
-    </ul>
+
 
 <div>
   <h3/>Your Groups
@@ -24,9 +21,5 @@
       </div>
     <% end %>
   </ul>
-
-</div>
-
-<div>
 
 </div>
