@@ -6,16 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-50.times do
-  FactoryGirl.create(:user)
+50.times do |n|
+  User.create(first_name: 'John', last_name: 'Doe', username: "user#{n}", email: "john#{n}@test.com", password: 'devise')
 end
 
-3.times do
-  FactoryGirl.create(:group)
+3.times do |n|
+  Group.create(name: "group#{n}")
 end
 
-100.times do
-  FactoryGirl.create(:goal)
+100.times do |n|
+  Goal.create(title: "goal title #{n}")
 end
 
 User.all.each do |user|
@@ -24,11 +24,11 @@ User.all.each do |user|
     goal = Goal.offset(goal_index).first
     group_index = rand(Group.count)
     group = Group.offset(group_index).first
-    FactoryGirl.create(:aspiration, user: user, goal: goal, group: group)
+    Aspiration.create(user: user, goal: goal, group: group)
   end
   random_index = rand(Group.count)
   group = Group.offset(random_index).first
-  FactoryGirl.create(:affiliation, user: user, group: group)
+  Affiliation.create(user: user, group: group)
 end
 
 300.times do
@@ -36,5 +36,5 @@ end
   user = User.offset(user_index).first
   aspiration_index = rand(Aspiration.count)
   aspiration = Aspiration.offset(aspiration_index).first
-  FactoryGirl.create(:vote, user: user, aspiration: aspiration )
+  Vote.create(user: user, aspiration: aspiration )
 end
