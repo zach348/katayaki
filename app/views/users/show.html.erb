@@ -2,9 +2,8 @@
 
 <div class="row">
   <div>
-    <h3 class="">Katayakies</h3>
     <% @aspirations.each do |aspiration| %>
-      <div class="katayaki small-9 small-centered columns">
+      <div class="goal-list small-9 small-centered columns">
         <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
       </div>
     <% end %>
