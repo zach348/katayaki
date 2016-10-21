@@ -4,10 +4,20 @@ $turquoise: #93E7FF;
 
 
 .actions {
-  padding-right: 3em;
   background-color: $teal;
+  text-align: center;
+  margin: auto;
 }
 
 .new_user {
-  margin-top: 10%;
+  margin-top: 7vmin;
+}
+
+.devise-button {
+  background-color: $teal;
+  border: none;
+}
+
+.sign-in {
+
 }
