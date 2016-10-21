@@ -16,7 +16,7 @@
       <ul class="header-subnav">
         <%- if user_signed_in? -%>
         <li class="navItem"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <li class="navItem"><%= link_to 'Trending', user_path(current_user) %></li>
+        <li class="navItem"><%= link_to 'Katayakies', user_path(current_user) %></li>
         <li class="navItem"><%= link_to 'Rate', rate_path %></li>
         <li class="navItem"><%= link_to 'Aspire', new_aspiration_path %></li>
         <li class="navItem"><%= link_to 'Trending', static_pages_path(get_splash: true) %></li>
