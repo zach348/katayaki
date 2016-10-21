@@ -5458,12 +5458,24 @@ a:link {
 a:visited {
   color: #FF7D00;
 }
+
+/* line 26, /Users/Admin/Dropbox/Launch/challenges/katayaki/app/assets/stylesheets/index.scss */
+.goal-list {
+  width: 66%;
+  height: 66% !important;
+  text-align: center;
+  margin-top: 12.5%;
+  margin-bottom: 10%;
+  border: 0.25rem solid #93E7FF;
+  background-color: #008BB2;
+  float: none !important;
+}
 /* line 7, /Users/Admin/Dropbox/Launch/challenges/katayaki/app/assets/stylesheets/react.scss */
 .katayaki {
   width: 66%;
   height: 66% !important;
   text-align: center;
-  margin-top: 20%;
+  margin-top: 15%;
   border: 0.25rem solid #93E7FF;
   background-color: #008BB2;
   float: none !important;
