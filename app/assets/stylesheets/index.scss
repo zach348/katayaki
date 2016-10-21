@@ -21,3 +21,15 @@ a:link {
 a:visited {
     color: $orange;
 }
+
+
+.goal-list {
+  width: 66%;
+  height: 66% !important;
+  text-align: center;
+  margin-top: 12.5%;
+  margin-bottom: 10%;
+  border: 0.25rem solid $turquoise;
+  background-color: $teal;
+  float: none !important;
+}
