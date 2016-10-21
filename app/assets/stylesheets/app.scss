@@ -21,8 +21,19 @@ html, body {
   text-align: center;
   font-size: 2rem;
   background-color: $orange;
-  margin: 10% auto auto auto !important;
+  margin: 10% auto 5% auto !important;
   margin: auto;
   color: white;
   border-radius: 10px;
+}
+
+.actions {
+  padding-right: 3em;
+  background-color: $teal;
+}
+
+.sign-in {
+  a {
+    background-color: $teal;
+  }
 }
