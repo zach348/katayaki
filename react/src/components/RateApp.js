@@ -1,7 +1,7 @@
 //RateApp.js
 import React, {Component} from 'react';
 import Katayaki from './Katayaki';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 
 class RateApp extends Component {
   constructor(props){
@@ -34,23 +34,28 @@ class RateApp extends Component {
     }
   }
 
-
-
-
   render(){
-    var aspiration = this.state.aspirations.pop();
+    let stateCheck = this.state.aspirations
 
-    if(aspiration === undefined){
+    let katayakies = this.state.aspirations.map((aspiration,i) => (
+        <Katayaki key={String(i)} info={aspiration}/>
+    ));
+
+    if(stateCheck === undefined){
       return (
-        <div className='katayaki small-9 small-centered columns'></div>
+        <div className='small-9 small-centered columns'></div>
       );
     }else{
       return (
-        <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
-              <Katayaki info={aspiration}/>
-            </div>
+        <div>
+          <ReactCSSTransitionGroup
+            transitionName="example-enter"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {katayakies}
+          </ReactCSSTransitionGroup>
         </div>
+
       )
     }
   }

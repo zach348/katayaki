@@ -7,10 +7,16 @@ const Katayaki = props => {
   var user = props.info.user;
 
   return (
-    <div className="card">
-      <h3>{goal}</h3>
-      <h5>{user}</h5>
+
+    <div className='row'>
+      <div className='katayaki small-9 small-centered columns'>
+        <div className="card">
+          <h3>{goal}</h3>
+          <h5>{user}</h5>
+        </div>
+      </div>
     </div>
+
   );
 };
 
