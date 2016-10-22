@@ -16,12 +16,16 @@ html, body {
     height: 100%;
 }
 
-
 #flash {
   text-align: center;
-  font-size: 2rem;
+  font-size: 5vmin;
   background-color: $orange;
+  margin: 10vmin auto 5vmin auto !important;
   margin: auto;
   color: white;
-  border-radius: 10px;
+  border-radius: 2vmin;
+}
+
+.hidden {
+  display: none;
 }
