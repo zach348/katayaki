@@ -29,15 +29,12 @@ class RateApp extends Component {
 
   componentDidMount(){
     this.getAspirations();
-    if(this.state.aspirations.length < 3){
-      this.getAspirations();
-    }
   }
 
   render(){
     let stateCheck = this.state.aspirations
 
-    let katayakies = this.state.aspirations.map((aspiration,i) => (
+    let katayakie = this.state.aspirations.slice(0,1).map((aspiration,i) => (
         <Katayaki key={String(i)} info={aspiration}/>
     ));
 
@@ -49,10 +46,10 @@ class RateApp extends Component {
       return (
         <div>
           <ReactCSSTransitionGroup
-            transitionName="example-enter"
+            transitionName="example-appear"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
-            {katayakies}
+            {katayakie}
           </ReactCSSTransitionGroup>
         </div>
 
