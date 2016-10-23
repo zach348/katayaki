@@ -10,4 +10,8 @@ class Goal < ActiveRecord::Base
     end
     ordered_goals.slice(0, num)
   end
+
+  def self.search(search)
+    where('name ILIKE ?', "%#{search}%")
+  end
 end
