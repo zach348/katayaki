@@ -13,8 +13,6 @@ class RateApp extends Component {
     this.getAspirations = this.getAspirations.bind(this);
   }
 
-
-
   getAspirations() {
     let app = this;
     $.ajax({
@@ -53,6 +51,10 @@ class RateApp extends Component {
     });
   }
 
+  next(){
+    this.getAspirations();
+  }
+
   componentDidMount(){
     this.getAspirations();
   }
@@ -61,7 +63,7 @@ class RateApp extends Component {
     let stateCheck = this.state.aspirations
 
     let katayaki = this.state.aspirations.slice(0,1).map((aspiration,i) => (
-        <Katayaki key={String(i)} onClick={()=> this.endorse(aspiration.id)} info={aspiration} btnsDisabled={this.state.disabled}/>
+        <Katayaki key={String(i)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration} btnsDisabled={this.state.disabled}/>
     ));
 
     if(stateCheck === undefined){
