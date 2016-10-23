@@ -16,15 +16,10 @@ const Katayaki = props => {
           <div className="card">
             <h3>{goal}</h3>
             <h5>{user}</h5>
-              <ReactCSSTransitionReplace
-                transitionName="btn-cross-fade"
-                transitionEnterTimeout={20000}
-                transitionLeaveTimeout={1000}>
-                <div className='row' key={String(id)}>
-                  <button className="kat-button" onClick={next}>Skip</button>
-                  <button className="kat-button" onClick={endorse}>Endorse</button>
-                </div>
-              </ReactCSSTransitionReplace>
+              <div className='row' key={String(id)}>
+                <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
+                <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+              </div>
           </div>
         </div>
       </div>
