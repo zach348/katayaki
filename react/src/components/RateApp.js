@@ -8,7 +8,7 @@ class RateApp extends Component {
     super(props);
     this.state = {
       aspirations: [],
-      lowCount: false
+      disabled: false
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -22,9 +22,23 @@ class RateApp extends Component {
       url: '/aspirations.json',
       contentType: 'application/json',
       success: function(data) {
-        app.setState({ aspirations: data });
+        app.setState(
+          { aspirations: data}
+        );
       }
     });
+  }
+
+  disableBtns(){
+    this.setState(
+      { disabled: true }
+    );
+  }
+
+  enableBtns(){
+    this.setState(
+      { disabled: false }
+    )
   }
 
   endorse(id){
@@ -46,8 +60,8 @@ class RateApp extends Component {
   render(){
     let stateCheck = this.state.aspirations
 
-    let katayakie = this.state.aspirations.slice(0,1).map((aspiration,i) => (
-        <Katayaki key={String(i)} onClick={()=> this.endorse(aspiration.id)} info={aspiration}/>
+    let katayaki = this.state.aspirations.slice(0,1).map((aspiration,i) => (
+        <Katayaki key={String(i)} onClick={()=> this.endorse(aspiration.id)} info={aspiration} btnsDisabled={this.state.disabled}/>
     ));
 
     if(stateCheck === undefined){
@@ -61,7 +75,7 @@ class RateApp extends Component {
             transitionName="example-appear"
             transitionEnterTimeout={2000}
             transitionLeaveTimeout={2000}>
-            {katayakie}
+            {katayaki}
           </ReactCSSTransitionGroup>
         </div>
 

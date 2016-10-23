@@ -26,3 +26,19 @@ $turquoise: #93E7FF;
   opacity: 1;
   transition: opacity .5s ease-in;
 }
+
+.kat-button {
+  background-color: $orange;
+  font-size: 3vmin;
+  margin-left: 4vmin;
+  margin-right: 4vmin;
+  margin-top: 5vmin;
+  border: 2px groove $turquoise;
+  display: inline-block;
+  width: 20vmin;
+  outline: none;
+}
+
+.kat-button:active {
+  background-color: #EADDBB;
+}
