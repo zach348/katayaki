@@ -2,8 +2,6 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
-
-
 .katayaki {
   width: 66%;
   height: 66% !important;
@@ -16,15 +14,6 @@ $turquoise: #93E7FF;
 
 .card{
   padding: 5rem;
-}
-
-.example-appear {
-  opacity: 0.01;
-}
-
-.example-appear.example-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in;
 }
 
 .kat-button {
@@ -41,4 +30,25 @@ $turquoise: #93E7FF;
 
 .kat-button:active {
   background-color: #EADDBB;
+}
+
+.cross-fade-leave {
+  opacity: 1;
+}
+
+.cross-fade-leave.cross-fade-leave-active {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.cross-fade-enter {
+  opacity: 0;
+}
+.cross-fade-enter.cross-fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.cross-fade-height {
+  transition: height .5s ease-in-out;
 }

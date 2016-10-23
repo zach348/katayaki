@@ -9,7 +9,6 @@ const Katayaki = props => {
   let next = props.next;
   let btnState = props.btnsDisabled;
 
-
     return (
       <div className='row'>
         <div className='katayaki small-9 small-centered columns'>
@@ -25,6 +24,5 @@ const Katayaki = props => {
       </div>
     );
 };
-
 
 export default Katayaki;
