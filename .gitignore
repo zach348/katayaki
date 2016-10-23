@@ -18,4 +18,4 @@
 /node_moduels
 /app/assets/javascripts/bundle.js
 /react/coverage
-
+.DS_STORE
