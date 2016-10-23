@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:show]
 
   get 'rate' => 'ratings#rate'
+  post 'endorse' => 'ratings#endorse'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

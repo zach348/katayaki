@@ -1,56 +1,86 @@
 //RateApp.js
 import React, {Component} from 'react';
 import Katayaki from './Katayaki';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 
 class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-      aspirations: []
+      aspirations: [],
+      disabled: false
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
-
-
 
   getAspirations() {
     let app = this;
     $.ajax({
       method: 'GET',
       url: '/aspirations.json',
-      contentType: 'application/json'
-    })
-    .done(function(data) {
-      app.setState({ aspirations: data });
+      contentType: 'application/json',
+      success: function(data) {
+        app.setState(
+          { aspirations: data}
+        );
+      }
     });
   }
 
+  disableBtns(){
+    this.setState(
+      { disabled: true }
+    );
+  }
+
+  enableBtns(){
+    this.setState(
+      { disabled: false }
+    )
+  }
+
+  endorse(id){
+    let app = this;
+    $.ajax({
+      method: 'POST',
+      url: '/endorse',
+      data: {id: id},
+      success: function(data){
+        app.getAspirations();
+      }
+    });
+  }
+
+  next(){
+    this.getAspirations();
+  }
 
   componentDidMount(){
     this.getAspirations();
-    if(this.state.aspirations.length < 3){
-      this.getAspirations();
-    }
   }
 
-
-
-
   render(){
-    var aspiration = this.state.aspirations.pop();
+    let stateCheck = this.state.aspirations
 
-    if(aspiration === undefined){
+    let katayaki = this.state.aspirations.slice(0,1).map((aspiration,i) => (
+        <Katayaki key={String(i)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration} btnsDisabled={this.state.disabled}/>
+    ));
+
+    if(stateCheck === undefined){
       return (
-        <div className='katayaki small-9 small-centered columns'></div>
+        <div className='small-9 small-centered columns'></div>
       );
     }else{
       return (
-        <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
-              <Katayaki info={aspiration}/>
-            </div>
+        <div>
+          <ReactCSSTransitionGroup
+            transitionName="example-appear"
+            transitionEnterTimeout={2000}
+            transitionLeaveTimeout={2000}>
+            {katayaki}
+          </ReactCSSTransitionGroup>
         </div>
+
       )
     }
   }
