@@ -48,6 +48,7 @@ class RateApp extends Component {
         app.getAspirations();
       }
     });
+    debugger;
   }
 
   next(){
@@ -71,7 +72,7 @@ class RateApp extends Component {
       return (
         <ReactCSSTransitionReplace
           transitionName="cross-fade"
-          transitionEnterTimeout={1000}
+          transitionEnterTimeout={5000}
           transitionLeaveTimeout={1000}>
           {katayaki}
         </ReactCSSTransitionReplace>
