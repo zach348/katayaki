@@ -4,14 +4,14 @@ class GoalsController < ApplicationController
   end
 
   def search
-    binding.pry
     @search_term = params[:search]
     @goals = display_goals
+    binding.pry
   end
 
-  private
+  protected
 
-  def display_figures
+  def display_goals
     if params[:search]
       Goal.search(params[:search])
     else

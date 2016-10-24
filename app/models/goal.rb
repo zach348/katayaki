@@ -12,6 +12,6 @@ class Goal < ActiveRecord::Base
   end
 
   def self.search(search)
-    where('name ILIKE ?', "%#{search}%")
+    where('title ILIKE ?', "%#{search}%")
   end
 end

@@ -1,0 +1,10 @@
+<% if @goals.empty? %>
+  <h3>Suggest a Katayaki</h3>
+<% else  %>
+  <h2>Search Results:</h2>
+  <ul>
+    <% @goals.each do |goal| %>
+      <li> <%= link_to goal.title, goal_path(goal) %></li>
+    <% end %>
+  </ul>
+<% end %>
