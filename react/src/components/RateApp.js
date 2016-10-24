@@ -1,7 +1,7 @@
 //RateApp.js
 import React, {Component} from 'react';
 import Katayaki from './Katayaki';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
+import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
 class RateApp extends Component {
   constructor(props){
@@ -52,35 +52,32 @@ class RateApp extends Component {
   }
 
   next(){
+    this.disableBtns();
     this.getAspirations();
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   componentDidMount(){
     this.getAspirations();
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   render(){
-    let stateCheck = this.state.aspirations
+    let aspiration = this.state.aspirations[0];
 
-    let katayaki = this.state.aspirations.slice(0,1).map((aspiration,i) => (
-        <Katayaki key={String(i)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration} btnsDisabled={this.state.disabled}/>
-    ));
-
-    if(stateCheck === undefined){
+    if(aspiration === undefined){
       return (
         <div className='small-9 small-centered columns'></div>
       );
     }else{
+      let katayaki = <Katayaki btnsDisabled={this.state.disabled} key={String(aspiration.id)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration}/>
       return (
-        <div>
-          <ReactCSSTransitionGroup
-            transitionName="example-appear"
-            transitionEnterTimeout={2000}
-            transitionLeaveTimeout={2000}>
-            {katayaki}
-          </ReactCSSTransitionGroup>
-        </div>
-
+        <ReactCSSTransitionReplace
+          transitionName="cross-fade"
+          transitionEnterTimeout={2000}
+          transitionLeaveTimeout={800}>
+          {katayaki}
+        </ReactCSSTransitionReplace>
       )
     }
   }
