@@ -8,7 +8,7 @@ class RateApp extends Component {
     super(props);
     this.state = {
       aspirations: [],
-      disabled: true
+      disabled: false
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -40,8 +40,8 @@ class RateApp extends Component {
   }
 
   endorse(id){
-    let app = this;
     this.disableBtns();
+    let app = this;
     $.ajax({
       method: 'POST',
       url: '/endorse',
@@ -50,18 +50,17 @@ class RateApp extends Component {
         app.getAspirations();
       }
     });
-    setTimeout(this.enableBtns.bind(this), 3000);
   }
 
   next(){
     this.disableBtns();
     this.getAspirations();
-    setTimeout(this.enableBtns.bind(this), 3000);
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   componentDidMount(){
     this.getAspirations();
-    setTimeout(this.enableBtns.bind(this), 3000);
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   render(){
