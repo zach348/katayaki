@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+
   def show
     @goal = Goal.find(params[:id])
   end
@@ -17,5 +18,4 @@ class GoalsController < ApplicationController
       Goal.all.to_a
     end
   end
-
 end
