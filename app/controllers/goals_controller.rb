@@ -18,4 +18,5 @@ class GoalsController < ApplicationController
       Goal.all.to_a
     end
   end
+
 end

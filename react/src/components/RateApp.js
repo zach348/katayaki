@@ -1,7 +1,7 @@
 //RateApp.js
 import React, {Component} from 'react';
 import Katayaki from './Katayaki';
-import ReactCSSTransitionReplace from 'react-css-transition-replace';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 
 class RateApp extends Component {
   constructor(props){
@@ -21,7 +21,7 @@ class RateApp extends Component {
       contentType: 'application/json',
       success: function(data) {
         app.setState(
-          { aspirations: {vote: data}}
+          { aspirations: data }
         );
       }
     });
@@ -40,12 +40,11 @@ class RateApp extends Component {
   }
 
   endorse(id){
-    this.disableBtns();
     let app = this;
     $.ajax({
       method: 'POST',
       url: '/endorse',
-      data: {id: id},
+      data: {rating: { aspiration_id: id } },
       success: function(data){
         app.getAspirations();
       }
@@ -53,32 +52,35 @@ class RateApp extends Component {
   }
 
   next(){
-    this.disableBtns();
     this.getAspirations();
-    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   componentDidMount(){
     this.getAspirations();
-    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   render(){
-    let aspiration = this.state.aspirations[0];
+    let stateCheck = this.state.aspirations
 
-    if(aspiration === undefined){
+    let katayaki = this.state.aspirations.slice(0,1).map((aspiration,i) => (
+        <Katayaki key={String(i)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration} btnsDisabled={this.state.disabled}/>
+    ));
+
+    if(stateCheck === undefined){
       return (
         <div className='small-9 small-centered columns'></div>
       );
     }else{
-      let katayaki = <Katayaki btnsDisabled={this.state.disabled} key={String(aspiration.id)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration}/>
       return (
-        <ReactCSSTransitionReplace
-          transitionName="cross-fade"
-          transitionEnterTimeout={2000}
-          transitionLeaveTimeout={800}>
-          {katayaki}
-        </ReactCSSTransitionReplace>
+        <div>
+          <ReactCSSTransitionGroup
+            transitionName="example-appear"
+            transitionEnterTimeout={2000}
+            transitionLeaveTimeout={2000}>
+            {katayaki}
+          </ReactCSSTransitionGroup>
+        </div>
+
       )
     }
   }

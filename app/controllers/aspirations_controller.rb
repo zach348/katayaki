@@ -20,4 +20,5 @@ class AspirationsController < ApplicationController
       raise ActionController::RoutingError.new("Not Found")
     end
   end
+
 end
