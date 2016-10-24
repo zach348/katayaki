@@ -10,6 +10,8 @@ gem 'dotenv'
 gem 'dotenv-rails'
 gem 'foundation-rails'
 gem 'factory_girl_rails'
+gem 'will_paginate'
+gem 'will_paginate-foundation'
 
 
 group :development, :test do

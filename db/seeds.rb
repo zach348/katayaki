@@ -14,7 +14,7 @@ end
   Group.create(name: "group#{n}")
 end
 
-100.times do |n|
+50.times do |n|
   Goal.create(title: "goal title #{n}")
 end
 

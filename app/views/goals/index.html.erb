@@ -2,3 +2,18 @@
   <%= text_field_tag :search, params[:search], id: 'searchField' %>
   <%= submit_tag "Search", name: nil, id: 'searchButton' %>
 <% end %>
+
+<div class='row'>
+  <div>
+    <% @goals.each do |goal| %>
+      <div class='goal-list small-9 small-centered columns'>
+        <h3 class="white-text-override"> <%= link_to goal.title, goal_path(goal) %></h3>
+      </div>
+    <% end %>
+  </div>
+  <div class='row'>
+    <div class='small-8 small-centered columns'>
+      <%= will_paginate @goals, inner_window: 2, renderer: FoundationPagination::Rails %>
+    </div>
+  </div>
+</div>
