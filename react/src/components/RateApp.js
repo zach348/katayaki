@@ -7,7 +7,8 @@ class RateApp extends Component {
   constructor(props){
     super(props);
     this.state = {
-      aspirations: []
+      aspirations: [],
+      disabled: false
     };
     this.getAspirations = this.getAspirations.bind(this);
   }
@@ -39,6 +40,7 @@ class RateApp extends Component {
   }
 
   endorse(id){
+    this.disableBtns();
     let app = this;
     $.ajax({
       method: 'POST',
@@ -51,28 +53,30 @@ class RateApp extends Component {
   }
 
   next(){
+    this.disableBtns();
     this.getAspirations();
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   componentDidMount(){
     this.getAspirations();
+    setTimeout(this.enableBtns.bind(this), 2200);
   }
 
   render(){
     let aspiration = this.state.aspirations[0];
-;
 
     if(aspiration === undefined){
       return (
         <div className='small-9 small-centered columns'></div>
       );
     }else{
-      let katayaki = <Katayaki key={String(aspiration.id)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration}/>
+      let katayaki = <Katayaki btnsDisabled={this.state.disabled} key={String(aspiration.id)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration}/>
       return (
         <ReactCSSTransitionReplace
           transitionName="cross-fade"
-          transitionEnterTimeout={1000}
-          transitionLeaveTimeout={1000}>
+          transitionEnterTimeout={2000}
+          transitionLeaveTimeout={800}>
           {katayaki}
         </ReactCSSTransitionReplace>
       )

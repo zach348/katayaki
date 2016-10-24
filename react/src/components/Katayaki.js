@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
 const Katayaki = props => {
   let goal = props.info.goal;
@@ -15,10 +16,10 @@ const Katayaki = props => {
           <div className="card">
             <h3>{goal}</h3>
             <h5>{user}</h5>
-            <div className='row'>
-              <button className="kat-button" onClick={next}>Skip</button>
-              <button className="kat-button" onClick={endorse}>Endorse</button>
-            </div>
+              <div className='row' key={String(id)}>
+                <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
+                <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+              </div>
           </div>
         </div>
       </div>
