@@ -3,17 +3,18 @@ $teal: #008BB2;
 $turquoise: #93E7FF;
 
 .katayaki {
-  width: 66%;
-  height: 66% !important;
+  width: 66vmin;
+  height: 66vmin !important;
   text-align: center;
-  margin-top: 15%;
-  border: 0.25rem solid $turquoise;
+  margin-top: 15vmin;
+  border: 1vmin solid $turquoise;
+  border-radius: 3vmin;
   background-color: $teal;
   float: none !important;
 }
 
 .card{
-  padding: 5rem;
+  padding: 5vmin;
 }
 
 .kat-button {
@@ -22,9 +23,11 @@ $turquoise: #93E7FF;
   margin-left: 4vmin;
   margin-right: 4vmin;
   margin-top: 5vmin;
-  border: 3px groove $turquoise;
+  border: 3px outset $turquoise;
+  border-radius: 1vmin;
   display: inline-block;
   width: 20vmin;
+  height: 5vmin;
   outline: none;
 }
 
