@@ -6,7 +6,6 @@ class GoalsController < ApplicationController
   def search
     @search_term = params[:search]
     @goals = display_goals
-    binding.pry
   end
 
   protected
