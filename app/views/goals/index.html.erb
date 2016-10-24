@@ -12,8 +12,8 @@
     <% end %>
   </div>
   <div class='row'>
-    <div class='small-8 small-centered columns'>
-      <%= will_paginate @goals, inner_window: 2, renderer: FoundationPagination::Rails %>
+    <div class='small-7 small-centered columns'>
+      <%= will_paginate @goals, inner_window: 2, outer_window: 2, renderer: FoundationPagination::Rails %>
     </div>
   </div>
 </div>

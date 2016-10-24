@@ -1,4 +1,6 @@
+
 class Goal < ActiveRecord::Base
+
   has_many :aspirations
   has_many :users, through: :aspirations
 
