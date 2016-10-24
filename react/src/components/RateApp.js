@@ -21,7 +21,7 @@ class RateApp extends Component {
       contentType: 'application/json',
       success: function(data) {
         app.setState(
-          { aspirations: data}
+          { aspirations: {vote: data}}
         );
       }
     });
