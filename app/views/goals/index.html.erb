@@ -10,12 +10,14 @@
     <div>
       <% @goals.each do |goal| %>
         <div class='goal-list small-9 small-centered columns'>
-          <h3 class="white-text-override"> <%= link_to goal.title, goal_path(goal) %></h3>
+          <h3> <%= link_to goal.title, goal_path(goal) %></h3>
         </div>
       <% end %>
-    </div>
-    <div class='row'>
-      <%= will_paginate @goals, inner_window: 4, outer_window: 4, renderer: FoundationPagination::Rails %>
+      <div class='row'>
+        <div class='small-7 small-centered columns'>
+          <%= will_paginate @goals, inner_window: 4, outer_window: 4, renderer: FoundationPagination::Rails %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

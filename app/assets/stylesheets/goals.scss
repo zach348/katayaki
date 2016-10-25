@@ -21,15 +21,13 @@ $turquoise: #93E7FF;
   border-radius: 1vmin;
 }
 
-.goal-footer {
-
-}
-
-.pagination{
+.pagination {
   font-weight: bold;
   display: inline;
   position: relative;
+  background-color: white;
 }
+
 
 a:link {
   color: $orange !important;
