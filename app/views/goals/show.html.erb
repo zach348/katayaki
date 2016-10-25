@@ -1,5 +1,10 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 
-<h1> Goal Show page </h1>
-
-<h3> <%= @goal.title %> <br/>
+<div class='row'>
+  <div class='small-9 small-centered columns'>
+    <div class='goal-show'>
+      <h3> <%= @goal.title %> </h3>
+      <p> <%= @goal.details %> </p>
+    </div>
+  </div>
+</div>

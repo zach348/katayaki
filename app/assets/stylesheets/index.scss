@@ -13,10 +13,6 @@ html, body {
     background-size: 100%;
 }
 
-a:link {
-    color: white;
-}
-
 /* visited link */
 a:visited {
     color: $orange;
@@ -32,4 +28,12 @@ a:visited {
   border: 0.25rem solid $turquoise;
   background-color: $teal;
   float: none !important;
+  border-radius: 3vmin;
+    a {
+      color: white;
+    }
+    a:visited {
+      color: $orange;
+    }
+  text-shadow: .5px .5px $orange;
 }

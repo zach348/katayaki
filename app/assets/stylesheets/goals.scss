@@ -1,0 +1,51 @@
+
+
+$orange: #FF7D00;
+$teal: #008BB2;
+$turquoise: #93E7FF;
+
+.goal-search {
+  border: 0.25rem solid $turquoise;
+  background-color: $teal;
+  margin: 1vmin;
+  text-align: center;
+  border-radius: 3vmin;
+}
+
+.goal-show {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  border: 0.25rem solid $turquoise;
+  border-radius: 3vmin;
+  background-color: $teal;
+
+  h3 {
+    font-weight: 300;
+  }
+}
+
+.search {
+  margin-top: 10vmin;
+}
+
+.search-btn {
+  background-color: $orange;
+  border-radius: 1vmin;
+}
+
+.pagination {
+  font-weight: bold;
+  display: inline;
+  position: relative;
+  padding: 0;
+
+  a {
+    color: white !important;
+  }
+}
+
+.footer {
+  background-color: $teal;
+  border: 0.5vmin solid $turquoise;
+}

@@ -3,7 +3,7 @@
   <div>
     <% @trending.each do |goal| %>
       <div class="goal-list small-9 small-centered columns">
-        <h3 class="white-text-override"> <%= link_to goal.title, goal_path(goal) %></h3>
+        <h3> <%= link_to goal.title, goal_path(goal) %></h3>
       </div>
     <% end %>
   </div>

@@ -21,7 +21,7 @@ class RateApp extends Component {
       contentType: 'application/json',
       success: function(data) {
         app.setState(
-          { aspirations: data}
+          { aspirations: data }
         );
       }
     });
@@ -40,12 +40,11 @@ class RateApp extends Component {
   }
 
   endorse(id){
-    this.disableBtns();
     let app = this;
     $.ajax({
       method: 'POST',
       url: '/endorse',
-      data: {id: id},
+      data: {rating: { aspiration_id: id } },
       success: function(data){
         app.getAspirations();
       }
