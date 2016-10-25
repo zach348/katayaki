@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :goals, only: [:new, :show, :index]
   resources :aspirations, only: [:new, :index, :create, :show, :destroy]
   resources :static_pages, only: [:index]
-  resources :groups, only: [:show]
+  resources :groups, only: [:show, :index]
 
   get 'rate' => 'ratings#rate'
   post 'endorse' => 'ratings#endorse'
