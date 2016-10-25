@@ -19,6 +19,10 @@ $turquoise: #93E7FF;
   border: 0.25rem solid $turquoise;
   border-radius: 3vmin;
   background-color: $teal;
+
+  h3 {
+    font-weight: 300;
+  }
 }
 
 .search {
@@ -34,5 +38,14 @@ $turquoise: #93E7FF;
   font-weight: bold;
   display: inline;
   position: relative;
-  background-color: white;
+  padding: 0;
+
+  a {
+    color: white !important;
+  }
+}
+
+.footer {
+  background-color: $teal;
+  border: 0.5vmin solid $turquoise;
 }
