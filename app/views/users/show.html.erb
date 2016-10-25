@@ -9,15 +9,3 @@
     <% end %>
   </div>
 </div>
-
-
-<div>
-  <h3/>Your Groups
-  <ul>
-    <% @groups.each do |group| %>
-      <div>
-        <h5/> <%= link_to group.name, group_path(group) %> <br/>
-      </div>
-    <% end %>
-  </ul>
-</div>

@@ -31,7 +31,7 @@ class AspirationsController < ApplicationController
       redirect_to goals_path
     elsif new_aspiration.save
       flash[:notice] = 'Katayaki Accepted'
-      @aspiration = Aspiration.where(user: user, goal: goal, group: group)
+      aspiration = Aspiration.where(user: user, goal: goal, group: group).first
       redirect_to aspiration_path(aspiration)
     else
       raise ActionController::RoutingError.new("There seems to a problem")
