@@ -22,10 +22,11 @@ class AspirationsController < ApplicationController
   end
 
   def create
-    goal = Goal.find(aspiration_params[:goal_id])
     user = current_user
-    group = current_user.groups.to_a.sample
+    goal = Goal.find(aspiration_params[:goal_id])
+    group = Group.find(group_params[:group_id])
     new_aspiration = Aspiration.new(user: user, goal: goal, group: group)
+
     if Aspiration.aspiration_exists?(goal, user, group)
       flash[:notice] = 'You have already accepted this Katayaki'
       redirect_to goals_path
@@ -42,6 +43,10 @@ class AspirationsController < ApplicationController
 
   def aspiration_params
     params.require(:goal).permit(:goal_id)
+  end
+
+  def group_params
+    params.require(:group).permit(:group_id)
   end
 
 end
