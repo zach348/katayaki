@@ -3,7 +3,6 @@
 <% if @goals.empty? %>
   <h3>Suggest a Katayaki</h3>
 <% else  %>
-  <h2>Search Results:</h2>
   <div class="row">
     <div>
       <% @goals.each do |goal| %>
@@ -11,11 +10,6 @@
           <h3 class="white-text-override"> <%= link_to goal.title, goal_path(goal) %></h3>
         </div>
       <% end %>
-    </div>
-    <div class='row'>
-      <div class='small-7 small-centered columns'>
-        <%= will_paginate @goals, inner_window: 2, outer_window: 2, renderer: FoundationPagination::Rails %>
-      </div>
     </div>
   </div>
 <% end %>

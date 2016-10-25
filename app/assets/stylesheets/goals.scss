@@ -12,13 +12,25 @@ $turquoise: #93E7FF;
   border-radius: 3vmin;
 }
 
-.pagination{
-  background-color: #82a7b0;
+.search {
+  margin-top: 10vmin;
+}
+
+.search-btn {
+  background-color: $orange;
   border-radius: 1vmin;
-  ul {
-  }
+}
 
+.goal-footer {
 
+}
 
+.pagination{
+  font-weight: bold;
+  display: inline;
+  position: relative;
+}
 
+a:link {
+  color: $orange !important;
 }
