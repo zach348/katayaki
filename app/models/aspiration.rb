@@ -27,4 +27,12 @@ class Aspiration < ActiveRecord::Base
   def self.voted?(aspiration, user)
     !Vote.where(user: user).where(aspiration: aspiration).empty?
   end
+
+  def self.aspiration_exists?(goal, user, group)
+    if self.where(goal: goal, user: user, group: group).empty?
+      false
+    else
+      true
+    end
+  end
 end

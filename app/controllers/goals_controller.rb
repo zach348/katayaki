@@ -19,7 +19,7 @@ class GoalsController < ApplicationController
     if params[:search]
       Goal.search(params[:search])
     else
-      Goal.all.to_a.shuffle
+      Goal.all
     end
   end
 end

@@ -5,6 +5,9 @@
     <div class='goal-show'>
       <h3> <%= @goal.title %> </h3>
       <p> <%= @goal.details %> </p>
+      <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
+        <%= submit_tag 'Accept Katayaki', class: 'accept-kat' %>
+      <% end %>
     </div>
   </div>
 </div>

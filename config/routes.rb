@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :update, :edit, :destroy]
   resources :goals, only: [:new, :show, :index]
-  resources :aspirations, only: [:new, :index, :create, :show, :destroy]
+  resources :aspirations, only: [:index, :create, :show, :destroy]
   resources :static_pages, only: [:index]
   resources :groups, only: [:show, :index]
 
