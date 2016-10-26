@@ -49,7 +49,8 @@ $turquoise: #93E7FF;
 
 .footer {
   background-color: $teal;
-  border: 0.5vmin solid $turquoise;
+  border: 0.25vmin solid $turquoise;
+  float: right;
 }
 
 .accept-kat {
@@ -58,7 +59,7 @@ $turquoise: #93E7FF;
 }
 
 .orange-shadow {
-  text-shadow: .1vmin .1vmin $orange;
+  text-shadow: .15vmin .15vmin $orange !important;
 }
 
 .underline {
