@@ -19,6 +19,7 @@ $turquoise: #93E7FF;
   border: 0.25rem solid $turquoise;
   border-radius: 3vmin;
   background-color: $teal;
+  padding: 3vmin;
 
   h3 {
     font-weight: 300;
@@ -53,4 +54,12 @@ $turquoise: #93E7FF;
 .accept-kat {
   margin-bottom: 3vmin;
   background-color: $orange;
+}
+
+.orange-shadow {
+  text-shadow: .25vmin .25vmin $orange;
+}
+
+.underline {
+  text-decoration: underline;
 }

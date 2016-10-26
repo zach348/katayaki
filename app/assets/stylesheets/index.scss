@@ -15,7 +15,7 @@ html, body {
 
 /* visited link */
 a:visited {
-    color: $orange;
+    text-shadow: .25vmin .25vmin white !important;
 }
 
 
@@ -35,5 +35,5 @@ a:visited {
     a:visited {
       color: $orange;
     }
-  text-shadow: .5px .5px $orange;
+  text-shadow: .25vmin .25vmin $orange;
 }
