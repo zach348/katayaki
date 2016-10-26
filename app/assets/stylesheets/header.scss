@@ -23,10 +23,11 @@ $turquoise: #93E7FF;
 
   .headline {
     color: #ffe;
-    font-size: 10vmin;
+    font-size: 15vmin;
     padding-left: 2%;
     padding-right: 2%;
     margin: auto auto 6vmin auto;
+    text-shadow: .25vmin .25vmin $orange;
   }
 }
 

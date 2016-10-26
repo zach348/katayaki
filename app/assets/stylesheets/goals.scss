@@ -14,11 +14,12 @@ $turquoise: #93E7FF;
 
 .goal-show {
   text-align: center;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 20vmin;
+  margin-bottom: 10vmin;
   border: 0.25rem solid $turquoise;
   border-radius: 3vmin;
   background-color: $teal;
+  padding: 3vmin;
 
   h3 {
     font-weight: 300;
@@ -29,9 +30,10 @@ $turquoise: #93E7FF;
   margin-top: 10vmin;
 }
 
-.search-btn {
+.btn {
   background-color: $orange;
   border-radius: 1vmin;
+  margin: 1vmin auto 3vmin auto;
 }
 
 .pagination {
@@ -47,10 +49,19 @@ $turquoise: #93E7FF;
 
 .footer {
   background-color: $teal;
-  border: 0.5vmin solid $turquoise;
+  border: 0.25vmin solid $turquoise;
+  float: right;
 }
 
 .accept-kat {
   margin-bottom: 3vmin;
   background-color: $orange;
+}
+
+.orange-shadow {
+  text-shadow: .15vmin .15vmin $orange !important;
+}
+
+.underline {
+  text-decoration: underline;
 }

@@ -1,8 +1,16 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 
-<h1/>Aspiration Show Page
-
-<div>
-  <h3/> <%= @aspiration.goal.title %> <br/>
-  <h5/> Impacts: <%= @aspiration.votes.count %>
+<div class='row'>
+  <div class='small-9 small-centered large-5 large-centered columns'>
+    <div class='goal-show'>
+      <h2 class='orange-shadow'> <%= @aspiration.goal.title %> </h2>
+      <p> <%= @aspiration.goal.details %> </p>
+      <div class='row'>
+        <div class='small-6 small-centered columns'>
+          <h4 class='underline orange-shadow'>Touches</h4>
+          <h3 class='orange-shadow'><%= @aspiration.votes.count %></h3>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

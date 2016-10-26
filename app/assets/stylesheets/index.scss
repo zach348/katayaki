@@ -15,7 +15,7 @@ html, body {
 
 /* visited link */
 a:visited {
-    color: $orange;
+    text-shadow: .25vmin .25vmin white !important;
 }
 
 
@@ -29,11 +29,13 @@ a:visited {
   background-color: $teal;
   float: none !important;
   border-radius: 3vmin;
+
     a {
       color: white;
     }
-    a:visited {
-      color: $orange;
-    }
-  text-shadow: .5px .5px $orange;
+}
+
+a:visited {
+  color: $orange;
+  text-shadow: .25vmin .25vmin white !important;
 }
