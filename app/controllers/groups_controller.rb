@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
     group = Group.new(group_params)
     if group.save
       flash[:notice] = 'Group created successfully'
-      redirect_to user_path(current_user)
+      redirect_to groups_path
     else
       flash[:notice] = group.errors.full_messages.join(', ')
       redirect_to groups_path
