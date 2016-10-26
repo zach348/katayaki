@@ -12,6 +12,9 @@ gem 'foundation-rails'
 gem 'factory_girl_rails'
 gem 'will_paginate'
 gem 'will_paginate-foundation'
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'mini_magick'
+gem 'fog'
 
 
 group :development, :test do
