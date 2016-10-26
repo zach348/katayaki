@@ -35,7 +35,8 @@ class AspirationsController < ApplicationController
       aspiration = Aspiration.where(user: user, goal: goal, group: group).first
       redirect_to aspiration_path(aspiration)
     else
-      raise ActionController::RoutingError.new("There seems to a problem")
+      flash[:notice] = new_aspiration.errors.full_messages.join(', ')
+      redirect_to goals_path
     end
   end
 

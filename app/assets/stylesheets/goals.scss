@@ -14,8 +14,8 @@ $turquoise: #93E7FF;
 
 .goal-show {
   text-align: center;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 20vmin;
+  margin-bottom: 10vmin;
   border: 0.25rem solid $turquoise;
   border-radius: 3vmin;
   background-color: $teal;
@@ -30,9 +30,10 @@ $turquoise: #93E7FF;
   margin-top: 10vmin;
 }
 
-.search-btn {
+.btn {
   background-color: $orange;
   border-radius: 1vmin;
+  margin: 1vmin auto 3vmin auto;
 }
 
 .pagination {
@@ -57,7 +58,7 @@ $turquoise: #93E7FF;
 }
 
 .orange-shadow {
-  text-shadow: .25vmin .25vmin $orange;
+  text-shadow: .1vmin .1vmin $orange;
 }
 
 .underline {
