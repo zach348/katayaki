@@ -6,12 +6,18 @@
       <h3><span class='heading'><%= @goal.title %></span></h3>
       <p> <%= @goal.details %> </p>
       <div class='row'>
+        <% if current_user.groups.empty? %>
         <div class='small-6 small-centered columns'>
-          <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
-            <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
-            <%= submit_tag 'Accept Katayaki', class: 'accept-kat' %>
-          <% end %>
+          <h5><%=link_to 'Join a Circle to Accept this Katayaki', groups_path %>
         </div>
+        <% else  %>
+          <div class='small-6 small-centered columns'>
+            <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
+              <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
+              <%= submit_tag 'Accept Katayaki', class: 'accept-kat' %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -5,7 +5,12 @@ class GoalsController < ApplicationController
   end
 
   def show
-    @goal = Goal.find(params[:id])
+    if current_user
+      @goal = Goal.find(params[:id])
+    else
+      flash[:notice] = 'Sign Up or Sign In to Continue'
+      redirect_to root_path
+    end
   end
 
   def search
