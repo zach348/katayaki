@@ -21,6 +21,7 @@ class Aspiration < ActiveRecord::Base
       user: User.find(aspiration.user).full_name,
       img_url: User.find(aspiration.user).avatar.url,
       goal: Goal.find(aspiration.goal).title,
+      details: Goal.find(aspiration.goal).details,
       id: aspiration.id
     }
   end
