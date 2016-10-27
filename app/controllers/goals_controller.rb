@@ -27,4 +27,5 @@ class GoalsController < ApplicationController
       Goal.all
     end
   end
+
 end

@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :restrict_user, only: [:show, :edit, :update]
+  before_action :authorize_user, except: [:show, :edit, :update]
+
   def show
     @user = current_user
     @groups = @user.groups
@@ -23,14 +26,26 @@ class UsersController < ApplicationController
   protected
 
   def user_params
-  params.require(:user).permit(
-    :id,
-    :email,
-    :first_name,
-    :last_name,
-    :username,
-    :avatar,
-    :avatar_cache
-  )
-end
+    params.require(:user).permit(
+      :id,
+      :email,
+      :first_name,
+      :last_name,
+      :username,
+      :avatar,
+      :avatar_cache
+    )
+  end
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
+
+  def restrict_user
+    if current_user.id != params[:id].to_i
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 end
