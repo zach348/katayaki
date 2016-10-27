@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    binding.pry
     @user = current_user
     if @user.update_attributes(user_params)
       flash[:notice] = 'User successfully updated'
