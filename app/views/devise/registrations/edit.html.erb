@@ -1,4 +1,3 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -27,14 +26,19 @@
     <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Enter Curren Password' %>
   </div>
 
+  <div class="field small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+    <%= link_to 'Add a Profile Picture', edit_user_path(current_user),  id: 'prof-pic-link' %>
+  </div>
+
   <div class='row' class='devise-submit'>
     <div class="actions small-2 small-centered large-1 large-centered columns">
       <%= f.submit 'Update Account', class: 'devise-button' %>
     </div>
   </div>
 <% end %>
+
 <div class='row'>
-  <div class='small-2 small-centered columns'>
+  <div class='small-2 small-centered large-1 large-centered columns'>
     <%= button_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn', id: 'cancel-acct' %>
   </div>
 </div>

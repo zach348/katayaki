@@ -81,12 +81,15 @@ VIRTUES = [
   { "Wonder" => ": a feeling caused by seeing something that is very surprising, beautiful, amazing, etc." },
 ]
 
-10.times do |n|
-  User.create(first_name: 'John', last_name: 'Doe', username: "user#{n}", email: "john#{n}@test.com", password: 'devise')
+2.times do |n|
+  User.create(first_name: 'John', last_name: 'Doe', username: "maleuser#{n}", email: "john#{n}@test.com", password: 'devise')
+end
+
+3.times do |n|
+  User.create(first_name: 'Jane', last_name: 'Doe', username: "femaleuser#{n}", email: "jane#{n}@test.com", password: 'devise')
 end
 
 Group.create(name: 'Launch Academy')
-Group.create(name: 'Rspectacular')
 
 VIRTUES.each do |virtue|
   virtue.each do |name, details|

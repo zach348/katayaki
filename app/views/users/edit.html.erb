@@ -3,7 +3,7 @@
     <div class='goal-show'>
       <h4>Upload a Profile Picture</h4>
       <%= form_for @user, :html => {:multipart => true} do |f| %>
-        My Avatar
+      <br/>
         <%= f.file_field :avatar %>
         <%= f.submit  %>
       <% end %>
