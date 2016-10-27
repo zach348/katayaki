@@ -24,8 +24,8 @@ $turquoise: #93E7FF;
   .headline {
     color: #ffe;
     font-size: 15vmin;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 2vmin;
+    padding-right: 2vmin;
     margin: auto auto 6vmin auto;
     text-shadow: .25vmin .25vmin $orange;
   }
@@ -63,4 +63,11 @@ $turquoise: #93E7FF;
       }
     }
   }
+}
+
+#kat-headline {
+  padding-bottom: 7vmin;
+}
+
+#kat-subnav {
 }
