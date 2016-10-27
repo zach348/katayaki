@@ -81,7 +81,7 @@ VIRTUES = [
   { "Wonder" => ": a feeling caused by seeing something that is very surprising, beautiful, amazing, etc." },
 ]
 
-50.times do |n|
+10.times do |n|
   User.create(first_name: 'John', last_name: 'Doe', username: "user#{n}", email: "john#{n}@test.com", password: 'devise')
 end
 
@@ -107,7 +107,7 @@ User.all.each do |user|
   Affiliation.create(user: user, group: group)
 end
 
-300.times do
+50.times do
   user_index = rand(User.count)
   user = User.offset(user_index).first
   aspiration_index = rand(Aspiration.count)
