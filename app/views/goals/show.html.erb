@@ -14,7 +14,7 @@
           <div class='small-6 small-centered columns'>
             <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
               <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
-              <%= submit_tag 'Accept Katayaki', class: 'accept-kat' %>
+              <%= submit_tag 'Accept Katayaki', class: 'btn' %>
             <% end %>
           </div>
         <% end %>

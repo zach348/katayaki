@@ -40,6 +40,13 @@ class AspirationsController < ApplicationController
     end
   end
 
+  def destroy
+    @aspiration = Aspiration.find(params[:id])
+    @aspiration.destroy
+    flash[:notice] = 'Katayaki Removed'
+    redirect_to user_path(current_user)
+  end
+
   protected
 
   def aspiration_params
