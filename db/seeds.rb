@@ -85,9 +85,8 @@ VIRTUES = [
   User.create(first_name: 'John', last_name: 'Doe', username: "user#{n}", email: "john#{n}@test.com", password: 'devise')
 end
 
-3.times do |n|
-  Group.create(name: "group#{n}")
-end
+Group.create(name: 'Launch Academy')
+Group.create(name: 'Rspectacular')
 
 VIRTUES.each do |virtue|
   virtue.each do |name, details|

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   has_many :affiliations
   has_many :aspirations
   has_many :goals, through: :aspirations
