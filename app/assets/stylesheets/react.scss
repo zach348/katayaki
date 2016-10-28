@@ -5,7 +5,7 @@ $turquoise: #93E7FF;
 .katayaki {
 
   text-align: center;
-  margin-top: 15vmin;
+  margin-top: 7vmin;
   border: 1vmin solid $turquoise;
   border-radius: 3vmin;
   background-color: $teal;
@@ -41,6 +41,10 @@ $turquoise: #93E7FF;
   width: 20vmin;
   height: 5vmin;
   outline: none;
+}
+
+.goal-title {
+  text-shadow: .1vmin .1vmin $orange;
 }
 
 .kat-button:active {
