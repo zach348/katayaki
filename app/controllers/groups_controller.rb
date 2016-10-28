@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   def create
     group = Group.new(group_params)
     if group.save
-      flash[:notice] = 'Group created successfully'
+      flash[:notice] = 'Circle created successfully'
       redirect_to groups_path
     else
       flash[:notice] = group.errors.full_messages.join(', ')
