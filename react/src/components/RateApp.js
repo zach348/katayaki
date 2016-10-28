@@ -8,9 +8,11 @@ class RateApp extends Component {
     super(props);
     this.state = {
       aspirations: [],
-      disabled: false
+      disabled: false,
+      defDisplayed: false
     };
     this.getAspirations = this.getAspirations.bind(this);
+    this.showDef = this.showDef.bind(this);
   }
 
   getAspirations() {
@@ -25,6 +27,18 @@ class RateApp extends Component {
         );
       }
     });
+  }
+
+  showDef(){
+    if(this.state.defDisplayed){
+      this.setState(
+        { defDisplayed: false }
+      );
+    }else{
+      this.setState(
+        { defDisplayed: true }
+      );
+    }
   }
 
   disableBtns(){
@@ -70,7 +84,14 @@ class RateApp extends Component {
         <div className='small-9 small-centered columns'></div>
       );
     }else{
-      let katayaki = <Katayaki btnsDisabled={this.state.disabled} key={String(aspiration.id)} endorse={() => this.endorse(aspiration.id)} next={() => this.next()} info={aspiration}/>
+      let katayaki = <Katayaki btnsDisabled={this.state.disabled}
+                      key={String(aspiration.id)}
+                      endorse={() => this.endorse(aspiration.id)}
+                      next={() => this.next()}
+                      showDef={() => this.showDef()}
+                      defDisplayed={this.state.defDisplayed}
+                      info={aspiration}
+                      />
       return (
         <ReactCSSTransitionReplace
           transitionName="cross-fade"
