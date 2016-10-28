@@ -20,12 +20,12 @@ const Katayaki = props => {
           <div className='row'>
             <div className='katayaki small-9 small-centered columns'>
               <div className="card">
-                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
-                <h4>({details})</h4>
                 <h5>{user}</h5>
+                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
+                <p>({details})</p>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="btn" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="btn" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
                   </div>
               </div>
             </div>
@@ -36,11 +36,11 @@ const Katayaki = props => {
           <div className='row'>
             <div className='katayaki small-9 small-centered columns'>
               <div className="card">
-                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                 <h5>{user}</h5>
+                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="btn" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="btn" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
                   </div>
               </div>
             </div>
