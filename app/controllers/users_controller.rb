@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def restrict_user
-    if current_user.id != params[:id].to_i
+    if !user_signed_in? || current_user.id != params[:id].to_i
       raise ActionController::RoutingError.new("Not Found")
     end
   end
