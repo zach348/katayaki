@@ -25,7 +25,7 @@ const Katayaki = props => {
                 <p>({details})</p>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Affirm</button>
                   </div>
               </div>
             </div>
@@ -40,7 +40,7 @@ const Katayaki = props => {
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Affirm</button>
                   </div>
               </div>
             </div>
@@ -58,7 +58,7 @@ const Katayaki = props => {
                 <p>({details})</p>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Affirm</button>
                   </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ const Katayaki = props => {
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Skip</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Endorse</button>
+                    <button disabled={btnState} className="kat-button" onClick={endorse}>Affirm</button>
                   </div>
               </div>
             </div>
