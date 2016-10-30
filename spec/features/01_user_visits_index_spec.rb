@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'index page' do
-  let!(:user) { FactoryGirl.create(:user) }
   let!(:group) { FactoryGirl.create(:group) }
 
   before(:each) do
