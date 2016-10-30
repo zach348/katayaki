@@ -12,10 +12,7 @@
 
   <body>
     <header class="header">
-      <div class='row' id='kat-headline'>
-        <h1 class="headline">Katayaki</h1>
-      </div>
-      <div class='row' id='kat-subnav'>
+      <h1 class="headline">Katayaki</h1>
         <ul class="header-subnav">
           <%- if user_signed_in? -%>
           <li class="navItem"><%= link_to 'Katayakies', user_path(current_user) %></li>
@@ -31,7 +28,6 @@
           <li class="navItem"><%= link_to 'Trending', static_pages_path %></li>
           <%- end -%>
         </ul>
-      </div>
     </header>
 
     <div class='row'>
