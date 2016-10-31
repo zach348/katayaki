@@ -39,5 +39,15 @@ How to run the test suite
 run test suite with rake
 
 
+Heroku Deployment
+-configure Amazon S3 environment vars
+-ensure that node buildpack precedes ruby buildbpack
+-database setup: 'heroku run rake db:migrate'; 'heroku run rake db:seed';
+to reset the production db, run: 'heroku pg:reset'
+
+
 #Katayaki
 Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
+
+
+For some time, I've fascinated and concerned by what is often referred to as the Photoshop Effect.
