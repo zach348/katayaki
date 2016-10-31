@@ -4,7 +4,8 @@
   <div class='small-9 small-centered large-5 large-centered columns'>
     <div class='goal-show'>
       <h2 class='orange-shadow'> <%= @aspiration.goal.title %> </h2>
-      <p> <%= @aspiration.goal.details %> </p>
+      <h4> <%= @aspiration.goal.details %> </h4>
+      <p> (<%= @aspiration.group.name %>) </p>
       <div class='row'>
         <div class='small-6 small-centered columns'>
           <h4 class='underline orange-shadow'>Touches</h4>
@@ -13,7 +14,7 @@
       </div>
       <div class='row'>
         <div class='small-6 small-centered columns'>
-          <%= button_to 'Remove Katayaki', @aspiration, { method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' } %> 
+          <%= button_to 'Remove Katayaki', @aspiration, { method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' } %>
         </div>
       </div>
     </div>
