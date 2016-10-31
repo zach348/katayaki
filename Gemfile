@@ -20,6 +20,8 @@ gem 'faker'
 
 group :development, :test do
   gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
   gem 'shoulda'
