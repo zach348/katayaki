@@ -1,3 +1,9 @@
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
