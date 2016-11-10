@@ -48,6 +48,3 @@ to reset the production db, run: 'heroku pg:reset'
 
 #Katayaki
 Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
-
-
-For some time, I've fascinated and concerned by what is often referred to as the Photoshop Effect.
