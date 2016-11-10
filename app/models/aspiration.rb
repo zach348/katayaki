@@ -7,23 +7,14 @@ class Aspiration < ActiveRecord::Base
   validates :user_id, presence: true
   validates :goal_id, presence: true
 
+
   def self.rating_items_for(user, num)
     result = []
-    aspirations = self.where(group: user.groups)
+    aspirations = self.where(group: user.groups).limit(num + user.votes.count)
     aspirations.find_each do |aspiration|
       if !self.voted?(aspiration, user) && aspiration.user != user then result.push(aspiration) end
     end
     result.shuffle.slice(0, num)
-  end
-
-  def self.to_hash(aspiration)
-    {
-      user: aspiration.user.full_name,
-      img_url: aspiration.user.avatar.url,
-      goal: aspiration.goal.title,
-      details: aspiration.goal.details,
-      id: aspiration.id
-    }
   end
 
   def self.voted?(aspiration, user)
@@ -37,4 +28,15 @@ class Aspiration < ActiveRecord::Base
       true
     end
   end
+
+  def to_hash
+    {
+      user: self.user.full_name,
+      img_url: self.user.avatar.url,
+      goal: self.goal.title,
+      details: self.goal.details,
+      id: self.id
+    }
+  end
+
 end
