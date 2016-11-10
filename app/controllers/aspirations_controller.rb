@@ -10,7 +10,7 @@ class AspirationsController < ApplicationController
           data = []
           to_be_rated = Aspiration.rating_items_for(current_user, 1)
           to_be_rated.each do |aspiration|
-            hashed = Aspiration.to_hash(aspiration)
+            hashed = aspiration.to_hash
             data.push(hashed)
           end
         render json: data
