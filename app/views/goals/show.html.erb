@@ -8,13 +8,13 @@
       <div class='row'>
         <% if current_user.groups.empty? %>
         <div class='small-6 small-centered columns'>
-          <h5><%=link_to 'Join a Circle to Accept this Katayaki', groups_path %>
+          <h5><%= button_to 'Join a Circle To Accept', groups_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
         <% else  %>
           <div class='small-6 small-centered columns'>
             <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
               <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
-              <%= submit_tag 'Accept Katayaki', class: 'btn' %>
+              <%= submit_tag 'Accept Katayaki', class: 'btn', method: :get %>
             <% end %>
           </div>
         <% end %>
