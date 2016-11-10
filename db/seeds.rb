@@ -94,6 +94,9 @@ VIRTUES.each do |virtue|
 end
 
 User.all.each do |user|
+  random_index = rand(Group.count)
+  group = Group.offset(random_index).first
+  Affiliation.create(user: user, group: group)
   4.times do
     goal_index = rand(Goal.count)
     goal = Goal.offset(goal_index).first
@@ -101,9 +104,6 @@ User.all.each do |user|
     group = Group.offset(group_index).first
     Aspiration.create(user: user, goal: goal, group: group)
   end
-  random_index = rand(Group.count)
-  group = Group.offset(random_index).first
-  Affiliation.create(user: user, group: group)
 end
 
 40.times do
