@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
+  before_destroy :clean_associations
+
   has_many :affiliations
   has_many :aspirations
   has_many :goals, through: :aspirations
@@ -18,5 +20,12 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def clean_associations
+    Aspiration.where(user_id: self.id).delete_all
+    Affiliation.where(user_id: self.id).delete_all
   end
 end
