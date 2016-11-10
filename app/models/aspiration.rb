@@ -15,7 +15,7 @@ class Aspiration < ActiveRecord::Base
     aspirations.find_each do |aspiration|
       if !self.voted?(aspiration, user) && aspiration.user != user then result.push(aspiration) end
     end
-    result.slice(0, num)
+    result.shuffle.slice(0, num)
   end
 
   def self.voted?(aspiration, user)
