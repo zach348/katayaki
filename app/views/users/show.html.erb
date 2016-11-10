@@ -1,11 +1,26 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 
-<div class="row">
-  <div>
-    <% @aspirations.each do |aspiration| %>
-      <div class="goal-list small-9 small-centered columns">
-        <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
-      </div>
-    <% end %>
+<% if !current_user.aspirations.empty? %>
+  <div class="row">
+    <div>
+      <% @aspirations.each do |aspiration| %>
+        <div class="goal-list small-9 small-centered columns">
+          <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class='row'>
+    <div class='small-9 small-centered large-5 large-centered columns'>
+      <div class='goal-show'>
+        <h3><span class='orange-shadow'>Welcome to Katayaki</span></h3>
+        <div class='row'>
+          <div class='small-8 small-centered columns'>
+            <h5><%= button_to 'Aspire', goals_path, { action: 'index', method: :get, class: 'btn' } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
