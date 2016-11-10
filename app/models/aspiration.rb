@@ -10,11 +10,12 @@ class Aspiration < ActiveRecord::Base
 
   def self.rating_items_for(user, num)
     result = []
-    aspirations = self.where(group: user.groups).limit(num + user.votes.count)
+    user_votes = user.votes.count
+    aspirations = self.where(group: user.groups).where(id: self.pluck(:id).sample(user_votes + num))
     aspirations.find_each do |aspiration|
       if !self.voted?(aspiration, user) && aspiration.user != user then result.push(aspiration) end
     end
-    result.shuffle.slice(0, num)
+    result.slice(0, num)
   end
 
   def self.voted?(aspiration, user)
