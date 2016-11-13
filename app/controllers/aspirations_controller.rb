@@ -1,6 +1,5 @@
 class AspirationsController < ApplicationController
-  before_action :restrict_user, only: [:show, :index, :create, :destroy]
-  before_action :authorize_user, except: [:show, :index, :create, :destroy]
+  before_action :authorize_user, only: [:show, :index, :create, :destroy]
 
   def show
     @aspiration = Aspiration.find(params[:id])
@@ -54,12 +53,6 @@ class AspirationsController < ApplicationController
 
   def authorize_user
     if !user_signed_in?
-      raise ActionController::RoutingError.new("Not Found")
-    end
-  end
-
-  def restrict_user
-    if !user_signed_in? || current_user.id != params[:id].to_i
       raise ActionController::RoutingError.new("Not Found")
     end
   end
