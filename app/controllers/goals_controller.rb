@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   def index
-    @goals = display_goals.paginate(page: params[:page], per_page: 15)
+    @goals = display_goals.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -10,7 +10,7 @@ class GoalsController < ApplicationController
 
   def search
     @search_term = params[:search]
-    @goals = display_goals
+    @goals = display_goals.paginate(page: params[:page], per_page: 10)
   end
 
   protected
