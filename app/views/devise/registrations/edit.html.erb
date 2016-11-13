@@ -2,7 +2,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
   <div class='row small-8 small-centered columns goal-show'>
-    <div class="field small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+    <div class="field small-12 small-centered medium-10 medium-centered large-8 large-centered columns">
       <%= f.label :email, class: 'hidden' %><br />
       <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
     </div>
@@ -11,35 +11,35 @@
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
 
-    <div class="field small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+    <div class="field small-12 small-centered medium-10 medium-centered large-8 large-centered columns">
       <%= f.label :password, class: 'hidden' %> <br />
       <%= f.password_field :password, autocomplete: "off", placeholder: "Enter New Password (#{@minimum_password_length} character minium)" %>
     </div>
 
-    <div class="field small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+    <div class="field small-12 small-centered medium-10 medium-centered large-8 large-centered columns">
       <%= f.label :password_confirmation, class: 'hidden' %><br />
       <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm Your Password' %>
     </div>
 
-    <div class="field small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+    <div class="field small-12 small-centered medium-10 medium-centered large-8 large-centered columns">
       <%= f.label :current_password, class: 'hidden' %> <br />
       <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Enter Curren Password' %>
     </div>
 
     <div class='row'>
-      <div class="small-3 small-centered columns">
+      <div class="small-12 small-centered columns">
         <%= f.submit "Update Account", class: 'btn devise-btn' %>
       </div>
     </div>
   <% end %>
 
   <div class='row'>
-    <div class="small-3 small-centered columns">
+    <div class="small-12 small-centered columns">
       <%= link_to 'Add a Profile Picture', edit_user_path(current_user),  id: 'prof-pic-link' %>
     </div>
   </div>
   <div class='row'>
-    <div class='small-2 small-centered columns'>
+    <div class='small-12 small-centered columns'>
       <%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, id: 'cancel-acct' %>
     </div>
   </div>
