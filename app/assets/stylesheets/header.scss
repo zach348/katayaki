@@ -17,7 +17,7 @@ $turquoise: #93E7FF;
   background-size: cover;
   position: relative;
   overflow: visible;
-  border: 0.5em solid $turquoise;
+  border: 0.5vmin solid $turquoise;
   padding-top: $header-height;
   padding-bottom: $header-height + ($subnav-link-padding * 2 + $subnav-font-size - 0.15rem);
 
