@@ -1,4 +1,6 @@
 class AspirationsController < ApplicationController
+  before_action :authorize_user, only: [:show, :index, :create, :destroy]
+
   def show
     @aspiration = Aspiration.find(params[:id])
   end
@@ -48,6 +50,12 @@ class AspirationsController < ApplicationController
   end
 
   protected
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 
   def aspiration_params
     params.require(:goal).permit(:goal_id)

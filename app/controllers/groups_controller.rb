@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :authorize_user, only: [:show, :index, :create]
+
   def show
     @group = Group.find(params[:id])
   end
@@ -25,4 +27,9 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name)
   end
 
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 end
