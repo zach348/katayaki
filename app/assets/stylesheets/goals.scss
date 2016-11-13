@@ -37,6 +37,14 @@ $turquoise: #93E7FF;
 }
 
 .pagination {
+  @media (max-width: 1240px) {
+    li {
+      display: none;
+      &.active,&.prev,&.next {
+        display: inline
+      }
+    }
+  }
   font-weight: bold;
   display: inline;
   position: relative;

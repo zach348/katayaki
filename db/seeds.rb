@@ -81,17 +81,17 @@ VIRTUES = [
   { "Wonder" => ": a feeling caused by seeing something that is very surprising, beautiful, amazing, etc." },
 ]
 
-5.times do |n|
-  User.create(first_name: 'User', last_name: 'User', username: "user#{n}", email: "user#{n}@test.com", password: 'devise')
-end
-
-Group.create(name: 'Launch Academy')
-
 VIRTUES.each do |virtue|
   virtue.each do |name, details|
     Goal.create(title: name, details: details)
   end
 end
+
+5.times do |n|
+  User.create(first_name: 'User', last_name: 'User', username: "user#{n}", email: "user#{n}@test.com", password: 'devise')
+end
+
+Group.create(name: 'Launch Academy')
 
 User.all.each do |user|
   random_index = rand(Group.count)
