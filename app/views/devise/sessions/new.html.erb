@@ -1,6 +1,6 @@
 
 <%= form_for(resource, class: 'sign-in', as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class='row goal-show'>
+  <div class='row small-8 small-centered columns goal-show'>
     <div class="field small-8 small-centered large-5 large-centered columns">
       <%= f.label :email, class: 'hidden' %><br />
       <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
