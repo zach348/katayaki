@@ -30,15 +30,15 @@
     <%= link_to 'Add a Profile Picture', edit_user_path(current_user),  id: 'prof-pic-link' %>
   </div>
 
-  <div class='row' class='devise-submit'>
-    <div class="actions small-2 small-centered large-1 large-centered columns">
-      <%= f.submit 'Update Account', class: 'devise-button' %>
+  <div class='row'>
+    <div class="small-3 small-centered columns">
+      <%= f.submit "Update Account", class: 'btn devise-btn' %>
     </div>
   </div>
 <% end %>
 
 <div class='row'>
-  <div class='small-2 small-centered large-1 large-centered columns'>
+  <div class='small-2 small-centered columns'>
     <%= button_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn', id: 'cancel-acct' %>
   </div>
 </div>

@@ -7,15 +7,16 @@ $turquoise: #93E7FF;
   background-color: $teal;
   text-align: center;
   margin: auto;
+  border: .25vmin solid $turquoise !important;
 }
 
 .new_user {
   margin-top: 7vmin;
 }
 
-.devise-button {
-  background-color: $teal;
-  border: none;
+.devise-btn {
+  font-size: 3vmin;
+  margin: auto;
 }
 
 .devise-submit {
