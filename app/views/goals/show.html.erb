@@ -3,20 +3,24 @@
 <div class='row'>
   <div class='small-9 small-centered large-5 large-centered columns'>
     <div class='goal-show'>
-      <h3><span class='heading'><%= @goal.title %></span></h3>
+      <h2><span class='orange-shadow'><%= @goal.title %></span></h3>
       <p> <%= @goal.details %> </p>
       <div class='row'>
-        <% if current_user.groups.empty? %>
+        <% if current_user && current_user.groups.empty? %>
         <div class='small-6 small-centered columns'>
           <h5><%= button_to 'Join a Circle To Accept', groups_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
-        <% else  %>
+        <% elsif current_user  %>
           <div class='small-6 small-centered columns'>
             <%= form_tag aspirations_path( goal: { goal_id: @goal.id }), method: :post do %>
               <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
               <%= submit_tag 'Accept Katayaki', class: 'btn', method: :get %>
             <% end %>
           </div>
+        <% else %>
+        <div class='small-6 small-centered columns'>
+          <h5><%= button_to 'Sign Up To Aspire', new_user_registration_path, { action: 'index', method: :get, class: 'btn' } %>
+        </div>
         <% end %>
       </div>
     </div>
