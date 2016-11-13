@@ -36,7 +36,7 @@ feature 'index page' do
   scenario 'inauthenticated can visit goal page' do
     visit root_path
     click_link 'trending1'
-    expect(page).to have_content('description')
+    expect(page).to have_content('details')
     expect(page).to have_content('trending1')
   end
 

@@ -9,7 +9,7 @@ feature 'login' do
 
     fill_in 'user[email]', with: 'Stranger@danger.com'
     fill_in 'user[password]', with: 'Danger'
-    click_button 'Log in'
+    click_button 'Sign In'
 
     expect(page).to have_content('Invalid Email or password')
   end

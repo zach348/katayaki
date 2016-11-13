@@ -45,7 +45,7 @@ feature 'katayakies' do
 
     sign_in(user)
     visit aspiration_path(katayaki)
-    click_button 'Remove Katayaki'
+    click_button 'Remove'
 
     expect(page).to have_content('Katayaki Removed')
     expect(Aspiration.all.length).to eq(num_aspirations - 1)
