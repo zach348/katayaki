@@ -1,26 +1,28 @@
 
 <%= form_for(resource, class: 'sign-in', as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field small-8 small-centered large-5 large-centered columns">
-    <%= f.label :email, class: 'hidden' %><br />
-    <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
-  </div>
+  <div class='row goal-show'>
+    <div class="field small-8 small-centered large-5 large-centered columns">
+      <%= f.label :email, class: 'hidden' %><br />
+      <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
+    </div>
 
-  <div class="field small-8 small-centered large-5 large-centered columns">
-    <%= f.label :password, class: 'hidden' %><br />
-    <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
-  </div>
-  <div class='row'>
-    <% if devise_mapping.rememberable? -%>
-      <div class="field small-8 small-centered large-5 large-centered columns">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+    <div class="field small-8 small-centered large-5 large-centered columns">
+      <%= f.label :password, class: 'hidden' %><br />
+      <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+    </div>
+    <div class='row'>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field small-8 small-centered large-5 large-centered columns">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+    </div>
+
+    <div class='row'>
+      <div class="small-1 small-centered columns">
+        <%= f.submit "Sign In", class: 'btn devise-btn' %>
       </div>
-    <% end -%>
-  </div>
-
-  <div class='row'>
-    <div class="small-1 small-centered columns">
-      <%= f.submit "Sign In", class: 'btn devise-btn' %>
     </div>
   </div>
 <% end %>
