@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :authorize_user
+
   def rate
 
   end
@@ -10,6 +12,12 @@ class RatingsController < ApplicationController
   end
 
   protected
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 
   def rating_params
     params.require(:rating).permit(:aspiration_id)
