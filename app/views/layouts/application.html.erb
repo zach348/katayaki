@@ -25,10 +25,10 @@
             <li class="navItem"><%= link_to 'Account',  edit_user_registration_path(current_user)%></li>
             <li class="navItem"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
           <%- else -%>
-            <li class="navItem"><%= link_to 'Sign Up', new_user_registration_path  %></li>
-            <li class="navItem"><%= link_to 'Sign In', new_user_session_path  %></li>
             <li class="navItem"><%= link_to 'Trending', static_pages_path %></li>
             <li class="navItem"><%= link_to 'Aspire', goals_path %></li>
+            <li class="navItem"><%= link_to 'Sign Up', new_user_registration_path  %></li>
+            <li class="navItem"><%= link_to 'Sign In', new_user_session_path  %></li>
           <%- end -%>
         </ul>
     </header>
