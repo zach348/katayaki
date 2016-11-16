@@ -3,8 +3,7 @@ class Goal < ActiveRecord::Base
 
   has_many :aspirations
   has_many :users, through: :aspirations
-
-  validates :title, presence: true, uniqueness: true, length: { in: 3..25 }
+  validates :title, presence: true, length: { in: 3..25 }, uniqueness: { scope: [:details] }
   validates :details, presence: true, length: { in: 10..140 }
 
   def self.top(num)
