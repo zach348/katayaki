@@ -7,7 +7,11 @@
         <div class="goal-list small-6 small-centered columns">
           <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
           <div class='row small-9 small-centered columns'>
-            <h5>(Touches: <%= aspiration.votes.count %>)</h5>
+            <ul class='star-count'>
+            <% aspiration.votes.count.times do %>
+              <li><i class="fa fa-star" aria-hidden="true"></i></li>
+            <% end %>
+            </ul>
           </div>
         </div>
       <% end %>
