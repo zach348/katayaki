@@ -65,6 +65,10 @@ $turquoise: #93E7FF;
   text-shadow: .15vmin .15vmin $orange !important;
 }
 
+.turquoise-shadow {
+  text-shadow: .15vmin .15vmin $turquoise !important;
+}
+
 .underline {
   text-decoration: underline;
 }
