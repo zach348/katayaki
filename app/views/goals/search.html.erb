@@ -14,7 +14,7 @@
     <div class="row search-results">
       <div>
         <% @goals.each do |goal| %>
-          <div class="goal-list small-9 small-centered columns">
+          <div class="goal-list small-6 small-centered columns">
             <h3> <%= link_to goal.title, goal_path(goal) %></h3>
           </div>
         <% end %>

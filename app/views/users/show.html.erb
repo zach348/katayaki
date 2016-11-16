@@ -4,9 +4,15 @@
   <div class="row">
     <div>
       <% @aspirations.each do |aspiration| %>
-        <div class="goal-list small-9 small-centered columns">
+        <div class="goal-list small-6 small-centered columns">
           <h3> <%= link_to aspiration.goal.title, aspiration_path(aspiration) %></h3>
-          <h5>(Touches: <%= aspiration.votes.count %>)</h5>
+          <div class='row small-9 small-centered columns'>
+            <ul class='star-count'>
+            <% aspiration.votes.count.times do %>
+              <li><i class="fa fa-star" aria-hidden="true"></i></li>
+            <% end %>
+            </ul>
+          </div>
         </div>
       <% end %>
     </div>
