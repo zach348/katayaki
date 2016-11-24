@@ -16,4 +16,12 @@ class Goal < ActiveRecord::Base
   def self.search(search)
     where('title ILIKE ?', "%#{search}%")
   end
+
+  def self.get_defs(search)
+    response = Wordnik.word.get_definitions(search)
+    definitions = response.map do |definition|
+      definition['text']
+    end
+    definitions
+  end
 end
