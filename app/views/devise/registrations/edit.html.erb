@@ -27,19 +27,19 @@
     </div>
 
     <div class='row'>
-      <div class="small-12 small-centered columns">
+      <div class="small-12 small-centered columns"> <br />
         <%= f.submit "Update Account", class: 'btn devise-btn' %>
       </div>
     </div>
   <% end %>
 
   <div class='row'>
-    <div class="small-12 small-centered columns">
+    <div class="edit-link small-12 small-centered columns">
       <%= link_to 'Add a Profile Picture', edit_user_path(current_user),  id: 'prof-pic-link' %>
     </div>
   </div>
   <div class='row'>
-    <div class='small-12 small-centered columns'>
+    <div class='edit-link small-12 small-centered columns'>
       <%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, id: 'cancel-acct' %>
     </div>
   </div>

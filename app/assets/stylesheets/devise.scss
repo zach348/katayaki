@@ -24,12 +24,11 @@ $turquoise: #93E7FF;
   margin-top: 5vmin;
 }
 
-#cancel-acct {
-  margin: 4vmin auto auto auto;
-}
-
-#prof-pic-link {
+.edit-link {
   a {
-    color: $turquoise;
+    color: #FFF;
+    &:hover {
+      color: #FFF;
+    }
   }
 }
