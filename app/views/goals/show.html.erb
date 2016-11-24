@@ -4,7 +4,7 @@
   <div class='small-9 small-centered large-5 large-centered columns'>
     <div class='goal-show'>
       <h2><span class='orange-shadow'><%= @goal.title %></span></h3>
-      <p> <%= @goal.details %> </p>
+      <h5> <%= @goal.details %> </p>
       <div class='row'>
         <% if current_user && current_user.groups.empty? %>
         <div class='small-6 small-centered columns'>
@@ -19,6 +19,7 @@
           </div>
         <% else %>
         <div class='small-6 small-centered columns'>
+          <br />
           <h5><%= button_to 'Sign Up To Aspire', new_user_registration_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
         <% end %>
