@@ -15,7 +15,6 @@ class GoalsController < ApplicationController
 
   def search
     @search_term = params[:search]
-    # @new_goals = Goal.get_defs(@search_term)
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
   end
 

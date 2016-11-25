@@ -14,7 +14,9 @@ class Goal < ActiveRecord::Base
   end
 
   def self.search(search)
-    where('title ILIKE ?', "%#{search}%") + self.get_defs(search)
+    regex = /#{search}/i
+    result = where('title ILIKE ?', "%#{regex}%") + self.get_defs(search)
+    result.sort{|a,b| (a.title =~ regex) <=> (b.title =~ regex) }
   end
 
   def self.get_defs(search)
