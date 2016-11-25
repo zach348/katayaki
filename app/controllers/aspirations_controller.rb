@@ -25,7 +25,12 @@ class AspirationsController < ApplicationController
 
   def create
     user = current_user
-    goal = Goal.find(aspiration_params[:goal_id])
+    if aspiration_params[:id].empty?
+      binding.pry
+      goal = Goal.create(title: aspiration_params[:title], details: aspiration_params[:details])
+    else
+      goal = Goal.find(aspiration_params[:goal_id])
+    end
     group = Group.find(group_params[:group_id])
     new_aspiration = Aspiration.new(user: user, goal: goal, group: group)
 
@@ -58,7 +63,7 @@ class AspirationsController < ApplicationController
   end
 
   def aspiration_params
-    params.require(:goal).permit(:goal_id)
+    params.require(:goal).permit(:id, :title, :details)
   end
 
   def group_params
