@@ -21,14 +21,27 @@ class Goal < ActiveRecord::Base
     search.gsub!(/\s/, "+")
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
+    self.goals_from_xml(response)
+  end
+
+  protected
+
+  def self.goals_from_xml(response)
     entries = []
     if response['entry_list']['entry']
-      entries.push(response['entry_list']['entry']).flatten.map do |entry|
-        title = entry['ew']
-        defs = []
-        defs.push(entry['def']['dt']).flatten!
-        { title: title, defs: defs }
+      goals = entries.push(response['entry_list']['entry']).flatten.map do |entry|
+        if entry['ew'] && entry['def'] && entry['def']['dt']
+          title = entry['ew']
+          defs = []
+          defs.push(entry['def']['dt']).flatten!
+          defs.map do |definition|
+            definition.class != String || definition.match(/[a-zA-Z]{3,}/).nil? ? nil : Goal.new(title: title.capitalize, details: definition)
+          end
+        else
+          nil
+        end
       end
+      goals.flatten.reject(&:nil?)
     else
       entries
     end

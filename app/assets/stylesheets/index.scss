@@ -32,9 +32,17 @@ a:visited {
     a {
       size: 4vmin;
       color: white;
+      &:hover{
+        text-shadow: .25vmin .25vmin $orange;
+      }
+
     }
 }
 
 a:visited {
   color: #BABAB4;
+}
+
+.underline {
+  text-decoration: underline;
 }
