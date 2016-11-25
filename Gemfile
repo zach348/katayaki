@@ -17,6 +17,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'faker'
 gem 'wordnik'
+gem 'httparty'
 
 
 group :development, :test do

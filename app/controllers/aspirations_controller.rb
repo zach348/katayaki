@@ -26,10 +26,9 @@ class AspirationsController < ApplicationController
   def create
     user = current_user
     if aspiration_params[:id].empty?
-      binding.pry
       goal = Goal.create(title: aspiration_params[:title], details: aspiration_params[:details])
     else
-      goal = Goal.find(aspiration_params[:goal_id])
+      goal = Goal.find(aspiration_params[:id])
     end
     group = Group.find(group_params[:group_id])
     new_aspiration = Aspiration.new(user: user, goal: goal, group: group)

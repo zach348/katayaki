@@ -18,9 +18,19 @@ class Goal < ActiveRecord::Base
   end
 
   def self.get_defs(search)
-    response = Wordnik.word.get_definitions(search)
-    response.map do |definition|
-      Goal.new(title: search.capitalize, details: definition['text'])
+    search.gsub!(/\s/, "+")
+    uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
+    response = Hash.from_xml(HTTParty.get(uri))
+    entries = []
+    if response['entry_list']['entry']
+      entries.push(response['entry_list']['entry']).flatten.map do |entry|
+        title = entry['ew']
+        defs = []
+        defs.push(entry['def']['dt']).flatten!
+        { title: title, defs: defs }
+      end
+    else
+      entries
     end
   end
 end
