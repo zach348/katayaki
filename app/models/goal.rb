@@ -24,6 +24,10 @@ class Goal < ActiveRecord::Base
     self.goals_from_xml(response)
   end
 
+  def self.goal_exists?(title, details)
+    !where(title: title.capitalize, details: details).empty?
+  end
+
   protected
 
   def self.goals_from_xml(response)
@@ -35,7 +39,9 @@ class Goal < ActiveRecord::Base
           defs = []
           defs.push(entry['def']['dt']).flatten!
           defs.map do |definition|
-            definition.class != String || definition.match(/[a-zA-Z]{3,}/).nil? ? nil : Goal.new(title: title.capitalize, details: definition)
+            definition.class != String ||
+            definition.match(/[a-zA-Z]{3,}/).nil? ||
+            goal_exists?(title, definition) ? nil : new(title: title.capitalize, details: definition)
           end
         else
           nil
