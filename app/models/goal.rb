@@ -14,16 +14,15 @@ class Goal < ActiveRecord::Base
   end
 
   def self.search(search)
-    regex = /#{search}/i
-    result = where('title ILIKE ?', "%#{regex}%") + self.get_defs(search)
-    result.sort{|a,b| (a.title =~ regex) <=> (b.title =~ regex) }
+    result = where('title ILIKE ?', "%#{search}%") + self.get_defs(search)
+    result.sort{|a,b| a.title <=> b.title }
   end
 
   def self.get_defs(search)
     search.gsub!(/\s/, "+")
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
-    self.goals_from_xml(response)
+    self.goals_from_xml(response, search)
   end
 
   def self.goal_exists?(details)
@@ -32,26 +31,32 @@ class Goal < ActiveRecord::Base
 
   protected
 
-  def self.goals_from_xml(response)
+  def self.goals_from_xml(response, search)
     entries = []
     if response['entry_list']['entry']
       goals = entries.push(response['entry_list']['entry']).flatten.map do |entry|
-        if entry['ew'] && entry['def'] && entry['def']['dt']
-          title = entry['ew']
-          defs = []
-          defs.push(entry['def']['dt']).flatten!
-          defs.map do |definition|
-            definition.class != String ||
-            definition.match(/[a-zA-Z]{3,}/).nil? ||
-            goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
-          end
-        else
-          nil
-        end
+        process_entry(entry, search)
       end
       goals.flatten.reject(&:nil?)
     else
       entries
+    end
+  end
+
+  def self.process_entry(entry, search)
+    if entry['ew'] && entry['def'] && entry['def']['dt']
+      title = entry['ew']
+      defs = []
+      defs.push(entry['def']['dt']).flatten!
+      defs.map do |definition|
+        regex = /#{search}/i
+        definition.class != String ||
+        definition.match(/[a-zA-Z]{3,}/).nil? ||
+        title.match(regex).nil? ||
+        goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
+      end
+    else
+      nil
     end
   end
 end
