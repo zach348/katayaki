@@ -25,7 +25,7 @@ class GoalsController < ApplicationController
     if params[:search]
       Goal.search(params[:search])
     else
-      Goal.all
+      Goal.all.order(title: :asc)
     end
   end
 

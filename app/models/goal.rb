@@ -24,8 +24,8 @@ class Goal < ActiveRecord::Base
     self.goals_from_xml(response)
   end
 
-  def self.goal_exists?(title, details)
-    !where(title: title.capitalize, details: details).empty?
+  def self.goal_exists?(details)
+    !where(details: details).empty?
   end
 
   protected
@@ -41,7 +41,7 @@ class Goal < ActiveRecord::Base
           defs.map do |definition|
             definition.class != String ||
             definition.match(/[a-zA-Z]{3,}/).nil? ||
-            goal_exists?(title, definition) ? nil : new(title: title.capitalize, details: definition)
+            goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
           end
         else
           nil

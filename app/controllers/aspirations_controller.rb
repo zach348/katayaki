@@ -25,6 +25,7 @@ class AspirationsController < ApplicationController
 
   def create
     user = current_user
+    binding.pry
     if aspiration_params[:id].empty?
       goal = Goal.create(title: aspiration_params[:title], details: aspiration_params[:details])
     else
