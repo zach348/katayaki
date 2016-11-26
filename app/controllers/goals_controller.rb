@@ -16,6 +16,7 @@ class GoalsController < ApplicationController
   def search
     @search_term = params[:search]
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
+    if @goals.empty? then flash[:notice] = 'No Adjectives Found' end
   end
 
   protected
