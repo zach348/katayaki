@@ -23,7 +23,7 @@ class Goal < ActiveRecord::Base
     search.gsub!(/\s/, "+")
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
-    self.goals_from_xml(response, search)
+    self.process_mw_response(response, search)
   end
 
   def self.goal_exists?(details)
@@ -32,7 +32,7 @@ class Goal < ActiveRecord::Base
 
   protected
 
-  def self.goals_from_xml(response, search)
+  def self.process_mw_response(response, search)
     entries = []
     if response['entry_list']['entry']
       goals = entries.push(response['entry_list']['entry']).flatten.map do |entry|
@@ -45,7 +45,7 @@ class Goal < ActiveRecord::Base
   end
 
   def self.process_entry(entry, search)
-    if entry['ew'] && entry['def'] && entry['def']['dt']
+    if entry['ew'] && entry['def'] && entry['def']['dt'] && entry['fl'] == 'adjective'
       regex = /\A#{search.strip}\z/i
       title = entry['ew']
       defs = []
