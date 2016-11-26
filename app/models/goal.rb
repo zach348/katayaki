@@ -46,18 +46,21 @@ class Goal < ActiveRecord::Base
 
   def self.process_entry(entry, search)
     if entry['ew'] && entry['def'] && entry['def']['dt']
+      regex = /\A#{search.strip}\z/i
       title = entry['ew']
       defs = []
       defs.push(entry['def']['dt']).flatten!
       defs.map do |definition|
-        regex = /\A#{search.strip}\z/i
-        definition.class != String ||
-        definition.match(/[a-zA-Z]{3,}/).nil? ||
-        title.match(regex).nil? ||
-        goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
+        title.match(regex).nil? ? nil : process_definition(definition, title)
       end
     else
       nil
     end
+  end
+
+  def self.process_definition(definition, title)
+    definition.class != String ||
+    definition.match(/[a-zA-Z]{3,}/).nil? ||
+    goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
   end
 end
