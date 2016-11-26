@@ -14,8 +14,9 @@ class Goal < ActiveRecord::Base
   end
 
   def self.search(search)
-    result = where('title ILIKE ?', "%#{search}%") + self.get_defs(search)
-    result.sort{|a,b| a.title <=> b.title }
+    search = search.strip
+    result = where('title ~* :regex', regex: "#{search}") + self.get_defs(search)
+    result.sort{|a,b| a.title.match(/\A#{search}\z/) <=> b.title.match(/\A#{search}\z/) }
   end
 
   def self.get_defs(search)
@@ -49,7 +50,7 @@ class Goal < ActiveRecord::Base
       defs = []
       defs.push(entry['def']['dt']).flatten!
       defs.map do |definition|
-        regex = /#{search}/i
+        regex = /\A#{search.strip}\z/i
         definition.class != String ||
         definition.match(/[a-zA-Z]{3,}/).nil? ||
         title.match(regex).nil? ||
