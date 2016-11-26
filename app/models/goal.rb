@@ -45,7 +45,7 @@ class Goal < ActiveRecord::Base
   end
 
   def self.process_entry(entry, search)
-    if entry['ew'] && entry['def'] && entry['def']['dt'] && entry['fl'] == 'adjective'
+    if entry['ew'] && entry['def'] && entry['def']['dt'] && ['adjective','noun'].include?(entry['fl'])
       regex = /\A#{search.strip}\z/i
       title = entry['ew']
       defs = []

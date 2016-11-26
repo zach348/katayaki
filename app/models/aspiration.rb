@@ -13,13 +13,13 @@ class Aspiration < ActiveRecord::Base
     user_votes = user.votes.count
     aspirations = self.where(group: user.groups).where(id: self.pluck(:id).sample(user_votes + 10))
     aspirations.find_each do |aspiration|
-      if !self.voted?(aspiration, user) && aspiration.user != user then result.push(aspiration) end
+      result.push(aspiration) unless aspiration.voted?(user) || aspiration.user == user
     end
     result.shuffle.slice(0, num)
   end
 
-  def self.voted?(aspiration, user)
-    !Vote.where(user: user).where(aspiration: aspiration).empty?
+  def voted?(user)
+    !self.votes.where(user: user).empty?
   end
 
   def self.aspiration_exists?(goal, user, group)
