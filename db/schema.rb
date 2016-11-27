@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 20161127025050) do
     t.string   "moderator",  default: "false", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["group_id"], name: "affiliations_group_id_ix", using: :btree
     t.index ["group_id"], name: "index_affiliations_on_group_id", using: :btree
+    t.index ["user_id"], name: "affiliations_user_id_ix", using: :btree
     t.index ["user_id"], name: "index_affiliations_on_user_id", using: :btree
   end
 
@@ -31,7 +33,9 @@ ActiveRecord::Schema.define(version: 20161127025050) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["goal_id"], name: "aspiration_goal_id_ix", using: :btree
     t.index ["goal_id"], name: "index_aspirations_on_goal_id", using: :btree
+    t.index ["user_id"], name: "aspirations_user_id_ix", using: :btree
     t.index ["user_id"], name: "index_aspirations_on_user_id", using: :btree
   end
 
@@ -40,8 +44,8 @@ ActiveRecord::Schema.define(version: 20161127025050) do
     t.text     "details"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["details"], name: "index_goals_on_details", using: :btree
-    t.index ["title"], name: "index_goals_on_title", using: :btree
+    t.index ["details"], name: "goals_details_ix", using: :btree
+    t.index ["title"], name: "goals_title_ix", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -77,7 +81,9 @@ ActiveRecord::Schema.define(version: 20161127025050) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["aspiration_id"], name: "index_votes_on_aspiration_id", using: :btree
+    t.index ["aspiration_id"], name: "votes_aspiration_id_ix", using: :btree
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+    t.index ["user_id"], name: "votes_user_id_ix", using: :btree
   end
 
 end
