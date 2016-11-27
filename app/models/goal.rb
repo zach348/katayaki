@@ -23,7 +23,7 @@ class Goal < ActiveRecord::Base
     search.gsub!(/\s/, "+")
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
-    self.process_mw_response(response, search)
+    process_mw_response(response, search)
   end
 
   def self.goal_exists?(details)
