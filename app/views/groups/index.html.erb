@@ -8,7 +8,7 @@
             <%= collection_select(:group, :group_id, Group.all, :id, :name, class: 'grp-drpdwn') %>
             <%= submit_tag 'Join Circle', class: 'btn' %>
           <% end %>
-          <h3>Create Circle</h4>
+          <h3>Form a Circle</h4>
           <%= form_for @new_group do |f| %>
             <%= f.label :name, class: 'hidden' %>
             <%= f.text_field :name, placeholder: 'Circle Name' %>
