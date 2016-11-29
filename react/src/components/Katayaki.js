@@ -21,7 +21,7 @@ const Katayaki = props => {
             <div className='katayaki small-9 small-centered columns'>
               <div className="card">
                 <h4>{user}</h4>
-                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
+                <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                 <h5>({details})</h5>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
@@ -37,7 +37,7 @@ const Katayaki = props => {
             <div className='katayaki small-9 small-centered columns'>
               <div className="card">
                 <h4>{user}</h4>
-                <h3 className='goal-title' onClick={showDef}>{goal}</h3>
+                <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
                     <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
                     <button disabled={btnState} className="kat-button" onClick={endorse}>Boost</button>

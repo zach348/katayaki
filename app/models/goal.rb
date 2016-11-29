@@ -23,7 +23,7 @@ class Goal < ActiveRecord::Base
     search.gsub!(/\s/, "+")
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
-    self.goals_from_xml(response, search)
+    process_mw_response(response, search)
   end
 
   def self.goal_exists?(details)
@@ -32,32 +32,35 @@ class Goal < ActiveRecord::Base
 
   protected
 
-  def self.goals_from_xml(response, search)
+  def self.process_mw_response(response, search)
     entries = []
     if response['entry_list']['entry']
       goals = entries.push(response['entry_list']['entry']).flatten.map do |entry|
         process_entry(entry, search)
       end
-      goals.flatten.reject(&:nil?)
+      goals.flatten.compact
     else
       entries
     end
   end
 
   def self.process_entry(entry, search)
-    if entry['ew'] && entry['def'] && entry['def']['dt']
+    if entry['ew'] && entry['def'] && entry['def']['dt'] && ['adjective','noun'].include?(entry['fl'])
+      regex = /\A#{search.strip}\z/i
       title = entry['ew']
       defs = []
       defs.push(entry['def']['dt']).flatten!
       defs.map do |definition|
-        regex = /\A#{search.strip}\z/i
-        definition.class != String ||
-        definition.match(/[a-zA-Z]{3,}/).nil? ||
-        title.match(regex).nil? ||
-        goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
+        title.match(regex).nil? ? nil : process_definition(definition, title)
       end
     else
       nil
     end
+  end
+
+  def self.process_definition(definition, title)
+    definition.class != String ||
+    definition.match(/[a-zA-Z]{3,}/).nil? ||
+    goal_exists?(definition) ? nil : new(title: title.capitalize, details: definition)
   end
 end
