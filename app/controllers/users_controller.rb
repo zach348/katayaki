@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :restrict_user, only: [:show, :edit, :update]
-  before_action :authorize_user, except: [:show, :edit, :update]
+  before_action :authorize_user, except: [:show, :edit, :update, :update_location]
 
   def show
     @user = current_user
@@ -13,13 +13,23 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update_attributes(user_params)
+    current_user
+    if current_user.update_attributes(user_params)
       flash[:notice] = 'User successfully updated'
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     else
       flash[:notice] = @user.errors.full_messages.join(', ')
       redirect_to edit_user_path(@user)
+    end
+  end
+
+  def update_location
+    binding.pry
+    if current_user
+      user = current_user
+      user.latitude = location_params['lat']
+      user.longitude = location_params['lon']
+      user.save
     end
   end
 
@@ -48,4 +58,9 @@ class UsersController < ApplicationController
       raise ActionController::RoutingError.new("Not Found")
     end
   end
+
+  def location_params
+    params.require(:location).permit(:lon, :lat)
+  end
+
 end

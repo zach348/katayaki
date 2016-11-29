@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :create]
   resources :affiliations, only: [:create, :index]
 
+  patch 'location' => 'users#update_location'
   get 'rate' => 'ratings#rate'
   post 'endorse' => 'ratings#endorse'
 
