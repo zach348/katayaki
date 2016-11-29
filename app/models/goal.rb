@@ -38,7 +38,7 @@ class Goal < ActiveRecord::Base
       goals = entries.push(response['entry_list']['entry']).flatten.map do |entry|
         process_entry(entry, search)
       end
-      goals.flatten.reject(&:nil?)
+      goals.flatten.compact
     else
       entries
     end

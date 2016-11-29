@@ -1,10 +1,9 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 <div class="row">
-  <div>
     <% @trending.each do |goal| %>
-      <div class="goal-list small-9 small-centered columns">
-        <h3> <%= link_to goal.title, goal_path(goal) %></h3>
+      <div class="goal-list small-6 small-centered columns">
+        <h4> <%= link_to goal.title, goal_path(goal) %></h4>
+        <h5> <%= goal.details  %><h5>
       </div>
     <% end %>
-  </div>
 </div>

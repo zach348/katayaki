@@ -24,11 +24,10 @@ class UsersController < ApplicationController
   end
 
   def update_location
-    binding.pry
     if current_user
       user = current_user
-      user.latitude = location_params['lat']
-      user.longitude = location_params['lon']
+      new_params =  {latitude: location_params['lat'], longitude: location_params['lon'] }
+      user.update_attributes(new_params)
       user.save
     end
   end
