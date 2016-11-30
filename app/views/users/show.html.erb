@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag    'application', media: 'all' %>
 
 <% if !current_user.aspirations.empty? %>
-  <div class="row">
+  <div class="user_show row">
     <div>
       <% @aspirations.each do |aspiration| %>
         <div class="goal-list small-6 small-centered columns">
