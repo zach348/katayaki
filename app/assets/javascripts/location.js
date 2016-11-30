@@ -1,4 +1,4 @@
-$("user_show").ready(function(){
+$(".users.show").ready(function(){
 
   function getLocation() {
       if (navigator.geolocation) {
