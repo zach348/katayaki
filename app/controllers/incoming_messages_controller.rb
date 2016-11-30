@@ -2,15 +2,23 @@ class IncomingMessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    binding.pry
-    Rails.logger.logparams[:envelope][:to] # print the to field to the logs
-    Rails.logger.log params[:subject] # print the subject to the logs
-    Rails.logger.log params[:plain] # print the decoded body plain to the logs if present
-    Rails.logger.log params[:html] # print the html decoded body to the logs if present
-    Rails.logger.log params[:attachments][0] if params[:attachments] # A tempfile attachment if attachments is populated
+    recipient = params[:envelope][:to]
+    subject = params[:subject]
+    plain = params[:plain]
+    html = params[:html]
 
+    # Rails.logger.log params[:attachments][0] if params[:attachments] # A tempfile attachment if attachments is populated
+
+    msg = Email.new(recipient: recipient, subject: subject, plain: plain, html: html )
+    msg.save
     # Do some other stuff with the mail message
 
     render :text => 'success', :status => 200 # a status of 404 would reject the mail
+  end
+
+  protected
+
+  def email_params
+    params.require(:envelope, :subject, :plain, :html)
   end
 end
