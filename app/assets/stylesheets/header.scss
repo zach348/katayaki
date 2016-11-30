@@ -1,6 +1,6 @@
 $header-bg: #008BB2;;
 $subnav-link-padding: 0.75rem;
-$subnav-font-size: 1.1rem;
+$subnav-font-size: 1.25rem;
 $subnav-link-opacity: 0.15;
 $header-height: 2.5rem;
 $transition: all .35s ease-in-out;
@@ -75,8 +75,8 @@ $turquoise: #93E7FF;
       transition: $transition;
 
       @media screen and (max-width: $small) {
-        font-size: $subnav-font-size - 0.4rem;
-        padding: $subnav-link-padding 0.65rem;
+        font-size: $subnav-font-size - 0.2rem;
+        padding: $subnav-link-padding 0.45rem;
       }
 
       @media screen and (max-width: $tiny) {
