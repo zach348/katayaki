@@ -75,8 +75,8 @@ $turquoise: #93E7FF;
       transition: $transition;
 
       @media screen and (max-width: $small) {
-        font-size: $subnav-font-size - 0.2rem;
-        padding: $subnav-link-padding 0.45rem;
+        font-size: $subnav-font-size - 0.4rem;
+        padding: $subnav-link-padding 0.65rem;
       }
 
       @media screen and (max-width: $tiny) {
