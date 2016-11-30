@@ -1,0 +1,18 @@
+<%= stylesheet_link_tag    'application', media: 'all' %>
+
+<div class='row'>
+  <div class='small-10 small-centered large-4 large-centered columns'>
+  <% flash.each do |name, msg| %>
+    <% if msg.class == Array %>
+    <ul id="flash">
+      <% msg.each do |message| %>
+      <li><p class='small-12 small-centered large-8 large-centered columns'><%="#{message}"%></p></li>
+    <% end %>
+    </ul>
+    <% else %>
+        <p class='small-12 small-centered large-8 large-centered columns' id="flash"><%="#{msg}"%></p>
+    <% end %>
+  <% end %>
+  <% flash.clear %>
+  </div>
+</div>
