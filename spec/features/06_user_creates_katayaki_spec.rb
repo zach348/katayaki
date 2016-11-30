@@ -21,7 +21,7 @@ feature 'katayakies' do
     expect(Goal.where(title: 'Zeal').empty?).to eq(true)
 
     click_link 'Zeal'
-    click_button 'Accept Katayaki'
+    click_button 'Accept'
 
     expect(page).to have_content('Katayaki Accepted')
     expect(Goal.count).to eq(num_goals + 1)

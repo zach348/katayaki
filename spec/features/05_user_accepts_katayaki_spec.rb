@@ -16,29 +16,16 @@ feature 'katayakies' do
     click_button 'Join Circle'
     click_link 'Aspire'
     click_link 'test_goal'
-    click_button 'Accept Katayaki'
+    click_button 'Accept'
 
     expect(Aspiration.all.length).to eq(num_aspirations + 1)
     aspiration = Aspiration.where(goal_id: goal.id, user_id: user.id).first
     expect(aspiration.goal.title).to eq('test_goal')
 
     expect(page).to have_content('Katayaki Accepted')
-    expect(page).to have_content('Touches')
-    expect(page).to have_content('0')
     expect(page).to have_content('test_goal')
   end
 
-  scenario 'katayaki show page reflects relevant votes' do
-    sign_in(user)
-
-    visit aspiration_path(katayaki)
-    expect(page).to have_content(0)
-
-    FactoryGirl.create(:vote, aspiration: katayaki)
-
-    visit aspiration_path(katayaki)
-    expect(page).to have_content(1)
-  end
 
   scenario 'user removes katayaki' do
     num_aspirations = Aspiration.all.length

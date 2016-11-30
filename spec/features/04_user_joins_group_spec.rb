@@ -20,7 +20,7 @@ feature 'groups' do
     sign_in(user)
     click_link 'Circles'
     fill_in 'group[name]', with: 'another_circle'
-    click_button 'Form a New Circle'
+    click_button 'Form Circle'
 
     expect(page).to have_content('Circle created successfully')
     expect(Group.all.length).to eq(num_groups + 1)
