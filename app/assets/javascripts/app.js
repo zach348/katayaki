@@ -1,22 +1,23 @@
 $(document).ready(function(){
-
-  var x = document.getElementById("demo");
-  function getLocation() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(sendPosition);
-      } else {
-          return { coords: { longitude: null, latitude: null } }
-      }
+  if($('.users.show').length == 1) {
+    debugger;
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(sendPosition);
+        } else {
+            return { coords: { longitude: null, latitude: null } }
+        }
+    }
+    function sendPosition(position) {
+      $.ajax({
+        method: 'PATCH',
+        url: '/location',
+        data: { location: { lon: position.coords.longitude, lat: position.coords.latitude  } },
+        success: function(data){
+          console.log(data);
+        }
+      });
+    }
+    getLocation()
   }
-  function sendPosition(position) {
-    $.ajax({
-      method: 'PATCH',
-      url: '/location',
-      data: { location: { lon: position.coords.longitude, lat: position.coords.latitude  } },
-      success: function(data){
-        console.log(data);
-      }
-    });
-  }
-  getLocation()
 })

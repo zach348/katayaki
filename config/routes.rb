@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   patch 'location' => 'users#update_location'
   get 'rate' => 'ratings#rate'
   post 'endorse' => 'ratings#endorse'
-
   get 'search' => 'goals#search'
+  post 'incoming_messages' => 'incoming_messages#create'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
