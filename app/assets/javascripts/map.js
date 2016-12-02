@@ -11,7 +11,6 @@ function placeMap(){
   }
 
   function buildMap(origin){
-    debugger;
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers([
