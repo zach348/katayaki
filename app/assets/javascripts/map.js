@@ -10,7 +10,7 @@ function buildMap(origin){
           "width":  32,
           "height": 32
         },
-        "infowindow": "hello!"
+        "infowindow": "You"
       }
     ]);
     handler.bounds.extendWith(markers);
