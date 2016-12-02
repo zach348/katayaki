@@ -24,7 +24,6 @@ function getUserPosition(callback){
     url: '/location.json',
     contentType: 'application/json',
     success: function(data) {
-      debugger;
       callback(data);
     }
   });
