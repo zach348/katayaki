@@ -32,6 +32,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def location
+    if current_user
+      data = { latitude: current_user.latitude, longitude: current_user.longitude }
+      respond_to do |format|
+        format.json { render json: data }
+        format.html { render json: { coords: data} }
+      end
+    end
+  end
+
   protected
 
   def user_params
