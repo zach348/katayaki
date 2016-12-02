@@ -18,6 +18,9 @@ gem 'fog'
 gem 'faker'
 gem 'wordnik'
 gem 'httparty'
+gem 'lodash-rails'
+gem 'gmaps4rails'
+gem 'coffee-rails'
 
 
 group :development, :test do
