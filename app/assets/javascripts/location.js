@@ -1,5 +1,4 @@
 function locateUser(){
-
   getLocation();
 
   function getLocation() {
