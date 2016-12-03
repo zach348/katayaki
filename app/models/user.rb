@@ -1,5 +1,10 @@
 class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
 
   before_destroy :clean_associations
 
@@ -16,6 +21,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
+
 
   def full_name
     "#{first_name} #{last_name}"

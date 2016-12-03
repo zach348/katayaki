@@ -1,9 +1,14 @@
+$orange: #FF7D00;
+$teal: #008BB2;
+$turquoise: #93E7FF;
+
 #map {
   width: 100vw;
   height: 100vh;
   margin: auto;
 }
 
-.map {
-  color: black !important;
+.gm-style-iw {
+  background-color: $teal;
+  text-align: center
 }

@@ -1,24 +1,28 @@
 function buildMap(origin){
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers([
+  var map = handler.buildMap({ provider: { zoom: 12, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
+                    internal: {id: 'map'}}, function(){
+
+    markers = handler.addMarkers([ //data//
       {
-        "lat": origin.latitude,
-        "lng": origin.longitude,
+        "lat": origin.coords.latitude,
+        "lng": origin.coords.longitude,
         "picture": {
-          "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
           "width":  32,
           "height": 32
         },
-        "infowindow": "You"
+        "infowindow": `<div class='row'>
+                        <h5 class='orange-shadow'>Aspiration</h5>
+                       </div>`
       }
     ]);
     handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
+    // handler.fitMapToBounds();
   });
+  return map
 }
 
-function getUserPosition(callback){
+function getCurrentUserPosition(callback){
   $.ajax({
     method: 'GET',
     url: '/location.json',
@@ -27,4 +31,8 @@ function getUserPosition(callback){
       callback(data);
     }
   });
+}
+
+function getUsersWithinBounds(bounds){
+
 }
