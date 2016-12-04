@@ -1,4 +1,4 @@
 $(document).ready(function(){
-  if($('.users.show').length == 1) { getLocation(sendPosition); }
-  if($('.static_pages.index').length == 1) { getLocation(buildMap); }
+  if($('.users.show').length == 1 || $('.static_pages.index').length == 1) { getLocation(sendPosition); }
+  if($('.static_pages.index').length == 1) { getCurrentUserPosition(buildMap); }
 })

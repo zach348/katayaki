@@ -34,10 +34,12 @@ function getCurrentUserPosition(callback){
 }
 
 function getAspirationsWithinBounds(){
-  let swBound = { lat: handler.getMap().getBounds().getSouthWest().lat(),
-                  lng: handler.getMap().getBounds().getSouthWest().lng() }
-  let neBound = { lat: handler.getMap().getBounds().getNorthEast().lat(),
-                  lng: handler.getMap().getBounds().getNorthEast().lng() }
+  let swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
+                  handler.getMap().getBounds().getSouthWest().lng() ]
+  let neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
+                  handler.getMap().getBounds().getNorthEast().lng() ]
+  let app = this;
+
   $.ajax({
     method: 'GET',
     url: '/markers.json',
@@ -47,8 +49,38 @@ function getAspirationsWithinBounds(){
                       NE: neBound
                     }
           },
-    success: function(data) {
-      alert(data)
+    success: function(aspirations) {
+      app.addMarkers(aspirations);
     }
   });
+}
+
+
+
+function addMarkers(aspirations) {
+  var map = handler.getMap();
+  handler.markers = aspirations.markers.map(function(aspiration){
+    var marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: { lat: aspiration.lat, lng: aspiration.lng },
+        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+    });
+    var infowindow = new google.maps.InfoWindow({
+      content: `<div class="row">`+
+                  `<h5 class="orange-shadow">${aspiration.title}</h5>`+
+               `</div>`
+    });
+    marker.addListener('click', function(){
+      infowindow.open(map, marker);
+    });
+    return { marker: marker, infowindow: infowindow }
+  })
+  openInfoBoxes();
+}
+
+function openInfoBoxes(){
+  handler.markers.forEach(function(marker){
+    marker.infowindow.open(handler.getMap(), marker.marker )
+  })
 }

@@ -7,9 +7,16 @@ class Aspiration < ActiveRecord::Base
   validates :user_id, presence: true
   validates :goal_id, presence: true
 
-  def self.markers_in_bounds(bound1,bound2)
-    binding.pry
-    ##User.in_bounds...
+  def self.markers_for_users(users)
+    where(user: users).map do |asp|
+      {
+        lat: asp.user.latitude,
+        lng: asp.user.longitude,
+        aspId: asp.id,
+        title: asp.goal.title,
+        details: asp.goal.details
+      }
+    end
   end
 
   def self.rating_items_for(user, num)

@@ -54,7 +54,11 @@ class AspirationsController < ApplicationController
   end
 
   def markers
-    binding.pry
+    users = User.in_bounds([bounds_params[:SW], bounds_params[:NE]])
+    markers = Aspiration.markers_for_users(users)
+    respond_to do |format|
+      format.json { render json: { markers: markers } }
+    end
   end
 
   protected
@@ -71,6 +75,10 @@ class AspirationsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:group_id)
+  end
+
+  def bounds_params
+    params.require(:bounds)
   end
 
 end

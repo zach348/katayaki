@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if current_user
       data = { latitude: current_user.latitude, longitude: current_user.longitude }
       respond_to do |format|
-        format.json { render json: data }
+        format.json { render json: {coords: data } }
         format.html { render json: { coords: data} }
       end
     end
