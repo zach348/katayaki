@@ -10,16 +10,15 @@ function buildMap(origin){
         "picture": {
           "width":  32,
           "height": 32
-        },
-        "infowindow": `<div class='row'>
-                        <h5 class='orange-shadow'>Aspiration</h5>
-                       </div>`
+        }
       }
     ]);
     handler.bounds.extendWith(markers);
     // handler.fitMapToBounds();
   });
-  return map
+  google.maps.event.addListener(handler.getMap(), 'idle', function(){
+    getAspirationsWithinBounds(addMarkers);
+  })
 }
 
 function getCurrentUserPosition(callback){
@@ -59,6 +58,7 @@ function getAspirationsWithinBounds(){
 
 function addMarkers(aspirations) {
   var map = handler.getMap();
+  handler.markers == undefined ? null : clearMarkers();
   handler.markers = aspirations.markers.map(function(aspiration){
     var marker = new google.maps.Marker({
         map: map,
@@ -67,9 +67,10 @@ function addMarkers(aspirations) {
         icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
     });
     var infowindow = new google.maps.InfoWindow({
-      content: `<div class="row">`+
-                  `<h5 class="orange-shadow">${aspiration.title}</h5>`+
-               `</div>`
+      content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
+               `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
+               `<p class="infowindow-body">${aspiration.details}</p>`
+
     });
     marker.addListener('click', function(){
       infowindow.open(map, marker);
@@ -82,5 +83,11 @@ function addMarkers(aspirations) {
 function openInfoBoxes(){
   handler.markers.forEach(function(marker){
     marker.infowindow.open(handler.getMap(), marker.marker )
+  })
+}
+
+function clearMarkers(){
+  handler.markers.forEach(function(marker){
+    marker.marker.setMap(null);
   })
 }
