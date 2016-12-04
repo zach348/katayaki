@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130213500) do
+ActiveRecord::Schema.define(version: 20161204194501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20161130213500) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes_count", default: 0
     t.index ["goal_id"], name: "aspiration_goal_id_ix", using: :btree
     t.index ["goal_id"], name: "index_aspirations_on_goal_id", using: :btree
     t.index ["user_id"], name: "aspirations_user_id_ix", using: :btree

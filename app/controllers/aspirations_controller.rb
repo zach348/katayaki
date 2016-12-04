@@ -25,10 +25,10 @@ class AspirationsController < ApplicationController
 
   def create
     user = current_user
-    if aspiration_params[:id].empty?
+    if Goal.where(title: aspiration_params[:title], details: aspiration_params[:details]).empty?
       goal = Goal.create(title: aspiration_params[:title], details: aspiration_params[:details])
     else
-      goal = Goal.find(aspiration_params[:id])
+      goal = Goal.where(title: aspiration_params[:title], details: aspiration_params[:details]).first
     end
     group = Group.find(group_params[:group_id])
     new_aspiration = Aspiration.new(user: user, goal: goal, group: group)
@@ -55,7 +55,7 @@ class AspirationsController < ApplicationController
 
   def markers
     users = User.in_bounds([bounds_params[:SW], bounds_params[:NE]])
-    markers = Aspiration.markers_for_users(users)
+    markers = Aspiration.markers_for_users(users, current_user)
     respond_to do |format|
       format.json { render json: { markers: markers } }
     end
