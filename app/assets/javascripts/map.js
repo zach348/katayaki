@@ -33,6 +33,22 @@ function getCurrentUserPosition(callback){
   });
 }
 
-function getUsersWithinBounds(bounds){
-
+function getAspirationsWithinBounds(){
+  let swBound = { lat: handler.getMap().getBounds().getSouthWest().lat(),
+                  lng: handler.getMap().getBounds().getSouthWest().lng() }
+  let neBound = { lat: handler.getMap().getBounds().getNorthEast().lat(),
+                  lng: handler.getMap().getBounds().getNorthEast().lng() }
+  $.ajax({
+    method: 'GET',
+    url: '/markers.json',
+    contentType: 'application/json',
+    data: { bounds: {
+                      SW: swBound,
+                      NE: neBound
+                    }
+          },
+    success: function(data) {
+      alert(data)
+    }
+  });
 }

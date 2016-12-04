@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'rate' => 'ratings#rate'
   post 'endorse' => 'ratings#endorse'
   get 'search' => 'goals#search'
+  get 'markers' => 'aspirations#markers'
   post 'incoming_messages' => 'incoming_messages#create'
 
 

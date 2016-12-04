@@ -7,6 +7,10 @@ class Aspiration < ActiveRecord::Base
   validates :user_id, presence: true
   validates :goal_id, presence: true
 
+  def self.markers_in_bounds(bound1,bound2)
+    binding.pry
+    ##User.in_bounds...
+  end
 
   def self.rating_items_for(user, num)
     result = []

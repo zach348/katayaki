@@ -53,6 +53,10 @@ class AspirationsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def markers
+    binding.pry
+  end
+
   protected
 
   def authorize_user
