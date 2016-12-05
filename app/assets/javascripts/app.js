@@ -4,7 +4,7 @@ $(document).ready(function(){
   //build map
   if($('.static_pages.index.current_user').length == 1) {
     getCurrentUserPosition(buildMap);
-  }else if($('.static_pages.index').length == 1){
+  }else if($('.static_pages.index.visitor').length == 1){
     getLocation(buildMap);
   }
 })
