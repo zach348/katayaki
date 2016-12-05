@@ -67,7 +67,7 @@ function addMarkers(aspirations) {
           usrId: aspiration.usrId,
           animation: google.maps.Animation.DROP,
           position: { lat: aspiration.lat, lng: aspiration.lng },
-          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
       });
       var infowindow = new google.maps.InfoWindow({
         content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+

@@ -7,18 +7,18 @@
       <h5> <%= @goal.details %> </p>
       <div class='row'>
         <% if current_user && current_user.groups.empty? %>
-        <div class='small-6 small-centered columns'>
+        <div class='small-7 small-centered columns'>
           <h5><%= button_to 'Join a Circle To Accept', groups_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
         <% elsif current_user  %>
-          <div class='small-6 small-centered columns'>
+          <div class='small-7 small-centered columns'>
             <%= form_tag aspirations_path( goal: { id: @goal.id, title: @goal.title, details: @goal.details }), method: :post do %>
               <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
               <%= submit_tag 'Accept', class: 'btn', method: :get %>
             <% end %>
           </div>
         <% else %>
-        <div class='small-6 small-centered columns'>
+        <div class='small-7 small-centered columns'>
           <h5><%= button_to 'Sign Up To Aspire', new_user_registration_path, { action: 'index', method: :get, class: 'btn' } %></h5>
         </div>
         <% end %>
