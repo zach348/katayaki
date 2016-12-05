@@ -20,7 +20,7 @@ class Aspiration < ActiveRecord::Base
       markers.push({
                       lat: user.latitude,
                       lng: user.longitude,
-                      aspId: asp.id,
+                      usrId: user.id,
                       title: asp.goal.title,
                       details: asp.goal.details
                     })
