@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :restrict_user, only: [:show, :edit, :update]
-  before_action :authorize_user, except: [:show, :edit, :update, :update_location]
+  before_action :authorize_user, except: [:update_location, :location]
 
   def show
     @user = current_user
