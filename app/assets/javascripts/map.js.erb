@@ -1,5 +1,5 @@
 function buildMap(origin){
-  var origin = origin || { coords: { latitude: 0, longitude: 0 }};
+  origin = origin || { coords: { latitude: 0, longitude: 0 }};
   handler = Gmaps.build('Google');
   var map = handler.buildMap({ provider: { zoom: 12, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
                     internal: {id: 'map'}}, function(){
@@ -34,11 +34,11 @@ function getCurrentUserPosition(callback){
 }
 
 function getAspirationsWithinBounds(){
-  let swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
+  var swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
                   handler.getMap().getBounds().getSouthWest().lng() ]
-  let neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
+  var neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
                   handler.getMap().getBounds().getNorthEast().lng() ]
-  let app = this;
+  var app = this;
 
   $.ajax({
     method: 'GET',
