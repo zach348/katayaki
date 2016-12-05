@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  if($('.users.show').length == 1 || $('.static_pages.index').length == 1) { getLocation(sendPosition); }
+
+  //update location
+  if($('.users').length == 1 || $('.static_pages.index').length == 1) { getLocation(sendPosition); }
 
   //build map
   if($('.static_pages.index.current_user').length == 1) {
-    debugger;
     getCurrentUserPosition(buildMap);
-  }else if($('.static_pages.index.visitor').length == 1){
-    debugger;
+  }else if($('.static_pages.index.visitor').length == 1) {
     getLocation(buildMap);
   }
 })
