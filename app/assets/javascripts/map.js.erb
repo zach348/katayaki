@@ -58,26 +58,28 @@ function getAspirationsWithinBounds(){
 
 function addMarkers(aspirations) {
   var map = handler.getMap();
-  handler.markers == undefined ? null : clearMarkers();
-  handler.markers = aspirations.markers.map(function(aspiration){
-    var marker = new google.maps.Marker({
-        map: map,
-        animation: google.maps.Animation.DROP,
-        position: { lat: aspiration.lat, lng: aspiration.lng },
-        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-    });
-    var infowindow = new google.maps.InfoWindow({
-      content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
-               `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
-               `<p class="infowindow-body">${aspiration.details}</p>`
+  handler.markers = handler.markers || [];
+  aspirations.markers.forEach(function(aspiration){
+    if(handler.markers.filter(function(marker){ return marker.marker.usrId == aspiration.usrId }).length == 0 ){
+      var marker = new google.maps.Marker({
+          map: map,
+          usrId: aspiration.usrId,
+          animation: google.maps.Animation.DROP,
+          position: { lat: aspiration.lat, lng: aspiration.lng },
+          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      });
+      var infowindow = new google.maps.InfoWindow({
+        content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
+                 `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
+                 `<p class="infowindow-body">${aspiration.details}</p>`
 
-    });
-    marker.addListener('click', function(){
-      infowindow.open(map, marker);
-    });
-    return { marker: marker, infowindow: infowindow }
+      });
+      marker.addListener('click', function(){
+        infowindow.open(map, marker);
+      });
+      handler.markers.push({ marker: marker, infowindow: infowindow })
+    }
   })
-  openInfoBoxes();
 }
 
 function openInfoBoxes(){
