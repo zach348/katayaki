@@ -1,4 +1,5 @@
 function buildMap(origin){
+  var origin = origin || { coords: { latitude: 0, longitude: 0 }};
   handler = Gmaps.build('Google');
   var map = handler.buildMap({ provider: { zoom: 12, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
                     internal: {id: 'map'}}, function(){

@@ -3,8 +3,10 @@ $(document).ready(function(){
 
   //build map
   if($('.static_pages.index.current_user').length == 1) {
+    debugger;
     getCurrentUserPosition(buildMap);
   }else if($('.static_pages.index.visitor').length == 1){
+    debugger;
     getLocation(buildMap);
   }
 })
