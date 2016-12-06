@@ -16,14 +16,16 @@ class Aspiration < ActiveRecord::Base
     users = users.reject{|user| user == current_user }
     markers = []
     users.each do |user|
-      asp = user.aspirations.leaders.first
-      markers.push({
-                      lat: user.latitude,
-                      lng: user.longitude,
-                      usrId: user.id,
-                      title: asp.goal.title,
-                      details: asp.goal.details
-                    })
+      unless user.aspirations.leaders.empty?
+        asp = user.aspirations.leaders.first
+        markers.push({
+                        lat: user.latitude,
+                        lng: user.longitude,
+                        usrId: user.id,
+                        title: asp.goal.title,
+                        details: asp.goal.details
+                      })
+      end
     end
     markers
   end
