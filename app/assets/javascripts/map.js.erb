@@ -4,18 +4,6 @@ function buildMap(origin, zoom = 12){
   var map = handler.buildMap({ provider: { zoom: zoom, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
                     internal: {id: 'map'}}, function(){
 
-    markers = handler.addMarkers([ //data//
-      {
-        "lat": origin.coords.latitude,
-        "lng": origin.coords.longitude,
-        "picture": {
-          "width":  32,
-          "height": 32
-        }
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    // handler.fitMapToBounds();
   });
   google.maps.event.addListener(handler.getMap(), 'idle', function(){
     getAspirationsWithinBounds(addMarkers);
