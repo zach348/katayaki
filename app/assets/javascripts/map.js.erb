@@ -8,7 +8,6 @@ function buildMap(origin, zoom = 12){
   google.maps.event.addListener(handler.getMap(), 'idle', function(){
     getAspirationsWithinBounds(addMarkers);
   })
-  if(mapDelay != undefined){window.clearTimeout(mapDelay);}
 }
 
 function getCurrentUserPosition(callback){

@@ -10,7 +10,7 @@ $(document).ready(function(){
     getCurrentUserPosition(buildMap);
   }else if($('.static_pages.index.visitor').length == 1) {
     setTimeout(function(){
-      buildMap({coords: {latitude: 0, longitude: -18.281250}}, 2);
+      buildMap(undefined, 3);
     }, 100);
   }
 })
