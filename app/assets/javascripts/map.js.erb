@@ -1,7 +1,7 @@
-function buildMap(origin){
+function buildMap(origin, zoom = 12){
   origin = origin || { coords: { latitude: 0, longitude: 0 }};
   handler = Gmaps.build('Google');
-  var map = handler.buildMap({ provider: { zoom: 12, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
+  var map = handler.buildMap({ provider: { zoom: zoom, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
                     internal: {id: 'map'}}, function(){
 
     markers = handler.addMarkers([ //data//
@@ -20,6 +20,7 @@ function buildMap(origin){
   google.maps.event.addListener(handler.getMap(), 'idle', function(){
     getAspirationsWithinBounds(addMarkers);
   })
+  if(mapDelay != undefined){window.clearTimeout(mapDelay);}
 }
 
 function getCurrentUserPosition(callback){
