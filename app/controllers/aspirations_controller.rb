@@ -54,7 +54,7 @@ class AspirationsController < ApplicationController
   end
 
   def markers
-    users = User.in_bounds([bounds_params[:SW], bounds_params[:NE]])
+    users = User.in_bounds([bounds_params[:SW], bounds_params[:NE]]).limit(250)
     markers = Aspiration.markers_for_users(users, current_user)
     respond_to do |format|
       format.json { render json: { markers: markers } }

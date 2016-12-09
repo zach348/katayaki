@@ -28,16 +28,9 @@ feature 'index page' do
 
   scenario 'inauthenticated sees only trending goals on splash page' do
     visit root_path
-    expect(page).to have_content('trending')
+    expect(page).to have_content('Trending')
     expect(page).to have_content('Aspire')
     expect(page).to_not have_content('Rate')
-  end
-
-  scenario 'inauthenticated can visit goal page' do
-    visit root_path
-    click_link 'trending1'
-    expect(page).to have_content('details')
-    expect(page).to have_content('trending1')
   end
 
   scenario 'inauthenticated user can visit search page' do
