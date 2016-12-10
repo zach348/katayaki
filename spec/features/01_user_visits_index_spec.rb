@@ -28,14 +28,14 @@ feature 'index page' do
 
   scenario 'inauthenticated sees only trending goals on splash page' do
     visit root_path
-    expect(page).to have_content('Trending')
-    expect(page).to have_content('Aspire')
+    expect(page).to have_content('Seeds')
+    expect(page).to have_content('Grow')
     expect(page).to_not have_content('Rate')
   end
 
   scenario 'inauthenticated user can visit search page' do
     visit root_path
-    click_link 'Aspire'
+    click_link 'Grow'
     expect(page).to have_selector(:link_or_button, 'Search')
   end
 end

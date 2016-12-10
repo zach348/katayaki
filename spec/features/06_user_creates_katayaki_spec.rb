@@ -12,7 +12,7 @@ feature 'katayakies' do
     click_link 'Circles'
     select 'test_circle', from: 'group[group_id]'
     click_button 'Join Circle'
-    click_link 'Aspire'
+    click_link 'Grow'
     fill_in 'search', with: 'zeal'
     click_button 'Search'
 
