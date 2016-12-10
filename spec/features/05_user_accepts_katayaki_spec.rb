@@ -14,7 +14,7 @@ feature 'katayakies' do
     click_link 'Circles'
     select 'test_circle', from: 'group[group_id]'
     click_button 'Join Circle'
-    click_link 'Aspire'
+    click_link 'Grow'
     click_link 'test_goal'
     click_button 'Accept'
 

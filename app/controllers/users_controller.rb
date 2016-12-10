@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :restrict_user, only: [:show, :edit, :update]
-  before_action :authorize_user, except: [:show, :edit, :update, :update_location]
+  before_action :authorize_user, except: [:update_location, :location]
 
   def show
     @user = current_user
@@ -29,6 +29,16 @@ class UsersController < ApplicationController
       new_params =  {latitude: location_params['lat'], longitude: location_params['lon'] }
       user.update_attributes(new_params)
       user.save
+    end
+  end
+
+  def location
+    if current_user
+      data = { latitude: current_user.latitude, longitude: current_user.longitude }
+      respond_to do |format|
+        format.json { render json: { coords: data } }
+        format.html { render json: { coords: data } }
+      end
     end
   end
 

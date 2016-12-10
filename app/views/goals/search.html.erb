@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag    'application', media: 'all' %>
+-<%= stylesheet_link_tag    'application', media: 'all' %>
 
 <div class='row small-12 small-centered columns'>
   <div class='small-8 centered small-centered columns'>
@@ -14,6 +14,9 @@
         <div class="goal-list small-6 small-centered columns">
           <h4 class='underline'><%=link_to goal.title, new_goal_path(goal: { title: goal.title, details: goal.details}) %></h4>
           <h5><%= goal.details %></h5>
+          <% if goal.id.nil? %>
+            <p>(Merriam-Webster)</p>
+          <% end %>
         </div>
       <% end %>
     </div>

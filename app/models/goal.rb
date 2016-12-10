@@ -14,13 +14,14 @@ class Goal < ActiveRecord::Base
   end
 
   def self.search(search)
-    search = search.strip
+    search = search.downcase.strip
     result = where('title ~* :regex', regex: "#{search}") + self.get_defs(search)
     result.sort{|a,b| a.title.match(/\A#{search}\z/) <=> b.title.match(/\A#{search}\z/) }
   end
 
   def self.get_defs(search)
     search.gsub!(/\s/, "+")
+    search.downcase!
     uri = "http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{search}?key=#{ENV['MW_DICT']}"
     response = Hash.from_xml(HTTParty.get(uri))
     process_mw_response(response, search)

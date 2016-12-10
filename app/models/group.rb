@@ -4,4 +4,10 @@ class Group < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 3..20 }, uniqueness: true
   validates :moderated, presence: true
+
+  protected
+
+  def clean_associations
+    Affiliation.where(group_id: self.id).delete_all
+  end
 end

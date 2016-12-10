@@ -26,15 +26,12 @@ $turquoise: #93E7FF;
   }
 }
 
-.search {
-  margin-top: 10vmin;
-}
-
 .btn {
   background-color: $orange;
   border-radius: 1vmin;
   margin: auto auto 2vmin auto;
   font-size: 3.0vmin !important;
+  text-align: center;
 }
 
 .pagination {
@@ -67,6 +64,10 @@ $turquoise: #93E7FF;
 
 .turquoise-shadow {
   text-shadow: .15vmin .15vmin $turquoise !important;
+}
+
+.teal-shadow {
+  text-shadow: .15vmin .15vmin $teal !important;
 }
 
 .underline {

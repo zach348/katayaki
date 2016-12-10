@@ -1,0 +1,84 @@
+function buildMap(origin, zoom = 12){
+  origin = origin || { coords: { latitude: 0, longitude: 0 }};
+  handler = Gmaps.build('Google');
+  var map = handler.buildMap({ provider: { zoom: zoom, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
+                    internal: {id: 'map'}}, function(){
+
+  });
+  google.maps.event.addListener(handler.getMap(), 'idle', function(){
+    getAspirationsWithinBounds(addMarkers);
+  })
+}
+
+function getCurrentUserPosition(callback){
+  $.ajax({
+    method: 'GET',
+    url: '/location.json',
+    contentType: 'application/json',
+    success: function(data) {
+      callback(data);
+    }
+  });
+}
+
+function getAspirationsWithinBounds(){
+  var swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
+                  handler.getMap().getBounds().getSouthWest().lng() ]
+  var neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
+                  handler.getMap().getBounds().getNorthEast().lng() ]
+  var app = this;
+
+  $.ajax({
+    method: 'GET',
+    url: '/markers.json',
+    contentType: 'application/json',
+    data: { bounds: {
+                      SW: swBound,
+                      NE: neBound
+                    }
+          },
+    success: function(aspirations) {
+      app.addMarkers(aspirations);
+    }
+  });
+}
+
+
+
+function addMarkers(aspirations) {
+  var map = handler.getMap();
+  handler.markers = handler.markers || [];
+  aspirations.markers.forEach(function(aspiration){
+    if(handler.markers.filter(function(marker){ return marker.marker.usrId == aspiration.usrId }).length == 0 ){
+      var marker = new google.maps.Marker({
+          map: map,
+          usrId: aspiration.usrId,
+          animation: google.maps.Animation.DROP,
+          position: { lat: aspiration.lat, lng: aspiration.lng },
+          icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      });
+      var infowindow = new google.maps.InfoWindow({
+        content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
+                 `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
+                 `<p class="infowindow-body">${aspiration.details}</p>`
+
+      });
+      marker.addListener('click', function(){
+        infowindow.open(map, marker);
+      });
+      handler.markers.push({ marker: marker, infowindow: infowindow })
+    }
+  })
+}
+
+function openInfoBoxes(){
+  handler.markers.forEach(function(marker){
+    marker.infowindow.open(handler.getMap(), marker.marker )
+  })
+}
+
+function clearMarkers(){
+  handler.markers.forEach(function(marker){
+    marker.marker.setMap(null);
+  })
+}

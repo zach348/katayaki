@@ -7,6 +7,28 @@ class Aspiration < ActiveRecord::Base
   validates :user_id, presence: true
   validates :goal_id, presence: true
 
+  scope :leaders, -> {
+    order('votes_count DESC')
+  }
+
+
+  def self.markers_for_users(users, current_user = nil )
+    users = users.reject{|user| user == current_user }
+    markers = []
+    users.each do |user|
+      unless user.aspirations.leaders.empty?
+        asp = user.aspirations.leaders.first
+        markers.push({
+                        lat: user.latitude,
+                        lng: user.longitude,
+                        usrId: user.id,
+                        title: asp.goal.title,
+                        details: asp.goal.details
+                      })
+      end
+    end
+    markers
+  end
 
   def self.rating_items_for(user, num)
     result = []
