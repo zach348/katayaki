@@ -1,6 +1,8 @@
 class GoalsController < ApplicationController
 
   def index
+    redirect_to user_path(current_user) if current_user && !params[:get_splash]
+
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
   end
 

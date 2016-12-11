@@ -1,31 +1,48 @@
-function buildMap(origin, zoom = 12){
-  origin = origin || { coords: { latitude: 7, longitude: 10 }};
-  handler = Gmaps.build('Google');
-  var map = handler.buildMap({ provider: { zoom: zoom, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
-                    internal: {id: 'map'}}, function(){
+var gmap;
 
+function buildMap(origin, options){
+  origin = origin || { coords: { latitude: 4, longitude: 5 }};
+  options = options || { zoom: 12, fetchMarkersOnResize: true, originMarker: true };
+
+  gmap = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: origin.coords.latitude, lng: origin.coords.longitude },
+    zoom: options.zoom
   });
-  google.maps.event.addListener(handler.getMap(), 'idle', function(){
-    getAspirationsWithinBounds(addMarkers);
-  })
+
+  if(options.fetchMarkersOnResize){
+    google.maps.event.addListener(gmap, 'idle', function(){
+      getAspirationsWithinBounds(addMarkersForAspirations);
+    })
+  }
+  if(options.originMarker){
+    gmap.markers = gmap.markers || [];
+    var marker = new google.maps.Marker({
+      position: {lat: origin.coords.latitude, lng: origin.coords.longitude},
+      map: gmap
+    });
+    gmap.markers.push({ marker: marker, infowindow: null })
+  }
+  if(options.timer){
+    clearTimeout(options.timer);
+  }
 }
 
-function getCurrentUserPosition(callback){
+function getCurrentUserPosition(callback, options){
   $.ajax({
     method: 'GET',
     url: '/location.json',
     contentType: 'application/json',
     success: function(data) {
-      callback(data);
+      callback(data, options);
     }
   });
 }
 
-function getAspirationsWithinBounds(){
-  var swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
-                  handler.getMap().getBounds().getSouthWest().lng() ]
-  var neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
-                  handler.getMap().getBounds().getNorthEast().lng() ]
+function getAspirationsWithinBounds(callback, options){
+  var swBound = [ gmap.getBounds().getSouthWest().lat(),
+                  gmap.getBounds().getSouthWest().lng() ]
+  var neBound = [ gmap.getBounds().getNorthEast().lat(),
+                  gmap.getBounds().getNorthEast().lng() ]
   var app = this;
 
   $.ajax({
@@ -38,20 +55,20 @@ function getAspirationsWithinBounds(){
                     }
           },
     success: function(aspirations) {
-      app.addMarkers(aspirations);
+      callback(aspirations, options);
     }
   });
 }
 
 
 
-function addMarkers(aspirations) {
-  var map = handler.getMap();
-  handler.markers = handler.markers || [];
+function addMarkersForAspirations(aspirations, options) {
+  options = options || {};
+  gmap.markers = gmap.markers || [];
   aspirations.markers.forEach(function(aspiration){
-    if(handler.markers.filter(function(marker){ return marker.marker.usrId == aspiration.usrId }).length == 0 ){
+    if(userMarkerExists(aspiration.usrId)){
       var marker = new google.maps.Marker({
-          map: map,
+          map: gmap,
           usrId: aspiration.usrId,
           animation: google.maps.Animation.DROP,
           position: { lat: aspiration.lat, lng: aspiration.lng },
@@ -61,24 +78,27 @@ function addMarkers(aspirations) {
         content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
                  `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
                  `<p class="infowindow-body">${aspiration.details}</p>`
-
       });
       marker.addListener('click', function(){
-        infowindow.open(map, marker);
+        infowindow.open(gmap, marker);
       });
-      handler.markers.push({ marker: marker, infowindow: infowindow })
+      gmap.markers.push({ marker: marker, infowindow: infowindow })
     }
   })
 }
 
 function openInfoBoxes(){
-  handler.markers.forEach(function(marker){
-    marker.infowindow.open(handler.getMap(), marker.marker )
+  gmap.markers.forEach(function(marker){
+    marker.infowindow.open(gmap, marker.marker )
   })
 }
 
 function clearMarkers(){
-  handler.markers.forEach(function(marker){
+  gmap.markers.forEach(function(marker){
     marker.marker.setMap(null);
   })
+}
+
+function userMarkerExists(userId){
+  return gmap.markers.filter(function(marker){ return marker.marker.usrId == userId }).length == 0
 }
