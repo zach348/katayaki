@@ -9,7 +9,7 @@ $(document).ready(function(){
   }else if($('.static_pages.index.visitor').length == 1) {
     var timer;
     timer = setTimeout(function(){
-      buildMap(undefined, {zoom: 2, fetchMarkersOnResize: true, timer: timer });
+      buildMap(undefined, {zoom: 2, refreshAspirations: true, timer: timer });
     }, 100);
   }
 })

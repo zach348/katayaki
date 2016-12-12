@@ -2,14 +2,14 @@ var gmap;
 
 function buildMap(origin, options){
   origin = origin || { coords: { latitude: 4, longitude: 5 }};
-  options = options || { zoom: 12, fetchMarkersOnResize: true, originMarker: true };
+  options = options || { zoom: 12, refreshAspirations: true, originMarker: true };
 
   gmap = new google.maps.Map(document.getElementById('map'), {
     center: { lat: origin.coords.latitude, lng: origin.coords.longitude },
     zoom: options.zoom
   });
 
-  if(options.fetchMarkersOnResize){
+  if(options.refreshAspirations){
     google.maps.event.addListener(gmap, 'idle', function(){
       getAspirationsWithinBounds(addMarkersForAspirations);
     })
@@ -66,7 +66,7 @@ function addMarkersForAspirations(aspirations, options) {
   options = options || {};
   gmap.markers = gmap.markers || [];
   aspirations.markers.forEach(function(aspiration){
-    if(userMarkerExists(aspiration.usrId)){
+    if(!userMarkerExists(aspiration.usrId)){
       var marker = new google.maps.Marker({
           map: gmap,
           usrId: aspiration.usrId,
@@ -100,5 +100,5 @@ function clearMarkers(){
 }
 
 function userMarkerExists(userId){
-  return gmap.markers.filter(function(marker){ return marker.marker.usrId == userId }).length == 0
+  return !gmap.markers.filter(function(marker){ return marker.marker.usrId == userId }).length == 0
 }

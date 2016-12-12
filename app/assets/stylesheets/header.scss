@@ -6,7 +6,7 @@ $header-height: 2.5rem;
 $transition: all .35s ease-in-out;
 
 $small: 420px;
-$tiny: 360px;
+$tiny: 350px;
 
 $orange: #FF7D00;
 $teal: #008BB2;
@@ -22,7 +22,9 @@ $turquoise: #93E7FF;
   overflow: visible;
   border: 0.5vmin solid $turquoise;
   padding-top: 2vmin;
-  padding-bottom: $header-height + ($subnav-link-padding * 2 + $subnav-font-size - 0.15rem);
+  padding-bottom: $header-height;
+
+
 
   .headline {
     color: #ffe;
@@ -54,8 +56,8 @@ $turquoise: #93E7FF;
 
 
   @media screen and (max-width: $small) {
-    padding-left: 13vmin !important;
-    padding-right: 13vmin !important;
+    padding-left: 7vmin !important;
+    padding-right: 7vmin !important;
   }
 
 
@@ -65,7 +67,7 @@ $turquoise: #93E7FF;
 
     a {
       //1rem
-      padding: $subnav-link-padding 0.75rem;
+      padding: $subnav-link-padding - 1rem;
       font-size: $subnav-font-size;
       color: #ffe;
       text-transform: uppercase;
