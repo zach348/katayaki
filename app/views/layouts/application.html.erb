@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title class='orange-shadow'>Katayaki</title>
+    <title class='orange-shadow'>Self</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="hRuJSO6fYBmsyQrI76IfLzb2imURIdNn1_zpQnCl80c" />
@@ -17,7 +17,7 @@
 
   <body class="<%=controller_name -%> <%= action_name %> <%= current_user ? 'current_user' : 'visitor' %>">
     <header class="header">
-      <h1 class="headline">Katayaki</h1>
+      <h1 class="headline">Self</h1>
         <ul class="header-subnav">
           <%- if user_signed_in? -%>
             <li class="navItem"><%= link_to 'Self', user_path(current_user) %></li>
