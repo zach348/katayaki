@@ -1,8 +1,8 @@
 $header-bg: #008BB2;;
 $subnav-link-padding: 0.75rem;
-$subnav-font-size: 0.75rem;
+$subnav-font-size: 0.8rem;
 $subnav-link-opacity: 0.15;
-$header-height: 2.5rem;
+$header-height: 3.0rem;
 $transition: all .35s ease-in-out;
 
 $small: 420px;
@@ -25,22 +25,17 @@ $turquoise: #93E7FF;
   padding-bottom: $header-height;
 
 
-
   .headline {
     color: #ffe;
-    font-size: 15vmin;
-    padding-left: 2vmin;
-    padding-right: 2vmin;
-    padding-bottom: 2.5vmin;
+    font-size: $header-height;
+    padding-bottom: 5vmin;
     margin: auto auto auto auto;
     text-shadow: .25vmin .25vmin $orange;
 
     @media screen and (max-width: $small) {
-      padding-bottom: 7.5vmin;
+      padding-left: 3vmin !important;
+      padding-right: 3vmin !important;
     }
-
-
-
   }
 }
 
@@ -51,6 +46,7 @@ $turquoise: #93E7FF;
   margin: 0 auto;
   bottom: 0;
   width: 100%;
+  padding-top: auto;
 
 
   @media screen and (max-width: $small) {
@@ -75,12 +71,12 @@ $turquoise: #93E7FF;
       transition: $transition;
 
       @media screen and (max-width: $small) {
-        font-size: $subnav-font-size - 0.1rem;
+        font-size: $subnav-font-size - 0.2rem;
         padding: $subnav-link-padding 0.15rem;
       }
 
       @media screen and (max-width: $tiny) {
-        font-size: $subnav-font-size - 0.25rem;
+        font-size: $subnav-font-size - 0.45rem;
       }
 
       &.is-active {
