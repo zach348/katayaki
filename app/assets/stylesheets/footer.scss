@@ -11,9 +11,13 @@ $text-color: #fff;
 // footer CSS
 
 .footer {
+  position: fixed;
+  min-width: 100%;
+  min-height: 7%;
+  bottom: 0;
   border: 0.5vmin solid $turquoise;
   background-color: $teal;
-  padding: 2rem 4rem;
+  padding: auto;
   text-align: center;
   color: $text-color;
   i {
