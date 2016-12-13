@@ -2,7 +2,7 @@ $header-bg: #008BB2;;
 $subnav-link-padding: 0.75rem;
 $subnav-font-size: 0.8rem;
 $subnav-link-opacity: 0.15;
-$header-height: 3.0rem;
+$header-height: 2.5rem;
 $transition: all .35s ease-in-out;
 
 $small: 420px;
@@ -27,7 +27,7 @@ $turquoise: #93E7FF;
 
   .headline {
     color: #ffe;
-    font-size: $header-height;
+    font-size: 12vmin;
     padding-bottom: 5vmin;
     margin: auto auto auto auto;
     text-shadow: .25vmin .25vmin $orange;
