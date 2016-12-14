@@ -11,9 +11,9 @@ $text-color: #fff;
 // footer CSS
 
 .footer {
-  position: fixed;
-  min-width: 100%;
-  min-height: 7%;
+  position: relative;
+  min-width: 100vmin;
+  min-height: 15vmin;
   bottom: 0;
   border: 0.5vmin solid $turquoise;
   background-color: $teal;

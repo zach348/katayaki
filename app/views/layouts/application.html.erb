@@ -38,12 +38,13 @@
         </ul>
     </header>
 
-    <%= render 'layouts/flash' %>
-
     <div className="wrapper">
-      <%= yield %>
+      <%= render 'layouts/flash' %>
+      <div class='content'>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer' unless current_page?(controller: '/static_pages', action: 'index') || current_page?(controller: '/ratings', action: 'rate') %>
     </div>
 
-    <%= render 'layouts/footer' %>
   </body>
 </html>

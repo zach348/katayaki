@@ -20,7 +20,7 @@ class GoalsController < ApplicationController
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
     if @goals.empty?
       flash[:notice] = 'Try a noun or adjective...'
-      redirect_to goals_path
+      redirect_to goals_path(get_splash: true)
     end
   end
 
