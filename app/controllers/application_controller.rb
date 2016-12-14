@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :visitor_ip
 
 
+
+
   protected
 
   def visitor_ip

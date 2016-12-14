@@ -43,7 +43,7 @@
       <div class='content'>
         <%= yield %>
       </div>
-      <%= render 'layouts/footer' unless current_page?(controller: '/static_pages', action: 'index') || current_page?(controller: '/ratings', action: 'rate') %>
+      <%= render 'layouts/footer' unless current_page?(controller: '/static_pages', action: 'index')  %>
     </div>
 
   </body>
