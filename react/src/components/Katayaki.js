@@ -18,7 +18,7 @@ const Katayaki = props => {
       if(defDisplayed){
         return (
           <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
+            <div className='katayaki small-9 small-centered medium-8 medium-centered large-7 large-centered columns'>
               <div className="card">
                 <h4>{user}</h4>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
@@ -34,7 +34,7 @@ const Katayaki = props => {
       }else{
         return (
           <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
+            <div className='katayaki small-9 small-centered medium-8 medium-centered large-7 large-centered columns'>
               <div className="card">
                 <h4>{user}</h4>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
@@ -51,7 +51,7 @@ const Katayaki = props => {
       if(defDisplayed){
         return (
           <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
+            <div className='katayaki small-9 small-centered medium-8 medium-centered large-7 large-centered columns'>
               <div className="card">
                 <img src={img_url} className='prof-img'></img>
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
@@ -67,7 +67,7 @@ const Katayaki = props => {
       }else{
         return (
           <div className='row'>
-            <div className='katayaki small-9 small-centered columns'>
+            <div className='katayaki small-9 small-centered medium-8 medium-centered large-7 large-centered columns'>
               <div className="card">
                 <img src={img_url} className='prof-img'></img>
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
