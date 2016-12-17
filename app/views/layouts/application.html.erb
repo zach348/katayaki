@@ -17,7 +17,10 @@
 
   <body class="<%=controller_name -%> <%= action_name %> <%= current_user ? 'current_user' : 'visitor' %>">
     <header class="header">
-      <h1 class="headline">Self</h1>
+      <div class='headline-wrapper'>
+        <h1 class="headline">Self</h1>
+      </div>
+      <div class='subnav-wrapper'>
         <ul class="header-subnav">
           <%- if user_signed_in? -%>
             <li class="navItem"><%= link_to 'Self', user_path(current_user) %></li>
@@ -36,6 +39,7 @@
             <li class="navItem"><%= link_to 'Sign In', new_user_session_path  %></li>
           <%- end -%>
         </ul>
+      </div>
     </header>
 
     <div className="wrapper">

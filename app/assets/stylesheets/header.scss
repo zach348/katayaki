@@ -22,13 +22,14 @@ $turquoise: #93E7FF;
   overflow: visible;
   border: 0.5vmin solid $turquoise;
   padding-top: 2vmin;
-  padding-bottom: $header-height;
 
+  .headline-wrapper {
+    padding-bottom: 0;
+  }
 
   .headline {
     color: #ffe;
     font-size: 12vmin;
-    padding-bottom: 5vmin;
     margin: auto auto auto auto;
     text-shadow: .25vmin .25vmin $orange;
 
@@ -41,7 +42,7 @@ $turquoise: #93E7FF;
 
 .header-subnav {
   float: none;
-  position: absolute;
+  position: relative;
   text-align: center;
   margin: 0 auto;
   bottom: 0;
