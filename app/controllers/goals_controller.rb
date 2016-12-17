@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
     if params[:search]
       Goal.search(params[:search])
     else
-      Goal.all.order(title: :asc)
+      Goal.top(Goal.count)
     end
   end
 
