@@ -1,6 +1,6 @@
 class Aspiration < ActiveRecord::Base
   belongs_to :user
-  belongs_to :goal
+  belongs_to :goal, counter_cache: true
   belongs_to :group
   has_many :votes
 
