@@ -2,6 +2,9 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
+$small: 420px;
+$tiny: 350px;
+
 .wrapper {
     min-height: 100%;
     height: auto !important;
@@ -10,6 +13,10 @@ $turquoise: #93E7FF;
 
 .content {
   margin-bottom: 10vmax;
+
+  @media screen and (max-width: $small) {
+    margin-bottom: 15vmax;
+  }
 }
 
 #flash {
