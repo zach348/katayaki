@@ -10,6 +10,7 @@ const Katayaki = props => {
   let endorse = props.endorse;
   let img_url = props.info.img_url
   let next = props.next;
+  let btnClass = props.btnsDisabled ? "kat-button disabled" : "kat-button";
   let btnState = props.btnsDisabled;
   let showDef = props.showDef;
   let defDisplayed = props.defDisplayed;
@@ -24,8 +25,12 @@ const Katayaki = props => {
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                 <h5>({details})</h5>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Boost</button>
+                    <a href='#' className={btnClass} onClick={next}>
+                      <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
+                    </a>
+                    <a href='#' className={btnClass} onClick={endorse}>
+                      <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
+                    </a>
                   </div>
               </div>
             </div>
@@ -39,8 +44,12 @@ const Katayaki = props => {
                 <h4>{user}</h4>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Boost</button>
+                    <a href='#' className={btnClass} onClick={next}>
+                      <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
+                    </a>
+                    <a href='#' className={btnClass} onClick={endorse}>
+                      <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
+                    </a>
                   </div>
               </div>
             </div>
@@ -57,8 +66,12 @@ const Katayaki = props => {
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                 <h5>({details})</h5>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Boost</button>
+                    <a href='#' className={btnClass} onClick={next}>
+                      <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
+                    </a>
+                    <a href='#' className={btnClass} onClick={endorse}>
+                      <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
+                    </a>
                   </div>
               </div>
             </div>
@@ -72,8 +85,12 @@ const Katayaki = props => {
                 <img src={img_url} className='prof-img'></img>
                 <h3 className='goal-title' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
-                    <button disabled={btnState} className="kat-button" onClick={next}>Pass</button>
-                    <button disabled={btnState} className="kat-button" onClick={endorse}>Boost</button>
+                    <a href='#' className={btnClass} onClick={next}>
+                      <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
+                    </a>
+                    <a href='#' className={btnClass} onClick={endorse}>
+                      <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
+                    </a>
                   </div>
               </div>
             </div>

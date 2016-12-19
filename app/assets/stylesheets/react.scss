@@ -43,6 +43,16 @@ $turquoise: #93E7FF;
   outline: none;
 }
 
+.btn-icon {
+  padding-bottom: 1vmin;
+}
+
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 .goal-title {
   text-shadow: .1vmin .1vmin $orange;
 }
