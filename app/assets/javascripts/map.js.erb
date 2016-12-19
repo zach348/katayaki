@@ -74,9 +74,10 @@ function addMarkersForAspirations(aspirations, options) {
           position: { lat: aspiration.lat, lng: aspiration.lng },
           icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
       });
+      var goalUrl = "/goals/" + aspiration.goalId
       var infowindow = new google.maps.InfoWindow({
         content: `<img class="marker-img" src=<%= asset_path('avatar.png') %>/>`+
-                 `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
+                 `<span class="infowindow-heading"><a href=${goalUrl}>${aspiration.title}</a></span>`+
                  `<p class="infowindow-body">${aspiration.details}</p>`
       });
       marker.addListener('click', function(){

@@ -21,6 +21,10 @@ $turquoise: #93E7FF;
   display: inline-block;
   padding: 1vmin;
   color: $teal;
+  font-size: 3vmin;
+  :visited {
+    color: $teal;
+  }
 }
 
 .infowindow-body {

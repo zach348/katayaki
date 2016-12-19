@@ -22,6 +22,7 @@ class Aspiration < ActiveRecord::Base
                         lat: user.latitude,
                         lng: user.longitude,
                         usrId: user.id,
+                        goalId: asp.goal.id,
                         title: asp.goal.title,
                         details: asp.goal.details
                       })
