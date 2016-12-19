@@ -22,6 +22,7 @@ $turquoise: #93E7FF;
   overflow: visible;
   border: 0.5vmin solid $turquoise;
   padding-top: 2vmin;
+  min-width: 100%;
 
   .headline-wrapper {
     padding-bottom: 0;
@@ -48,6 +49,7 @@ $turquoise: #93E7FF;
   bottom: 0;
   width: 100%;
   padding-top: auto;
+  padding-bottom: $subnav-link-padding;
 
 
   @media screen and (max-width: $small) {

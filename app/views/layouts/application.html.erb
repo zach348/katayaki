@@ -44,10 +44,14 @@
 
     <div className="wrapper">
       <%= render 'layouts/flash' %>
-      <div class='content'>
-        <%= yield %>
-      </div>
-      <%= render 'layouts/footer'  %>
+      <% if !current_page?(:controller => '/static_pages', :action => 'index') %>
+        <div class='content'>
+          <%= yield %>
+        </div>
+      <% else %>
+          <%= yield %>
+      <% end %>
+      <%= render 'layouts/footer' unless current_page?(:controller => '/static_pages', :action => 'index') %>
     </div>
 
   </body>
