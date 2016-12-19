@@ -2,7 +2,6 @@ class RatingsController < ApplicationController
   before_action :authorize_user
 
   def rate
-
   end
 
   def endorse

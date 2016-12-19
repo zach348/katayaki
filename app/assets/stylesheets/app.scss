@@ -12,11 +12,7 @@ $tiny: 350px;
 }
 
 .content {
-  margin-bottom: 10vmax;
-
-  @media screen and (max-width: $small) {
-    margin-bottom: 15vmax;
-  }
+  margin-bottom: 15vmax;
 }
 
 #flash {
