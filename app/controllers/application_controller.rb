@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :visitor_ip
 
-  before_filter :authenticate if Rails.env.production?
+  # removed for master branch
+  # before_filter :authenticate if Rails.env.production?
 
 
   protected
