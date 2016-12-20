@@ -23,7 +23,7 @@ feature 'katayakies' do
     click_link 'Zeal'
     click_button 'Accept'
 
-    expect(page).to have_content('Katayaki Accepted')
+    expect(page).to have_content('Seed Accepted')
     expect(Goal.count).to eq(num_goals + 1)
     expect(user.aspirations.count).to eq(num_aspirations + 1)
     expect(Goal.where(title: 'Zeal').first.details).to eq(':eagerness and  interest in pursuit of something : ')
