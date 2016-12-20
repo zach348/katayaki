@@ -2,6 +2,8 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
+$small: 420px;
+$tiny: 350px;
 
 * {
     margin: 0;
@@ -51,9 +53,12 @@ a:visited {
     }
 
     .goal-list-count {
-      padding-top: 4vmin;
+      padding-top: 3vmin;
       padding-right: 4vmin;
 
+      @media screen and (max-width: $small) {
+        padding-top: 2vmin;
+      }
     }
 
     .goal-details {
