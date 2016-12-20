@@ -26,7 +26,7 @@ a:visited {
 
 .goal-list {
 
-  text-align: center;
+  text-align: left;
   margin-top: 8vmin;
   margin-bottom: 10vmin;
   border: 0.5vmin solid $turquoise;
@@ -37,17 +37,31 @@ a:visited {
     a {
       size: 4vmin;
       color: white;
+      text-shadow: none;
       &:hover{
         text-shadow: .25vmin .25vmin $orange;
       }
+    }
+
+    .title-div {
+      text-decoration: underline;
+      padding-top: 2vmin;
+      padding-left: 2vmin;
 
     }
+
+    .goal-list-count {
+      padding-top: 4vmin;
+      padding-right: 4vmin;
+
+    }
+
+    .goal-details {
+      text-align: left;
+    }
+
 }
 
 a:visited {
   color: #BABAB4;
-}
-
-.underline {
-  text-decoration: underline;
 }
