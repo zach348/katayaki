@@ -1,6 +1,6 @@
 class Aspiration < ActiveRecord::Base
   belongs_to :user
-  belongs_to :goal
+  belongs_to :goal, counter_cache: true
   belongs_to :group
   has_many :votes
 
@@ -22,6 +22,7 @@ class Aspiration < ActiveRecord::Base
                         lat: user.latitude,
                         lng: user.longitude,
                         usrId: user.id,
+                        goalId: asp.goal.id,
                         title: asp.goal.title,
                         details: asp.goal.details
                       })

@@ -1,6 +1,8 @@
 class GoalsController < ApplicationController
 
   def index
+    redirect_to user_path(current_user) if current_user && !params[:get_splash]
+
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
   end
 
@@ -18,7 +20,7 @@ class GoalsController < ApplicationController
     @goals = display_goals.paginate(page: params[:page], per_page: 10)
     if @goals.empty?
       flash[:notice] = 'Try a noun or adjective...'
-      redirect_to goals_path
+      redirect_to goals_path(get_splash: true)
     end
   end
 
@@ -28,7 +30,7 @@ class GoalsController < ApplicationController
     if params[:search]
       Goal.search(params[:search])
     else
-      Goal.all.order(title: :asc)
+      Goal.top(Goal.count)
     end
   end
 

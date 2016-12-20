@@ -7,10 +7,7 @@ class Goal < ActiveRecord::Base
   validates :details, presence: true, length: { in: 10..140 }
 
   def self.top(num)
-    ordered_goals = self.all.to_a.sort do |a,b|
-      b.aspirations.count <=> a.aspirations.count
-    end
-    ordered_goals.slice(0, num)
+    order('aspirations_count DESC').limit(num)
   end
 
   def self.search(search)

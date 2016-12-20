@@ -2,18 +2,20 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
-* {
-    margin: 0;
-}
-html, body {
-    height: 100%;
-    background-image: url("./community-web2.jpg");
-    background-size: 100%;
-}
+$small: 420px;
+$tiny: 350px;
+
 .wrapper {
     min-height: 100%;
     height: auto !important;
     height: 100%;
+}
+
+.content {
+  padding-bottom: 8vmax;
+  @media screen and (max-width: $small) {
+    padding-bottom: 10vmax;
+  }
 }
 
 #flash {

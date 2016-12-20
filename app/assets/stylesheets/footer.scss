@@ -9,11 +9,19 @@ $turquoise: #93E7FF;
 $text-color: #fff;
 
 // footer CSS
+.footer-content {
+  padding-top: 3.5%;
+  padding-bottom: 3.5%;
+}
 
 .footer {
+  position: fixed;
+  min-width: 100%;
+  min-height: 15vmin;
+  bottom: 0;
   border: 0.5vmin solid $turquoise;
   background-color: $teal;
-  padding: 2rem 4rem;
+  padding: auto;
   text-align: center;
   color: $text-color;
   i {
