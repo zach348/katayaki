@@ -34,10 +34,10 @@ class AspirationsController < ApplicationController
     new_aspiration = Aspiration.new(user: user, goal: goal, group: group)
 
     if Aspiration.aspiration_exists?(goal, user, group)
-      flash[:notice] = 'You have already accepted this Katayaki'
+      flash[:notice] = 'You have already accepted this seed'
       redirect_to goals_path
     elsif new_aspiration.save
-      flash[:notice] = 'Katayaki Accepted'
+      flash[:notice] = 'Seed Accepted'
       aspiration = Aspiration.where(user: user, goal: goal, group: group).first
       redirect_to aspiration_path(aspiration)
     else
@@ -49,7 +49,7 @@ class AspirationsController < ApplicationController
   def destroy
     @aspiration = Aspiration.find(params[:id])
     @aspiration.destroy
-    flash[:notice] = 'Katayaki Removed'
+    flash[:notice] = 'Seed Removed'
     redirect_to user_path(current_user)
   end
 
