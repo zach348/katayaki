@@ -21,6 +21,7 @@ gem 'httparty'
 gem 'lodash-rails'
 gem 'coffee-rails'
 gem 'geokit-rails'
+gem 'ruby_dep'
 
 
 group :development, :test do

@@ -12,6 +12,7 @@ $tiny: 350px;
 }
 
 .content {
+  padding-top: 3vmax;
   padding-bottom: 8vmax;
   @media screen and (max-width: $small) {
     padding-bottom: 10vmax;
