@@ -23,14 +23,14 @@ feature 'index page' do
 
   scenario 'inauthenticated user sees header' do
     visit root_path
-    expect(page).to have_content 'Katayaki'
+    expect(page).to have_content 'Self'
   end
 
   scenario 'inauthenticated sees only trending goals on splash page' do
     visit root_path
     expect(page).to have_content('Seeds')
     expect(page).to have_content('Grow')
-    expect(page).to_not have_content('Rate')
+    expect(page).to_not have_content('Others')
   end
 
   scenario 'inauthenticated user can visit search page' do

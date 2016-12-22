@@ -2,6 +2,8 @@ $orange: #FF7D00;
 $teal: #008BB2;
 $turquoise: #93E7FF;
 
+$small: 420px;
+$tiny: 350px;
 
 * {
     margin: 0;
@@ -26,6 +28,45 @@ a:visited {
 
 .goal-list {
 
+  text-align: left;
+  margin-top: 8vmin;
+  margin-bottom: 10vmin;
+  border: 0.5vmin solid $turquoise;
+  background-color: $teal;
+  float: none !important;
+  border-radius: 3vmin;
+
+    a {
+      size: 4vmin;
+      color: white;
+      text-shadow: none;
+      &:hover{
+        text-shadow: .25vmin .25vmin $orange;
+      }
+    }
+
+    .title-div {
+      text-decoration: underline;
+      padding-top: 2vmin;
+      padding-left: 2vmin;
+
+    }
+
+    .goal-list-count {
+      padding-top: 3vmin;
+      padding-right: 4vmin;
+
+      @media screen and (max-width: $small) {
+        padding-top: 2vmin;
+      }
+    }
+
+    .goal-details {
+      text-align: left;
+    }
+}
+
+.kat-list {
   text-align: center;
   margin-top: 8vmin;
   margin-bottom: 10vmin;
@@ -37,17 +78,13 @@ a:visited {
     a {
       size: 4vmin;
       color: white;
+      text-shadow: none;
       &:hover{
         text-shadow: .25vmin .25vmin $orange;
       }
-
     }
 }
 
 a:visited {
   color: #BABAB4;
-}
-
-.underline {
-  text-decoration: underline;
 }

@@ -22,7 +22,7 @@ feature 'katayakies' do
     aspiration = Aspiration.where(goal_id: goal.id, user_id: user.id).first
     expect(aspiration.goal.title).to eq('test_goal')
 
-    expect(page).to have_content('Katayaki Accepted')
+    expect(page).to have_content('Seed Accepted')
     expect(page).to have_content('test_goal')
   end
 
@@ -34,7 +34,7 @@ feature 'katayakies' do
     visit aspiration_path(katayaki)
     click_button 'Remove'
 
-    expect(page).to have_content('Katayaki Removed')
+    expect(page).to have_content('Seed Removed')
     expect(Aspiration.all.length).to eq(num_aspirations - 1)
   end
 end
