@@ -33,6 +33,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'listen'
   gem 'database_cleaner'
+  gem 'coveralls', require: false
 end
 
 group :test do
