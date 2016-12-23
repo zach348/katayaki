@@ -10,6 +10,7 @@ $turquoise: #93E7FF;
   float: none !important;
   margin-bottom: 10vmax;
   margin-top: 5vmax;
+  max-height: 80%;
 }
 
 .card{
@@ -27,13 +28,8 @@ $turquoise: #93E7FF;
 .prof-img {
   margin: auto auto 3vmin;
   border-radius: 5vmin;
-  max-height: 65%;
-  max-width: 65%;
-}
-
-.prof-img-wrapper {
-  max-height: 40%;
-  max-width: 40%;
+  max-height: 60%;
+  max-width: 60%;
 }
 
 .kat-button {
