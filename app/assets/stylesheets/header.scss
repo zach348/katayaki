@@ -1,5 +1,5 @@
 $header-bg: #008BB2;;
-$subnav-link-padding: 0.75rem;
+$subnav-link-padding: 0.8rem;
 $subnav-font-size: 0.8rem;
 $subnav-link-opacity: 0.15;
 $header-height: 2.5rem;
@@ -48,8 +48,7 @@ $turquoise: #93E7FF;
   margin: 0 auto;
   bottom: 0;
   width: 100%;
-  padding-top: auto;
-  padding-bottom: $subnav-link-padding;
+  padding: auto;
 
 
   @media screen and (max-width: $small) {
