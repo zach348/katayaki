@@ -22,10 +22,6 @@ a:visited {
     text-shadow: .25vmin .25vmin white !important;
 }
 
-#search-form {
-  margin-top: 10vmin;
-}
-
 .goal-list {
 
   text-align: left;
@@ -49,7 +45,6 @@ a:visited {
       text-decoration: underline;
       padding-top: 2vmin;
       padding-left: 2vmin;
-
     }
 
     .goal-list-count {
@@ -63,6 +58,9 @@ a:visited {
 
     .goal-details {
       text-align: left;
+      h5 {
+        font-size: 3vmin;
+      }
     }
 }
 

@@ -37483,1002 +37483,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     root._ = _;
   }
 }.call(this));
-(function() {
-  this.Gmaps = {
-    build: function(type, options) {
-      var model;
-      if (options == null) {
-        options = {};
-      }
-      model = _.isFunction(options.handler) ? options.handler : Gmaps.Objects.Handler;
-      return new model(type, options);
-    },
-    Builders: {},
-    Objects: {},
-    Google: {
-      Objects: {},
-      Builders: {}
-    }
-  };
-
-}).call(this);
-(function() {
-  var moduleKeywords,
-    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-  moduleKeywords = ['extended', 'included'];
-
-  this.Gmaps.Base = (function() {
-    function Base() {}
-
-    Base.extend = function(obj) {
-      var key, ref, value;
-      for (key in obj) {
-        value = obj[key];
-        if (indexOf.call(moduleKeywords, key) < 0) {
-          this[key] = value;
-        }
-      }
-      if ((ref = obj.extended) != null) {
-        ref.apply(this);
-      }
-      return this;
-    };
-
-    Base.include = function(obj) {
-      var key, ref, value;
-      for (key in obj) {
-        value = obj[key];
-        if (indexOf.call(moduleKeywords, key) < 0) {
-          this.prototype[key] = value;
-        }
-      }
-      if ((ref = obj.included) != null) {
-        ref.apply(this);
-      }
-      return this;
-    };
-
-    return Base;
-
-  })();
-
-}).call(this);
-(function() {
-  this.Gmaps.Objects.BaseBuilder = (function() {
-    function BaseBuilder() {}
-
-    BaseBuilder.prototype.build = function() {
-      return new (this.model_class())(this.serviceObject);
-    };
-
-    BaseBuilder.prototype.before_init = function() {};
-
-    BaseBuilder.prototype.after_init = function() {};
-
-    BaseBuilder.prototype.addListener = function(action, fn) {
-      return this.primitives().addListener(this.getServiceObject(), action, fn);
-    };
-
-    BaseBuilder.prototype.getServiceObject = function() {
-      return this.serviceObject;
-    };
-
-    BaseBuilder.prototype.primitives = function() {
-      return this.constructor.PRIMITIVES;
-    };
-
-    BaseBuilder.prototype.model_class = function() {
-      return this.constructor.OBJECT;
-    };
-
-    return BaseBuilder;
-
-  })();
-
-}).call(this);
-(function() {
-  this.Gmaps.Objects.Builders = function(builderClass, objectClass, primitivesProvider) {
-    return {
-      build: function(args, provider_options, internal_options) {
-        var builder;
-        objectClass.PRIMITIVES = primitivesProvider;
-        builderClass.OBJECT = objectClass;
-        builderClass.PRIMITIVES = primitivesProvider;
-        builder = new builderClass(args, provider_options, internal_options);
-        return builder.build();
-      }
-    };
-  };
-
-}).call(this);
-(function() {
-  this.Gmaps.Objects.Handler = (function() {
-    function Handler(type, options) {
-      this.type = type;
-      if (options == null) {
-        options = {};
-      }
-      this.setPrimitives(options);
-      this.setOptions(options);
-      this._cacheAllBuilders();
-      this.resetBounds();
-    }
-
-    Handler.prototype.buildMap = function(options, onMapLoad) {
-      if (onMapLoad == null) {
-        onMapLoad = function() {};
-      }
-      return this.map = this._builder('Map').build(options, (function(_this) {
-        return function() {
-          _this._createClusterer();
-          return onMapLoad();
-        };
-      })(this));
-    };
-
-    Handler.prototype.addMarkers = function(markers_data, provider_options) {
-      return _.map(markers_data, (function(_this) {
-        return function(marker_data) {
-          return _this.addMarker(marker_data, provider_options);
-        };
-      })(this));
-    };
-
-    Handler.prototype.addMarker = function(marker_data, provider_options) {
-      var marker;
-      marker = this._builder('Marker').build(marker_data, provider_options, this.marker_options);
-      marker.setMap(this.getMap());
-      this.clusterer.addMarker(marker);
-      return marker;
-    };
-
-    Handler.prototype.addCircles = function(circles_data, provider_options) {
-      return _.map(circles_data, (function(_this) {
-        return function(circle_data) {
-          return _this.addCircle(circle_data, provider_options);
-        };
-      })(this));
-    };
-
-    Handler.prototype.addCircle = function(circle_data, provider_options) {
-      return this._addResource('circle', circle_data, provider_options);
-    };
-
-    Handler.prototype.addPolylines = function(polylines_data, provider_options) {
-      return _.map(polylines_data, (function(_this) {
-        return function(polyline_data) {
-          return _this.addPolyline(polyline_data, provider_options);
-        };
-      })(this));
-    };
-
-    Handler.prototype.addPolyline = function(polyline_data, provider_options) {
-      return this._addResource('polyline', polyline_data, provider_options);
-    };
-
-    Handler.prototype.addPolygons = function(polygons_data, provider_options) {
-      return _.map(polygons_data, (function(_this) {
-        return function(polygon_data) {
-          return _this.addPolygon(polygon_data, provider_options);
-        };
-      })(this));
-    };
-
-    Handler.prototype.addPolygon = function(polygon_data, provider_options) {
-      return this._addResource('polygon', polygon_data, provider_options);
-    };
-
-    Handler.prototype.addKmls = function(kmls_data, provider_options) {
-      return _.map(kmls_data, (function(_this) {
-        return function(kml_data) {
-          return _this.addKml(kml_data, provider_options);
-        };
-      })(this));
-    };
-
-    Handler.prototype.addKml = function(kml_data, provider_options) {
-      return this._addResource('kml', kml_data, provider_options);
-    };
-
-    Handler.prototype.removeMarkers = function(gem_markers) {
-      return _.map(gem_markers, (function(_this) {
-        return function(gem_marker) {
-          return _this.removeMarker(gem_marker);
-        };
-      })(this));
-    };
-
-    Handler.prototype.removeMarker = function(gem_marker) {
-      gem_marker.clear();
-      return this.clusterer.removeMarker(gem_marker);
-    };
-
-    Handler.prototype.fitMapToBounds = function() {
-      return this.map.fitToBounds(this.bounds.getServiceObject());
-    };
-
-    Handler.prototype.getMap = function() {
-      return this.map.getServiceObject();
-    };
-
-    Handler.prototype.setOptions = function(options) {
-      this.marker_options = _.extend(this._default_marker_options(), options.markers);
-      this.builders = _.extend(this._default_builders(), options.builders);
-      return this.models = _.extend(this._default_models(), options.models);
-    };
-
-    Handler.prototype.resetBounds = function() {
-      return this.bounds = this._builder('Bound').build();
-    };
-
-    Handler.prototype.setPrimitives = function(options) {
-      return this.primitives = options.primitives === void 0 ? this._rootModule().Primitives() : _.isFunction(options.primitives) ? options.primitives() : options.primitives;
-    };
-
-    Handler.prototype.currentInfowindow = function() {
-      return this.builders.Marker.CURRENT_INFOWINDOW;
-    };
-
-    Handler.prototype._addResource = function(resource_name, resource_data, provider_options) {
-      var resource;
-      resource = this._builder(resource_name).build(resource_data, provider_options);
-      resource.setMap(this.getMap());
-      return resource;
-    };
-
-    Handler.prototype._cacheAllBuilders = function() {
-      var that;
-      that = this;
-      return _.each(['Bound', 'Circle', 'Clusterer', 'Kml', 'Map', 'Marker', 'Polygon', 'Polyline'], function(kind) {
-        return that._builder(kind);
-      });
-    };
-
-    Handler.prototype._clusterize = function() {
-      return _.isObject(this.marker_options.clusterer);
-    };
-
-    Handler.prototype._createClusterer = function() {
-      return this.clusterer = this._builder('Clusterer').build({
-        map: this.getMap()
-      }, this.marker_options.clusterer);
-    };
-
-    Handler.prototype._default_marker_options = function() {
-      return _.clone({
-        singleInfowindow: true,
-        maxRandomDistance: 0,
-        clusterer: {
-          maxZoom: 5,
-          gridSize: 50
-        }
-      });
-    };
-
-    Handler.prototype._builder = function(name) {
-      var name1;
-      name = this._capitalize(name);
-      if (this[name1 = "__builder" + name] == null) {
-        this[name1] = Gmaps.Objects.Builders(this.builders[name], this.models[name], this.primitives);
-      }
-      return this["__builder" + name];
-    };
-
-    Handler.prototype._default_models = function() {
-      var models;
-      models = _.clone(this._rootModule().Objects);
-      if (this._clusterize()) {
-        return models;
-      } else {
-        models.Clusterer = Gmaps.Objects.NullClusterer;
-        return models;
-      }
-    };
-
-    Handler.prototype._capitalize = function(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
-    Handler.prototype._default_builders = function() {
-      return _.clone(this._rootModule().Builders);
-    };
-
-    Handler.prototype._rootModule = function() {
-      if (this.__rootModule == null) {
-        this.__rootModule = Gmaps[this.type];
-      }
-      return this.__rootModule;
-    };
-
-    return Handler;
-
-  })();
-
-}).call(this);
-(function() {
-  this.Gmaps.Objects.NullClusterer = (function() {
-    function NullClusterer() {}
-
-    NullClusterer.prototype.addMarkers = function() {};
-
-    NullClusterer.prototype.addMarker = function() {};
-
-    NullClusterer.prototype.clear = function() {};
-
-    NullClusterer.prototype.removeMarker = function() {};
-
-    return NullClusterer;
-
-  })();
-
-}).call(this);
-(function() {
-  this.Gmaps.Google.Objects.Common = {
-    getServiceObject: function() {
-      return this.serviceObject;
-    },
-    setMap: function(map) {
-      return this.getServiceObject().setMap(map);
-    },
-    clear: function() {
-      return this.getServiceObject().setMap(null);
-    },
-    show: function() {
-      return this.getServiceObject().setVisible(true);
-    },
-    hide: function() {
-      return this.getServiceObject().setVisible(false);
-    },
-    isVisible: function() {
-      return this.getServiceObject().getVisible();
-    },
-    primitives: function() {
-      return this.constructor.PRIMITIVES;
-    }
-  };
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Bound = (function(superClass) {
-    extend(Bound, superClass);
-
-    function Bound(options) {
-      this.before_init();
-      this.serviceObject = new (this.primitives().latLngBounds);
-      this.after_init();
-    }
-
-    return Bound;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Circle = (function(superClass) {
-    extend(Circle, superClass);
-
-    function Circle(args, provider_options) {
-      this.args = args;
-      this.provider_options = provider_options != null ? provider_options : {};
-      this.before_init();
-      this.serviceObject = this.create_circle();
-      this.after_init();
-    }
-
-    Circle.prototype.create_circle = function() {
-      return new (this.primitives().circle)(this.circle_options());
-    };
-
-    Circle.prototype.circle_options = function() {
-      var base_options;
-      base_options = {
-        center: new (this.primitives().latLng)(this.args.lat, this.args.lng),
-        radius: this.args.radius
-      };
-      return _.defaults(base_options, this.provider_options);
-    };
-
-    return Circle;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Clusterer = (function(superClass) {
-    extend(Clusterer, superClass);
-
-    function Clusterer(args, options) {
-      this.args = args;
-      this.options = options;
-      this.before_init();
-      this.serviceObject = new (this.primitives().clusterer)(this.args.map, [], this.options);
-      this.after_init();
-    }
-
-    return Clusterer;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Kml = (function(superClass) {
-    extend(Kml, superClass);
-
-    function Kml(args, provider_options) {
-      this.args = args;
-      this.provider_options = provider_options != null ? provider_options : {};
-      this.before_init();
-      this.serviceObject = this.create_kml();
-      this.after_init();
-    }
-
-    Kml.prototype.create_kml = function() {
-      return new (this.primitives().kml)(this.args.url, this.kml_options());
-    };
-
-    Kml.prototype.kml_options = function() {
-      var base_options;
-      base_options = {};
-      return _.defaults(base_options, this.provider_options);
-    };
-
-    return Kml;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Map = (function(superClass) {
-    extend(Map, superClass);
-
-    function Map(options, onMapLoad) {
-      var provider_options;
-      this.before_init();
-      provider_options = _.extend(this.default_options(), options.provider);
-      this.internal_options = options.internal;
-      this.serviceObject = new (this.primitives().map)(document.getElementById(this.internal_options.id), provider_options);
-      this.on_map_load(onMapLoad);
-      this.after_init();
-    }
-
-    Map.prototype.build = function() {
-      return new (this.model_class())(this.serviceObject, this.primitives());
-    };
-
-    Map.prototype.on_map_load = function(onMapLoad) {
-      return this.primitives().addListenerOnce(this.serviceObject, 'idle', onMapLoad);
-    };
-
-    Map.prototype.default_options = function() {
-      return {
-        mapTypeId: this.primitives().mapTypes('ROADMAP'),
-        center: new (this.primitives().latLng)(0, 0),
-        zoom: 8
-      };
-    };
-
-    return Map;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Marker = (function(superClass) {
-    extend(Marker, superClass);
-
-    Marker.CURRENT_INFOWINDOW = void 0;
-
-    Marker.CACHE_STORE = {};
-
-    function Marker(args, provider_options, internal_options) {
-      this.args = args;
-      this.provider_options = provider_options != null ? provider_options : {};
-      this.internal_options = internal_options != null ? internal_options : {};
-      this.infowindow_binding = bind(this.infowindow_binding, this);
-      this.before_init();
-      this.create_marker();
-      this.create_infowindow_on_click();
-      this.after_init();
-    }
-
-    Marker.prototype.build = function() {
-      return this.marker = new (this.model_class())(this.serviceObject);
-    };
-
-    Marker.prototype.create_marker = function() {
-      return this.serviceObject = new (this.primitives().marker)(this.marker_options());
-    };
-
-    Marker.prototype.create_infowindow = function() {
-      if (!_.isString(this.args.infowindow)) {
-        return null;
-      }
-      return new (this.primitives().infowindow)({
-        content: this.args.infowindow
-      });
-    };
-
-    Marker.prototype.marker_options = function() {
-      var base_options, coords;
-      coords = this._randomized_coordinates();
-      base_options = {
-        title: this.args.marker_title,
-        position: new (this.primitives().latLng)(coords[0], coords[1]),
-        icon: this._get_picture('picture'),
-        shadow: this._get_picture('shadow')
-      };
-      return _.extend(this.provider_options, base_options);
-    };
-
-    Marker.prototype.create_infowindow_on_click = function() {
-      return this.addListener('click', this.infowindow_binding);
-    };
-
-    Marker.prototype.infowindow_binding = function() {
-      var base;
-      if (this._should_close_infowindow()) {
-        this.constructor.CURRENT_INFOWINDOW.close();
-      }
-      this.marker.panTo();
-      if (this.infowindow == null) {
-        this.infowindow = this.create_infowindow();
-      }
-      if (this.infowindow == null) {
-        return;
-      }
-      this.infowindow.open(this.getServiceObject().getMap(), this.getServiceObject());
-      if ((base = this.marker).infowindow == null) {
-        base.infowindow = this.infowindow;
-      }
-      return this.constructor.CURRENT_INFOWINDOW = this.infowindow;
-    };
-
-    Marker.prototype._get_picture = function(picture_name) {
-      if (!_.isObject(this.args[picture_name]) || !_.isString(this.args[picture_name].url)) {
-        return null;
-      }
-      return this._create_or_retrieve_image(this._picture_args(picture_name));
-    };
-
-    Marker.prototype._create_or_retrieve_image = function(picture_args) {
-      if (this.constructor.CACHE_STORE[picture_args.url] === void 0) {
-        this.constructor.CACHE_STORE[picture_args.url] = new (this.primitives().markerImage)(picture_args.url, picture_args.size, picture_args.origin, picture_args.anchor, picture_args.scaledSize);
-      }
-      return this.constructor.CACHE_STORE[picture_args.url];
-    };
-
-    Marker.prototype._picture_args = function(picture_name) {
-      return {
-        url: this.args[picture_name].url,
-        anchor: this._createImageAnchorPosition(this.args[picture_name].anchor),
-        size: new (this.primitives().size)(this.args[picture_name].width, this.args[picture_name].height),
-        scaledSize: null,
-        origin: null
-      };
-    };
-
-    Marker.prototype._createImageAnchorPosition = function(anchorLocation) {
-      if (!_.isArray(anchorLocation)) {
-        return null;
-      }
-      return new (this.primitives().point)(anchorLocation[0], anchorLocation[1]);
-    };
-
-    Marker.prototype._should_close_infowindow = function() {
-      return this.internal_options.singleInfowindow && (this.constructor.CURRENT_INFOWINDOW != null);
-    };
-
-    Marker.prototype._randomized_coordinates = function() {
-      var Lat, Lng, dx, dy, random;
-      if (!_.isNumber(this.internal_options.maxRandomDistance)) {
-        return [this.args.lat, this.args.lng];
-      }
-      random = function() {
-        return Math.random() * 2 - 1;
-      };
-      dx = this.internal_options.maxRandomDistance * random();
-      dy = this.internal_options.maxRandomDistance * random();
-      Lat = parseFloat(this.args.lat) + (180 / Math.PI) * (dy / 6378137);
-      Lng = parseFloat(this.args.lng) + (90 / Math.PI) * (dx / 6378137) / Math.cos(this.args.lat);
-      return [Lat, Lng];
-    };
-
-    return Marker;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Polygon = (function(superClass) {
-    extend(Polygon, superClass);
-
-    function Polygon(args, provider_options) {
-      this.args = args;
-      this.provider_options = provider_options != null ? provider_options : {};
-      this.before_init();
-      this.serviceObject = this.create_polygon();
-      this.after_init();
-    }
-
-    Polygon.prototype.create_polygon = function() {
-      return new (this.primitives().polygon)(this.polygon_options());
-    };
-
-    Polygon.prototype.polygon_options = function() {
-      var base_options;
-      base_options = {
-        path: this._build_path()
-      };
-      return _.defaults(base_options, this.provider_options);
-    };
-
-    Polygon.prototype._build_path = function() {
-      return _.map(this.args, (function(_this) {
-        return function(arg) {
-          return new (_this.primitives().latLng)(arg.lat, arg.lng);
-        };
-      })(this));
-    };
-
-    return Polygon;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Builders.Polyline = (function(superClass) {
-    extend(Polyline, superClass);
-
-    function Polyline(args, provider_options) {
-      this.args = args;
-      this.provider_options = provider_options != null ? provider_options : {};
-      this.before_init();
-      this.serviceObject = this.create_polyline();
-      this.after_init();
-    }
-
-    Polyline.prototype.create_polyline = function() {
-      return new (this.primitives().polyline)(this.polyline_options());
-    };
-
-    Polyline.prototype.polyline_options = function() {
-      var base_options;
-      base_options = {
-        path: this._build_path()
-      };
-      return _.defaults(base_options, this.provider_options);
-    };
-
-    Polyline.prototype._build_path = function() {
-      return _.map(this.args, (function(_this) {
-        return function(arg) {
-          return new (_this.primitives().latLng)(arg.lat, arg.lng);
-        };
-      })(this));
-    };
-
-    return Polyline;
-
-  })(Gmaps.Objects.BaseBuilder);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Bound = (function(superClass) {
-    extend(Bound, superClass);
-
-    Bound.include(Gmaps.Google.Objects.Common);
-
-    function Bound(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Bound.prototype.extendWith = function(array_or_object) {
-      var collection;
-      collection = _.isArray(array_or_object) ? array_or_object : [array_or_object];
-      return _.each(collection, (function(_this) {
-        return function(object) {
-          return object.updateBounds(_this);
-        };
-      })(this));
-    };
-
-    Bound.prototype.extend = function(value) {
-      return this.getServiceObject().extend(this.primitives().latLngFromPosition(value));
-    };
-
-    return Bound;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Circle = (function(superClass) {
-    extend(Circle, superClass);
-
-    Circle.include(Gmaps.Google.Objects.Common);
-
-    function Circle(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Circle.prototype.updateBounds = function(bounds) {
-      bounds.extend(this.getServiceObject().getBounds().getNorthEast());
-      return bounds.extend(this.getServiceObject().getBounds().getSouthWest());
-    };
-
-    return Circle;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  this.Gmaps.Google.Objects.Clusterer = (function() {
-    function Clusterer(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Clusterer.prototype.addMarkers = function(markers) {
-      return _.each(markers, (function(_this) {
-        return function(marker) {
-          return _this.addMarker(marker);
-        };
-      })(this));
-    };
-
-    Clusterer.prototype.addMarker = function(marker) {
-      return this.getServiceObject().addMarker(marker.getServiceObject());
-    };
-
-    Clusterer.prototype.clear = function() {
-      return this.getServiceObject().clearMarkers();
-    };
-
-    Clusterer.prototype.removeMarker = function(marker) {
-      return this.getServiceObject().removeMarker(marker.getServiceObject());
-    };
-
-    Clusterer.prototype.getServiceObject = function() {
-      return this.serviceObject;
-    };
-
-    return Clusterer;
-
-  })();
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Kml = (function(superClass) {
-    extend(Kml, superClass);
-
-    function Kml(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Kml.prototype.updateBounds = function(bounds) {};
-
-    Kml.prototype.setMap = function(map) {
-      return this.getServiceObject().setMap(map);
-    };
-
-    Kml.prototype.getServiceObject = function() {
-      return this.serviceObject;
-    };
-
-    Kml.prototype.primitives = function() {
-      return this.constructor.PRIMITIVES;
-    };
-
-    return Kml;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Map = (function(superClass) {
-    extend(Map, superClass);
-
-    function Map(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Map.prototype.getServiceObject = function() {
-      return this.serviceObject;
-    };
-
-    Map.prototype.centerOn = function(position) {
-      return this.getServiceObject().setCenter(this.primitives().latLngFromPosition(position));
-    };
-
-    Map.prototype.fitToBounds = function(boundsObject) {
-      if (!boundsObject.isEmpty()) {
-        return this.getServiceObject().fitBounds(boundsObject);
-      }
-    };
-
-    Map.prototype.primitives = function() {
-      return this.constructor.PRIMITIVES;
-    };
-
-    return Map;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Marker = (function(superClass) {
-    extend(Marker, superClass);
-
-    Marker.include(Gmaps.Google.Objects.Common);
-
-    function Marker(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Marker.prototype.updateBounds = function(bounds) {
-      return bounds.extend(this.getServiceObject().position);
-    };
-
-    Marker.prototype.panTo = function() {
-      return this.getServiceObject().getMap().panTo(this.getServiceObject().getPosition());
-    };
-
-    return Marker;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Polygon = (function(superClass) {
-    extend(Polygon, superClass);
-
-    Polygon.include(Gmaps.Google.Objects.Common);
-
-    function Polygon(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Polygon.prototype.updateBounds = function(bounds) {
-      var i, len, ll, ref, results;
-      ref = this.serviceObject.getPath().getArray();
-      results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        ll = ref[i];
-        results.push(bounds.extend(ll));
-      }
-      return results;
-    };
-
-    return Polygon;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  this.Gmaps.Google.Objects.Polyline = (function(superClass) {
-    extend(Polyline, superClass);
-
-    Polyline.include(Gmaps.Google.Objects.Common);
-
-    function Polyline(serviceObject) {
-      this.serviceObject = serviceObject;
-    }
-
-    Polyline.prototype.updateBounds = function(bounds) {
-      var i, len, ll, ref, results;
-      ref = this.serviceObject.getPath().getArray();
-      results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        ll = ref[i];
-        results.push(bounds.extend(ll));
-      }
-      return results;
-    };
-
-    return Polyline;
-
-  })(Gmaps.Base);
-
-}).call(this);
-(function() {
-  this.Gmaps.Google.Primitives = function() {
-    var factory;
-    factory = {
-      point: google.maps.Point,
-      size: google.maps.Size,
-      circle: google.maps.Circle,
-      latLng: google.maps.LatLng,
-      latLngBounds: google.maps.LatLngBounds,
-      map: google.maps.Map,
-      mapTypez: google.maps.MapTypeId,
-      markerImage: google.maps.MarkerImage,
-      marker: google.maps.Marker,
-      infowindow: google.maps.InfoWindow,
-      listener: google.maps.event.addListener,
-      clusterer: MarkerClusterer,
-      listenerOnce: google.maps.event.addListenerOnce,
-      polyline: google.maps.Polyline,
-      polygon: google.maps.Polygon,
-      kml: google.maps.KmlLayer,
-      addListener: function(object, event_name, fn) {
-        return factory.listener(object, event_name, fn);
-      },
-      addListenerOnce: function(object, event_name, fn) {
-        return factory.listenerOnce(object, event_name, fn);
-      },
-      mapTypes: function(type) {
-        return factory.mapTypez[type];
-      },
-      latLngFromPosition: function(position) {
-        if (_.isArray(position)) {
-          return new factory.latLng(position[0], position[1]);
-        } else {
-          if (_.isNumber(position.lat) && _.isNumber(position.lng)) {
-            return new factory.latLng(position.lat, position.lng);
-          } else {
-            if (_.isFunction(position.getServiceObject)) {
-              return position.getServiceObject().getPosition();
-            } else {
-              return position;
-            }
-          }
-        }
-      }
-    };
-    return factory;
-  };
-
-}).call(this);
-(function() {
-
-
-}).call(this);
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -38489,16 +37493,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 $(document).ready(function(){
 
   //update location
-  if($('.users').length == 1 || $('.static_pages.index').length == 1) {
-    getLocation(sendPosition);
-  }
+  getLocation(sendPosition);
 
   //build map
   if($('.static_pages.index.current_user').length == 1) {
     getCurrentUserPosition(buildMap);
   }else if($('.static_pages.index.visitor').length == 1) {
-    setTimeout(function(){
-      buildMap(undefined, 3);
+    var timer;
+    timer = setTimeout(function(){
+      buildMap(undefined, {zoom: 2, refreshAspirations: true, timer: timer });
     }, 100);
   }
 })
@@ -41364,7 +40367,7 @@ $(document).ready(function(){
 /* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(298);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactCssTransitionReplace = __webpack_require__(470);\n\nvar _reactCssTransitionReplace2 = _interopRequireDefault(_reactCssTransitionReplace);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Katayaki = function Katayaki(props) {\n  var goal = props.info.goal;\n  var id = props.info.id;\n  var description = props.info.description;\n  var user = props.info.user;\n  var details = props.info.details;\n  var endorse = props.endorse;\n  var img_url = props.info.img_url;\n  var next = props.next;\n  var btnState = props.btnsDisabled;\n  var showDef = props.showDef;\n  var defDisplayed = props.defDisplayed;\n\n  if (img_url == 'default_avatar.png') {\n    if (defDisplayed) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement(\n              'h4',\n              null,\n              user\n            ),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'h5',\n              null,\n              '(',\n              details,\n              ')'\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: next },\n                'Pass'\n              ),\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: endorse },\n                'Boost'\n              )\n            )\n          )\n        )\n      );\n    } else {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement(\n              'h4',\n              null,\n              user\n            ),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: next },\n                'Pass'\n              ),\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: endorse },\n                'Boost'\n              )\n            )\n          )\n        )\n      );\n    }\n  } else {\n    if (defDisplayed) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement('img', { src: img_url, className: 'prof-img' }),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'h5',\n              null,\n              '(',\n              details,\n              ')'\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: next },\n                'Pass'\n              ),\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: endorse },\n                'Boost'\n              )\n            )\n          )\n        )\n      );\n    } else {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement('img', { src: img_url, className: 'prof-img' }),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: next },\n                'Pass'\n              ),\n              _react2.default.createElement(\n                'button',\n                { disabled: btnState, className: 'kat-button', onClick: endorse },\n                'Boost'\n              )\n            )\n          )\n        )\n      );\n    }\n  }\n};\n\nexports.default = Katayaki;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZWFjdC9zcmMvY29tcG9uZW50cy9LYXRheWFraS5qcz8yMThlIl0sIm5hbWVzIjpbIkthdGF5YWtpIiwiZ29hbCIsInByb3BzIiwiaW5mbyIsImlkIiwiZGVzY3JpcHRpb24iLCJ1c2VyIiwiZGV0YWlscyIsImVuZG9yc2UiLCJpbWdfdXJsIiwibmV4dCIsImJ0blN0YXRlIiwiYnRuc0Rpc2FibGVkIiwic2hvd0RlZiIsImRlZkRpc3BsYXllZCIsIlN0cmluZyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7Ozs7O0FBRUEsSUFBTUEsV0FBVyxTQUFYQSxRQUFXLFFBQVM7QUFDeEIsTUFBSUMsT0FBT0MsTUFBTUMsSUFBTixDQUFXRixJQUF0QjtBQUNBLE1BQUlHLEtBQUtGLE1BQU1DLElBQU4sQ0FBV0MsRUFBcEI7QUFDQSxNQUFJQyxjQUFjSCxNQUFNQyxJQUFOLENBQVdFLFdBQTdCO0FBQ0EsTUFBSUMsT0FBT0osTUFBTUMsSUFBTixDQUFXRyxJQUF0QjtBQUNBLE1BQUlDLFVBQVVMLE1BQU1DLElBQU4sQ0FBV0ksT0FBekI7QUFDQSxNQUFJQyxVQUFVTixNQUFNTSxPQUFwQjtBQUNBLE1BQUlDLFVBQVVQLE1BQU1DLElBQU4sQ0FBV00sT0FBekI7QUFDQSxNQUFJQyxPQUFPUixNQUFNUSxJQUFqQjtBQUNBLE1BQUlDLFdBQVdULE1BQU1VLFlBQXJCO0FBQ0EsTUFBSUMsVUFBVVgsTUFBTVcsT0FBcEI7QUFDQSxNQUFJQyxlQUFlWixNQUFNWSxZQUF6Qjs7QUFFRSxNQUFHTCxXQUFXLG9CQUFkLEVBQW1DO0FBQ2pDLFFBQUdLLFlBQUgsRUFBZ0I7QUFDZCxhQUNFO0FBQUE7QUFBQSxVQUFLLFdBQVUsS0FBZjtBQUNFO0FBQUE7QUFBQSxZQUFLLFdBQVUseUNBQWY7QUFDRTtBQUFBO0FBQUEsY0FBSyxXQUFVLE1BQWY7QUFDRTtBQUFBO0FBQUE7QUFBS1I7QUFBTCxhQURGO0FBRUU7QUFBQTtBQUFBLGdCQUFJLFdB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QUFERixPQURGO0FBY0Q7QUFDRjtBQUNKLENBaEZEOztrQkFrRmVSLFEiLCJmaWxlIjoiNDY5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCBSZWFjdENTU1RyYW5zaXRpb25SZXBsYWNlIGZyb20gJ3JlYWN0LWNzcy10cmFuc2l0aW9uLXJlcGxhY2UnO1xuXG5jb25zdCBLYXRheWFraSA9IHByb3BzID0+IHtcbiAgbGV0IGdvYWwgPSBwcm9wcy5pbmZvLmdvYWw7XG4gIGxldCBpZCA9IHByb3BzLmluZm8uaWQ7XG4gIGxldCBkZXNjcmlwdGlvbiA9IHByb3BzLmluZm8uZGVzY3JpcHRpb247XG4gIGxldCB1c2VyID0gcHJvcHMuaW5mby51c2VyO1xuICBsZXQgZGV0YWlscyA9IHByb3BzLmluZm8uZGV0YWlscztcbiAgbGV0IGVuZG9yc2UgPSBwcm9wcy5lbmRvcnNlO1xuICBsZXQgaW1nX3VybCA9IHByb3BzLmluZm8uaW1nX3VybFxuICBsZXQgbmV4dCA9IHByb3BzLm5leHQ7XG4gIGxldCBidG5TdGF0ZSA9IHByb3BzLmJ0bnNEaXNhYmxlZDtcbiAgbGV0IHNob3dEZWYgPSBwcm9wcy5zaG93RGVmO1xuICBsZXQgZGVmRGlzcGxheWVkID0gcHJvcHMuZGVmRGlzcGxheWVkO1xuXG4gICAgaWYoaW1nX3VybCA9PSAnZGVmYXVsdF9hdmF0YXIucG5nJyl7XG4gICAgICBpZihkZWZEaXNwbGF5ZWQpe1xuICAgICAgICByZXR1cm4gKFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9J2thdGF5YWtpIHNtYWxsLTkgc21hbGwtY2VudGVyZWQgY29sdW1ucyc+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxoND57dXNlcn08L2g0PlxuICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9J2dvYWwtdGl0bGUgdW5kZXJsaW5lJyBvbkNsaWNrPXtzaG93RGVmfT57Z29hbH08L2gzPlxuICAgICAgICAgICAgICAgIDxoNT4oe2RldGFpbHN9KTwvaDU+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ncm93JyBrZXk9e1N0cmluZyhpZCl9PlxuICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGRpc2FibGVkPXtidG5TdGF0ZX0gY2xhc3NOYW1lPVwia2F0LWJ1dHRvblwiIG9uQ2xpY2s9e25leHR9PlBhc3M8L2J1dHRvbj5cbiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBkaXNhYmxlZD17YnRuU3RhdGV9IGNsYXNzTmFtZT1cImthdC1idXR0b25cIiBvbkNsaWNrPXtlbmRvcnNlfT5Cb29zdDwvYnV0dG9uPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICk7XG4gICAgICB9ZWxzZXtcbiAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ncm93Jz5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdrYXRheWFraSBzbWFsbC05IHNtYWxsLWNlbnRlcmVkIGNvbHVtbnMnPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmRcIj5cbiAgICAgICAgICAgICAgICA8aDQ+e3VzZXJ9PC9oND5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSdnb2FsLXRpdGxlIHVuZGVybGluZScgb25DbGljaz17c2hvd0RlZn0+e2dvYWx9PC9oMz5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnIGtleT17U3RyaW5nKGlkKX0+XG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gZGlzYWJsZWQ9e2J0blN0YXRlfSBjbGFzc05hbWU9XCJrYXQtYnV0dG9uXCIgb25DbGljaz17bmV4dH0+UGFzczwvYnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGRpc2FibGVkPXtidG5TdGF0ZX0gY2xhc3NOYW1lPVwia2F0LWJ1dHRvblwiIG9uQ2xpY2s9e2VuZG9yc2V9PkJvb3N0PC9idXR0b24+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKTtcbiAgICAgIH1cbiAgICB9ZWxzZXtcbiAgICAgIGlmKGRlZkRpc3BsYXllZCl7XG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9J3Jvdyc+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0na2F0YXlha2kgc21hbGwtOSBzbWFsbC1jZW50ZXJlZCBjb2x1bW5zJz5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkXCI+XG4gICAgICAgICAgICAgICAgPGltZyBzcmM9e2ltZ191cmx9IGNsYXNzTmFtZT0ncHJvZi1pbWcnPjwvaW1nPlxuICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9J2dvYWwtdGl0bGUnIG9uQ2xpY2s9e3Nob3dEZWZ9Pntnb2FsfTwvaDM+XG4gICAgICAgICAgICAgICAgPGg1Pih7ZGV0YWlsc30pPC9oNT5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnIGtleT17U3RyaW5nKGlkKX0+XG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gZGlzYWJsZWQ9e2J0blN0YXRlfSBjbGFzc05hbWU9XCJrYXQtYnV0dG9uXCIgb25DbGljaz17bmV4dH0+UGFzczwvYnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGRpc2FibGVkPXtidG5TdGF0ZX0gY2xhc3NOYW1lPVwia2F0LWJ1dHRvblwiIG9uQ2xpY2s9e2VuZG9yc2V9PkJvb3N0PC9idXR0b24+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKTtcbiAgICAgIH1lbHNle1xuICAgICAgICByZXR1cm4gKFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9J2thdGF5YWtpIHNtYWxsLTkgc21hbGwtY2VudGVyZWQgY29sdW1ucyc+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxpbWcgc3JjPXtpbWdfdXJsfSBjbGFzc05hbWU9J3Byb2YtaW1nJz48L2ltZz5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSdnb2FsLXRpdGxlJyBvbkNsaWNrPXtzaG93RGVmfT57Z29hbH08L2gzPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9J3Jvdycga2V5PXtTdHJpbmcoaWQpfT5cbiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBkaXNhYmxlZD17YnRuU3RhdGV9IGNsYXNzTmFtZT1cImthdC1idXR0b25cIiBvbkNsaWNrPXtuZXh0fT5QYXNzPC9idXR0b24+XG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gZGlzYWJsZWQ9e2J0blN0YXRlfSBjbGFzc05hbWU9XCJrYXQtYnV0dG9uXCIgb25DbGljaz17ZW5kb3JzZX0+Qm9vc3Q8L2J1dHRvbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICApO1xuICAgICAgfVxuICAgIH1cbn07XG5cbmV4cG9ydCBkZWZhdWx0IEthdGF5YWtpO1xuXG5cblxuLyoqIFdFQlBBQ0sgRk9PVEVSICoqXG4gKiogLi9yZWFjdC9zcmMvY29tcG9uZW50cy9LYXRheWFraS5qc1xuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(298);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactCssTransitionReplace = __webpack_require__(470);\n\nvar _reactCssTransitionReplace2 = _interopRequireDefault(_reactCssTransitionReplace);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Katayaki = function Katayaki(props) {\n  var goal = props.info.goal;\n  var id = props.info.id;\n  var description = props.info.description;\n  var user = props.info.user;\n  var details = props.info.details;\n  var endorse = props.endorse;\n  var img_url = props.info.img_url;\n  var next = props.next;\n  var btnClass = props.btnsDisabled ? \"kat-button disabled\" : \"kat-button\";\n  var btnState = props.btnsDisabled;\n  var showDef = props.showDef;\n  var defDisplayed = props.defDisplayed;\n\n  if (img_url == 'default_avatar.png') {\n    if (defDisplayed) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered large-7 large-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement(\n              'h4',\n              null,\n              user\n            ),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'h5',\n              { className: 'kat-def' },\n              '(',\n              details,\n              ')'\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'pass-button', className: btnClass, onClick: next },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle-o', 'aria-hidden': 'true' })\n              ),\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'endorse-button', className: btnClass, onClick: endorse },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle', 'aria-hidden': 'true' })\n              )\n            )\n          )\n        )\n      );\n    } else {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered large-7 large-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement(\n              'h4',\n              null,\n              user\n            ),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'pass-button', className: btnClass, onClick: next },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle-o', 'aria-hidden': 'true' })\n              ),\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'endorse-button', className: btnClass, onClick: endorse },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle', 'aria-hidden': 'true' })\n              )\n            )\n          )\n        )\n      );\n    }\n  } else {\n    if (defDisplayed) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered large-7 large-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement('img', { src: img_url, className: 'prof-img' }),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'h5',\n              { className: 'kat-def' },\n              '(',\n              details,\n              ')'\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'pass-button', className: btnClass, onClick: next },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle-o', 'aria-hidden': 'true' })\n              ),\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'endorse-button', className: btnClass, onClick: endorse },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle', 'aria-hidden': 'true' })\n              )\n            )\n          )\n        )\n      );\n    } else {\n      return _react2.default.createElement(\n        'div',\n        { className: 'row' },\n        _react2.default.createElement(\n          'div',\n          { className: 'katayaki small-9 small-centered large-7 large-centered columns' },\n          _react2.default.createElement(\n            'div',\n            { className: 'card' },\n            _react2.default.createElement('img', { src: img_url, className: 'prof-img' }),\n            _react2.default.createElement(\n              'h3',\n              { className: 'goal-title underline', onClick: showDef },\n              goal\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'row', key: String(id) },\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'pass-button', className: btnClass, onClick: next },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle-o', 'aria-hidden': 'true' })\n              ),\n              _react2.default.createElement(\n                'a',\n                { href: '#', id: 'endorse-button', className: btnClass, onClick: endorse },\n                _react2.default.createElement('i', { className: 'btn-icon fa fa-circle', 'aria-hidden': 'true' })\n              )\n            )\n          )\n        )\n      );\n    }\n  }\n};\n\nexports.default = Katayaki;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZWFjdC9zcmMvY29tcG9uZW50cy9LYXRheWFraS5qcz8yMThlIl0sIm5hbWVzIjpbIkthdGF5YWtpIiwiZ29hbCIsInByb3BzIiwiaW5mbyIsImlkIiwiZGVzY3JpcHRpb24iLCJ1c2VyIiwiZGV0YWlscyIsImVuZG9yc2UiLCJpbWdfdXJsIiwibmV4dCIsImJ0bkNsYXNzIiwiYnRuc0Rpc2FibGVkIiwiYnRuU3RhdGUiLCJzaG93RGVmIiwiZGVmRGlzcGxheWVkIiwiU3RyaW5nIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7Ozs7QUFFQSxJQUFNQSxXQUFXLFNBQVhBLFFBQVcsUUFBUztBQUN4QixNQUFJQyxPQUFPQyxNQUFNQyxJQUFOLENBQVdGLElBQXRCO0FBQ0EsTUFBSUcsS0FBS0YsTUFBTUMsSUFBTixDQUFXQyxFQUFwQjtBQUNBLE1BQUlDLGNBQWNILE1BQU1DLElBQU4sQ0FBV0UsV0FBN0I7QUFDQSxNQUFJQyxPQUFPSixNQUFNQyxJQUFOLENBQVdHLElBQXRCO0FBQ0EsTUFBSUMsVUFBVUwsTUFBTUMsSUFBTixDQUFXSSxPQUF6QjtBQUNBLE1BQUlDLFVBQVVOLE1BQU1NLE9BQXBCO0FBQ0EsTUFBSUMsVUFBVVAsTUFBTUMsSUFBTixDQUFXTSxPQUF6QjtBQUNBLE1BQUlDLE9BQU9SLE1BQU1RLElBQWpCO0FBQ0EsTUFBSUMsV0FBV1QsTUFBTVUsWUFBTixHQUFxQixxQkFBckIsR0FBNkMsWUFBNUQ7QUFDQSxNQUFJQyxXQUFXWCxNQUFNVSxZQUFyQjtBQUNBLE1BQUlFLFVBQVVaLE1BQU1ZLE9BQXBCO0FBQ0EsTUFBSUMsZUFBZWIsTUFBTWEsWUFBekI7O0FBRUUsTUFBR04sV0FBVyxvQkFBZCxFQUFtQztBQUNqQyxRQUFHTSxZQUFILEVBQWdCO0FBQ2QsYUFDRTtBQUFBO0FBQUEsVUFBSyxXQUFVLEtBQWY7QUFDRTtBQUFBO0FBQUEsWUFBSyxXQUFVLGdFQUFmO0FBQ0U7QUFBQTtBQUFBLGNBQUss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QSxZQUFLLFdBQVUsZ0VBQWY7QUFDRTtBQUFBO0FBQUEsY0FBSyxXQUFVLE1BQWY7QUFDRSxtREFBSyxLQUFLQyxPQUFWLEVBQW1CLFdBQVUsVUFBN0IsR0FERjtBQUVFO0FBQUE7QUFBQSxnQkFBSSxXQUFVLHNCQUFkLEVBQXFDLFNBQVNLLE9BQTlDO0FBQXdEYjtBQUF4RCxhQUZGO0FBR0k7QUFBQTtBQUFBLGdCQUFLLFdBQVUsS0FBZixFQUFxQixLQUFLZSxPQUFPWixFQUFQLENBQTFCO0FBQ0U7QUFBQTtBQUFBLGtCQUFHLE1BQUssR0FBUixFQUFZLElBQUcsYUFBZixFQUE2QixXQUFXTyxRQUF4QyxFQUFrRCxTQUFTRCxJQUEzRDtBQUNFLHFEQUFHLFdBQVUseUJBQWIsRUFBdUMsZUFBWSxNQUFuRDtBQURGLGVBREY7QUFJRTtBQUFBO0FBQUEsa0JBQUcsTUFBSyxHQUFSLEVBQVksSUFBRyxnQkFBZixFQUFnQyxXQUFXQyxRQUEzQyxFQUFxRCxTQUFTSCxPQUE5RDtBQUNFLHFEQUFHLFdBQVUsdUJBQWIsRUFBcUMsZUFBWSxNQUFqRDtBQURGO0FBSkY7QUFISjtBQURGO0FBREYsT0FERjtBQWtCRDtBQUNGO0FBQ0osQ0FqR0Q7O2tCQW1HZVIsUSIsImZpbGUiOiI0NjkuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IFJlYWN0Q1NTVHJhbnNpdGlvblJlcGxhY2UgZnJvbSAncmVhY3QtY3NzLXRyYW5zaXRpb24tcmVwbGFjZSc7XG5cbmNvbnN0IEthdGF5YWtpID0gcHJvcHMgPT4ge1xuICBsZXQgZ29hbCA9IHByb3BzLmluZm8uZ29hbDtcbiAgbGV0IGlkID0gcHJvcHMuaW5mby5pZDtcbiAgbGV0IGRlc2NyaXB0aW9uID0gcHJvcHMuaW5mby5kZXNjcmlwdGlvbjtcbiAgbGV0IHVzZXIgPSBwcm9wcy5pbmZvLnVzZXI7XG4gIGxldCBkZXRhaWxzID0gcHJvcHMuaW5mby5kZXRhaWxzO1xuICBsZXQgZW5kb3JzZSA9IHByb3BzLmVuZG9yc2U7XG4gIGxldCBpbWdfdXJsID0gcHJvcHMuaW5mby5pbWdfdXJsXG4gIGxldCBuZXh0ID0gcHJvcHMubmV4dDtcbiAgbGV0IGJ0bkNsYXNzID0gcHJvcHMuYnRuc0Rpc2FibGVkID8gXCJrYXQtYnV0dG9uIGRpc2FibGVkXCIgOiBcImthdC1idXR0b25cIjtcbiAgbGV0IGJ0blN0YXRlID0gcHJvcHMuYnRuc0Rpc2FibGVkO1xuICBsZXQgc2hvd0RlZiA9IHByb3BzLnNob3dEZWY7XG4gIGxldCBkZWZEaXNwbGF5ZWQgPSBwcm9wcy5kZWZEaXNwbGF5ZWQ7XG5cbiAgICBpZihpbWdfdXJsID09ICdkZWZhdWx0X2F2YXRhci5wbmcnKXtcbiAgICAgIGlmKGRlZkRpc3BsYXllZCl7XG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9J3Jvdyc+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0na2F0YXlha2kgc21hbGwtOSBzbWFsbC1jZW50ZXJlZCBsYXJnZS03IGxhcmdlLWNlbnRlcmVkIGNvbHVtbnMnPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmRcIj5cbiAgICAgICAgICAgICAgICA8aDQ+e3VzZXJ9PC9oND5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSdnb2FsLXRpdGxlIHVuZGVybGluZScgb25DbGljaz17c2hvd0RlZn0+e2dvYWx9PC9oMz5cbiAgICAgICAgICAgICAgICA8aDUgY2xhc3NOYW1lPSdrYXQtZGVmJz4oe2RldGFpbHN9KTwvaDU+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ncm93JyBrZXk9e1N0cmluZyhpZCl9PlxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPScjJyBpZD0ncGFzcy1idXR0b24nIGNsYXNzTmFtZT17YnRuQ2xhc3N9IG9uQ2xpY2s9e25leHR9PlxuICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzTmFtZT1cImJ0bi1pY29uIGZhIGZhLWNpcmNsZS1vXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+PC9pPlxuICAgICAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9JyMnIGlkPSdlbmRvcnNlLWJ1dHRvbicgY2xhc3NOYW1lPXtidG5DbGFzc30gb25DbGljaz17ZW5kb3JzZX0+XG4gICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3NOYW1lPVwiYnRuLWljb24gZmEgZmEtY2lyY2xlXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+PC9pPlxuICAgICAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKTtcbiAgICAgIH1lbHNle1xuICAgICAgICByZXR1cm4gKFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9J2thdGF5YWtpIHNtYWxsLTkgc21hbGwtY2VudGVyZWQgbGFyZ2UtNyBsYXJnZS1jZW50ZXJlZCBjb2x1bW5zJz5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkXCI+XG4gICAgICAgICAgICAgICAgPGg0Pnt1c2VyfTwvaDQ+XG4gICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT0nZ29hbC10aXRsZSB1bmRlcmxpbmUnIG9uQ2xpY2s9e3Nob3dEZWZ9Pntnb2FsfTwvaDM+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ncm93JyBrZXk9e1N0cmluZyhpZCl9PlxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPScjJyBpZD0ncGFzcy1idXR0b24nIGNsYXNzTmFtZT17YnRuQ2xhc3N9IG9uQ2xpY2s9e25leHR9PlxuICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzTmFtZT1cImJ0bi1pY29uIGZhIGZhLWNpcmNsZS1vXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+PC9pPlxuICAgICAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9JyMnIGlkPSdlbmRvcnNlLWJ1dHRvbicgY2xhc3NOYW1lPXtidG5DbGFzc30gb25DbGljaz17ZW5kb3JzZX0+XG4gICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3NOYW1lPVwiYnRuLWljb24gZmEgZmEtY2lyY2xlXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+PC9pPlxuICAgICAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKTtcbiAgICAgIH1cbiAgICB9ZWxzZXtcbiAgICAgIGlmKGRlZkRpc3BsYXllZCl7XG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9J3Jvdyc+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0na2F0YXlha2kgc21hbGwtOSBzbWFsbC1jZW50ZXJlZCBsYXJnZS03IGxhcmdlLWNlbnRlcmVkIGNvbHVtbnMnPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmRcIj5cbiAgICAgICAgICAgICAgICA8aW1nIHNyYz17aW1nX3VybH0gY2xhc3NOYW1lPSdwcm9mLWltZyc+PC9pbWc+XG4gICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT0nZ29hbC10aXRsZSB1bmRlcmxpbmUnIG9uQ2xpY2s9e3Nob3dEZWZ9Pntnb2FsfTwvaDM+XG4gICAgICAgICAgICAgICAgPGg1IGNsYXNzTmFtZT0na2F0LWRlZic+KHtkZXRhaWxzfSk8L2g1PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9J3Jvdycga2V5PXtTdHJpbmcoaWQpfT5cbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0nIycgaWQ9J3Bhc3MtYnV0dG9uJyBjbGFzc05hbWU9e2J0bkNsYXNzfSBvbkNsaWNrPXtuZXh0fT5cbiAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzc05hbWU9XCJidG4taWNvbiBmYSBmYS1jaXJjbGUtb1wiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPjwvaT5cbiAgICAgICAgICAgICAgICAgICAgPC9hPlxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPScjJyBpZD0nZW5kb3JzZS1idXR0b24nIGNsYXNzTmFtZT17YnRuQ2xhc3N9IG9uQ2xpY2s9e2VuZG9yc2V9PlxuICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzTmFtZT1cImJ0bi1pY29uIGZhIGZhLWNpcmNsZVwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPjwvaT5cbiAgICAgICAgICAgICAgICAgICAgPC9hPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICk7XG4gICAgICB9ZWxzZXtcbiAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ncm93Jz5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdrYXRheWFraSBzbWFsbC05IHNtYWxsLWNlbnRlcmVkIGxhcmdlLTcgbGFyZ2UtY2VudGVyZWQgY29sdW1ucyc+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxpbWcgc3JjPXtpbWdfdXJsfSBjbGFzc05hbWU9J3Byb2YtaW1nJz48L2ltZz5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSdnb2FsLXRpdGxlIHVuZGVybGluZScgb25DbGljaz17c2hvd0RlZn0+e2dvYWx9PC9oMz5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdyb3cnIGtleT17U3RyaW5nKGlkKX0+XG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9JyMnIGlkPSdwYXNzLWJ1dHRvbicgY2xhc3NOYW1lPXtidG5DbGFzc30gb25DbGljaz17bmV4dH0+XG4gICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3NOYW1lPVwiYnRuLWljb24gZmEgZmEtY2lyY2xlLW9cIiBhcmlhLWhpZGRlbj1cInRydWVcIj48L2k+XG4gICAgICAgICAgICAgICAgICAgIDwvYT5cbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0nIycgaWQ9J2VuZG9yc2UtYnV0dG9uJyBjbGFzc05hbWU9e2J0bkNsYXNzfSBvbkNsaWNrPXtlbmRvcnNlfT5cbiAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzc05hbWU9XCJidG4taWNvbiBmYSBmYS1jaXJjbGVcIiBhcmlhLWhpZGRlbj1cInRydWVcIj48L2k+XG4gICAgICAgICAgICAgICAgICAgIDwvYT5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICApO1xuICAgICAgfVxuICAgIH1cbn07XG5cbmV4cG9ydCBkZWZhdWx0IEthdGF5YWtpO1xuXG5cblxuLyoqIFdFQlBBQ0sgRk9PVEVSICoqXG4gKiogLi9yZWFjdC9zcmMvY29tcG9uZW50cy9LYXRheWFraS5qc1xuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
 
 /***/ },
 /* 470 */
@@ -42013,34 +41016,51 @@ function sendPosition(position) {
   });
 }
 ;
-function buildMap(origin, zoom = 12){
-  origin = origin || { coords: { latitude: 7, longitude: 10 }};
-  handler = Gmaps.build('Google');
-  var map = handler.buildMap({ provider: { zoom: zoom, center: { lat: origin.coords.latitude, lng: origin.coords.longitude }},
-                    internal: {id: 'map'}}, function(){
+var gmap;
 
+function buildMap(origin, options){
+  origin = origin || { coords: { latitude: 4, longitude: 5 }};
+  options = options || { zoom: 12, refreshAspirations: true, originMarker: true };
+
+  gmap = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: origin.coords.latitude, lng: origin.coords.longitude },
+    zoom: options.zoom
   });
-  google.maps.event.addListener(handler.getMap(), 'idle', function(){
-    getAspirationsWithinBounds(addMarkers);
-  })
+
+  if(options.refreshAspirations){
+    google.maps.event.addListener(gmap, 'idle', function(){
+      getAspirationsWithinBounds(addMarkersForAspirations);
+    })
+  }
+  if(options.originMarker){
+    gmap.markers = gmap.markers || [];
+    var marker = new google.maps.Marker({
+      position: {lat: origin.coords.latitude, lng: origin.coords.longitude},
+      map: gmap
+    });
+    gmap.markers.push({ marker: marker, infowindow: null })
+  }
+  if(options.timer){
+    clearTimeout(options.timer);
+  }
 }
 
-function getCurrentUserPosition(callback){
+function getCurrentUserPosition(callback, options){
   $.ajax({
     method: 'GET',
     url: '/location.json',
     contentType: 'application/json',
     success: function(data) {
-      callback(data);
+      callback(data, options);
     }
   });
 }
 
-function getAspirationsWithinBounds(){
-  var swBound = [ handler.getMap().getBounds().getSouthWest().lat(),
-                  handler.getMap().getBounds().getSouthWest().lng() ]
-  var neBound = [ handler.getMap().getBounds().getNorthEast().lat(),
-                  handler.getMap().getBounds().getNorthEast().lng() ]
+function getAspirationsWithinBounds(callback, options){
+  var swBound = [ gmap.getBounds().getSouthWest().lat(),
+                  gmap.getBounds().getSouthWest().lng() ]
+  var neBound = [ gmap.getBounds().getNorthEast().lat(),
+                  gmap.getBounds().getNorthEast().lng() ]
   var app = this;
 
   $.ajax({
@@ -42053,49 +41073,53 @@ function getAspirationsWithinBounds(){
                     }
           },
     success: function(aspirations) {
-      app.addMarkers(aspirations);
+      callback(aspirations, options);
     }
   });
 }
 
 
 
-function addMarkers(aspirations) {
-  var map = handler.getMap();
-  handler.markers = handler.markers || [];
+function addMarkersForAspirations(aspirations, options) {
+  options = options || {};
+  gmap.markers = gmap.markers || [];
   aspirations.markers.forEach(function(aspiration){
-    if(handler.markers.filter(function(marker){ return marker.marker.usrId == aspiration.usrId }).length == 0 ){
+    if(!userMarkerExists(aspiration.usrId)){
       var marker = new google.maps.Marker({
-          map: map,
+          map: gmap,
           usrId: aspiration.usrId,
           animation: google.maps.Animation.DROP,
           position: { lat: aspiration.lat, lng: aspiration.lng },
           icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
       });
+      var goalUrl = "/goals/" + aspiration.goalId
       var infowindow = new google.maps.InfoWindow({
         content: `<img class="marker-img" src=/assets/avatar-4ac9d54511271d86e123e3e010d09be1e4b6ce5a03e0349ec1ef0bca5efd9477.png/>`+
-                 `<h5 class="infowindow-heading">${aspiration.title}</h5>`+
+                 `<span class="infowindow-heading"><a href=${goalUrl}>${aspiration.title}</a></span>`+
                  `<p class="infowindow-body">${aspiration.details}</p>`
-
       });
       marker.addListener('click', function(){
-        infowindow.open(map, marker);
+        infowindow.open(gmap, marker);
       });
-      handler.markers.push({ marker: marker, infowindow: infowindow })
+      gmap.markers.push({ marker: marker, infowindow: infowindow })
     }
   })
 }
 
 function openInfoBoxes(){
-  handler.markers.forEach(function(marker){
-    marker.infowindow.open(handler.getMap(), marker.marker )
+  gmap.markers.forEach(function(marker){
+    marker.infowindow.open(gmap, marker.marker )
   })
 }
 
 function clearMarkers(){
-  handler.markers.forEach(function(marker){
+  gmap.markers.forEach(function(marker){
     marker.marker.setMap(null);
   })
+}
+
+function userMarkerExists(userId){
+  return !gmap.markers.filter(function(marker){ return marker.marker.usrId == userId }).length == 0
 }
 ;
 // This is a manifest file that'll be compiled into application.js, which will include all the files
@@ -42110,7 +41134,6 @@ function clearMarkers(){
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
 
 
 
