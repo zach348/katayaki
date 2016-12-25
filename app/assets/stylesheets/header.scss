@@ -50,6 +50,11 @@ $turquoise: #93E7FF;
   width: 100%;
   padding: auto;
 
+  .nav-bottom {
+    padding-left: 2vmin;
+    padding-right: 2vmin;
+  }
+
 
   @media screen and (max-width: $small) {
     padding-left: 2vmin !important;
@@ -64,6 +69,8 @@ $turquoise: #93E7FF;
     a {
       //1rem
       padding: $subnav-link-padding - 0.35rem;
+      padding-left: $subnav-link-padding;
+      padding-right: $subnav-link-padding;
       font-size: $subnav-font-size;
       color: #ffe;
       text-transform: uppercase;
