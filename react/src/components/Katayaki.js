@@ -23,12 +23,12 @@ const Katayaki = props => {
               <div className="card">
                 <h4>{user}</h4>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
-                <h5>({details})</h5>
+                <h5 className='kat-def'>({details})</h5>
                   <div className='row' key={String(id)}>
-                    <a href='#' className={btnClass} onClick={next}>
+                    <a href='#' id='pass-button' className={btnClass} onClick={next}>
                       <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
                     </a>
-                    <a href='#' className={btnClass} onClick={endorse}>
+                    <a href='#' id='endorse-button' className={btnClass} onClick={endorse}>
                       <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
                     </a>
                   </div>
@@ -44,10 +44,10 @@ const Katayaki = props => {
                 <h4>{user}</h4>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
-                    <a href='#' className={btnClass} onClick={next}>
+                    <a href='#' id='pass-button' className={btnClass} onClick={next}>
                       <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
                     </a>
-                    <a href='#' className={btnClass} onClick={endorse}>
+                    <a href='#' id='endorse-button' className={btnClass} onClick={endorse}>
                       <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
                     </a>
                   </div>
@@ -64,12 +64,12 @@ const Katayaki = props => {
               <div className="card">
                 <img src={img_url} className='prof-img'></img>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
-                <h5>({details})</h5>
+                <h5 className='kat-def'>({details})</h5>
                   <div className='row' key={String(id)}>
-                    <a href='#' className={btnClass} onClick={next}>
+                    <a href='#' id='pass-button' className={btnClass} onClick={next}>
                       <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
                     </a>
-                    <a href='#' className={btnClass} onClick={endorse}>
+                    <a href='#' id='endorse-button' className={btnClass} onClick={endorse}>
                       <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
                     </a>
                   </div>
@@ -85,10 +85,10 @@ const Katayaki = props => {
                 <img src={img_url} className='prof-img'></img>
                 <h3 className='goal-title underline' onClick={showDef}>{goal}</h3>
                   <div className='row' key={String(id)}>
-                    <a href='#' className={btnClass} onClick={next}>
+                    <a href='#' id='pass-button' className={btnClass} onClick={next}>
                       <i className="btn-icon fa fa-circle-o" aria-hidden="true"></i>
                     </a>
-                    <a href='#' className={btnClass} onClick={endorse}>
+                    <a href='#' id='endorse-button' className={btnClass} onClick={endorse}>
                       <i className="btn-icon fa fa-circle" aria-hidden="true"></i>
                     </a>
                   </div>

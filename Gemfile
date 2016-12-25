@@ -26,6 +26,7 @@ gem 'geokit-rails'
 group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
