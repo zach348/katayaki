@@ -15,13 +15,14 @@ $text-color: #fff;
 }
 
 .footer {
-  position: fixed;
+  position: relative;
   min-width: 100%;
-  min-height: 15vmin;
+  min-height: 35vmin;
   bottom: 0;
   border: 0.5vmin solid $turquoise;
   background-color: $teal;
-  padding: auto;
+  padding: 0;
+  margin: 0;
   text-align: center;
   color: $text-color;
   i {
