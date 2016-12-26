@@ -11,7 +11,7 @@
   <div class="row search-results">
     <div>
       <% @goals.each do |goal| %>
-        <div class="goal-list small-8 small-centered medium-6 medium-centered large-4 large-centered columns">
+        <div class="goal-list small-9 small-centered medium-7 medium-centered large-5 large-centered columns">
           <div class='row'>
             <div class='small-10 columns'>
               <div class='title-div'><h4> <%= link_to goal.title,new_goal_path(goal: { title: goal.title, details: goal.details}), class: 'goal-link' %></h4></div>

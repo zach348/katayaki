@@ -45,14 +45,14 @@
 
     <div className="wrapper">
       <%= render 'layouts/flash' %>
-      <% if !current_page?(:controller => '/static_pages', :action => 'index') %>
+      <% if !current_page?(controller: '/static_pages', action: 'index') %>
         <div class='content'>
           <%= yield %>
         </div>
       <% else %>
           <%= yield %>
       <% end %>
-      <%= render 'layouts/footer' if params[:controller] == 'goals' %>
+      <%= render 'layouts/footer' if render_footer? %>
     </div>
 
   </body>
