@@ -23,18 +23,19 @@
       <div class='subnav-wrapper'>
         <ul class="header-subnav">
           <%- if user_signed_in? -%>
+            <li class="navItem"><%= link_to 'Seeds', static_pages_path %></li>
+            <li class="navItem"><%= link_to 'Circles', groups_path %></li>
+            <li class="navItem"><%= link_to 'Grow', goals_path %></li>
             <li class="navItem"><%= link_to 'Self', user_path(current_user) %></li>
             <%- if !current_user.groups.empty? -%>
               <li class="navItem"><%= link_to 'Others', rate_path %></li>
             <%- end -%>
-            <li class="navItem"><%= link_to 'Circles', groups_path %></li>
-            <li class="navItem"><%= link_to 'Seeds', static_pages_path %></li>
-            <li class="navItem"><%= link_to 'Grow', goals_path(get_splash: true) %></li><br/>
+            <br/>
             <li class="navItem nav-bottom"><%= link_to 'Account',  edit_user_registration_path(current_user)%></li>
             <li class="navItem nav-bottom"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
           <%- else -%>
+            <li class="navItem"><%= link_to 'Grow', goals_path %></li>
             <li class="navItem"><%= link_to 'Seeds', static_pages_path %></li>
-            <li class="navItem"><%= link_to 'Grow', goals_path(get_splash: true) %></li>
             <li class="navItem"><%= link_to 'Sign Up', new_user_registration_path  %></li>
             <li class="navItem"><%= link_to 'Sign In', new_user_session_path  %></li>
           <%- end -%>
@@ -51,7 +52,7 @@
       <% else %>
           <%= yield %>
       <% end %>
-      <%= render 'layouts/footer' if current_page?(goals_path)%>
+      <%= render 'layouts/footer' if params[:controller] == 'goals' %>
     </div>
 
   </body>
