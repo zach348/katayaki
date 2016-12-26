@@ -19,10 +19,4 @@ feature 'login' do
 
     expect(page).to have_content('Signed in successfully')
   end
-
-  scenario 'authenticated user is directed to respective show page' do
-    sign_in(user)
-
-    expect(current_path).to eq(user_path(user))
-  end
 end
