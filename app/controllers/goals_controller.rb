@@ -17,7 +17,7 @@ class GoalsController < ApplicationController
 
   def search
     @search_term = params[:search].downcase
-    @goals = display_goals.paginate(page: params[:page], per_page: 10)
+    @goals = display_goals.paginate(page: params[:page], per_page: 5)
     if @goals.empty?
       flash[:notice] = 'Try a noun or adjective...'
       redirect_to goals_path(get_splash: true)
