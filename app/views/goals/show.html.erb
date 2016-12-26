@@ -3,8 +3,10 @@
 <div class='row small-12 small-centered columns'>
   <div class='small-9 small-centered medium-7 medium-centered large-5 large-centered columns'>
     <div class='goal-show'>
-      <h3><span class='orange-shadow underline'><%= @goal.title %></span></h3>
-      <h5> <%= @goal.details %> </p>
+      <div class='small-10 small-centered columns'>
+        <h3><span class='orange-shadow underline'><%= @goal.title %></span></h3>
+        <h5> <%= @goal.details %> </h5>
+      </div>
       <div class='row'>
         <% if current_user && current_user.groups.empty? %>
         <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>
