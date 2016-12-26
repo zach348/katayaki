@@ -3,7 +3,7 @@
     <div class='goal-show'>
       <h3>Join Circle</h3>
       <div class='row'>
-        <div class='small-6 small-centered columns'>
+        <div class='small-8 small-centered medium-6 medium-centered large-4 large-centered columns'>
           <%= form_tag affiliations_path :affiliations, method: :post do %>
             <%= collection_select(:group, :group_id, Group.all, :id, :name, class: 'grp-drpdwn') %>
             <%= submit_tag 'Join Circle', class: 'btn' %>

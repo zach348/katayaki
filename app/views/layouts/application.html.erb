@@ -51,7 +51,7 @@
       <% else %>
           <%= yield %>
       <% end %>
-      <%= render 'layouts/footer' unless current_page?(:controller => '/static_pages', :action => 'index')%>
+      <%= render 'layouts/footer' if current_page?(goals_path)%>
     </div>
 
   </body>
