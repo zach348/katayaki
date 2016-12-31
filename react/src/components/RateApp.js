@@ -62,7 +62,8 @@ class RateApp extends Component {
       success: function(data){
         app.disableBtns();
         app.getAspirations();
-        setTimeout(app.enableBtns.bind(app), 2200);      }
+        setTimeout(app.enableBtns.bind(app), 2200);
+      }
     });
   }
 
