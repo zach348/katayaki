@@ -1,11 +1,10 @@
 class AspirationMailer < ApplicationMailer
   def new_impact(vote)
     @vote = vote
-    binding.pry
 
     mail(
-      to: vote.aspiration.user.email,
-      subject: "Growth!"
+      to: @vote.aspiration.user.email,
+      subject: "It grows!"
     )
   end
 end

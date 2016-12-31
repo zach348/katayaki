@@ -1,8 +1,8 @@
 Hello <%= @vote.aspiration.user.first_name %>,
 
-It grows!
+Your seed *<%= @vote.aspiration.goal.title.capitalize %>* has made an impact!
 
-Your seed *<%= @vote.aspiration.capitalize %>* has made an impact!
+<%=@vote.aspiration.votes_count %> and counting...
 
 
--Self
+-Your friends at Self
