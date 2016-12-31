@@ -3,22 +3,24 @@
 <div class='row small-12 small-centered columns'>
   <div class='small-9 small-centered medium-7 medium-centered large-5 large-centered columns'>
     <div class='goal-show'>
-      <h3><span class='orange-shadow underline'><%= @goal.title %></span></h3>
-      <h5> <%= @goal.details %> </p>
+      <div class='small-10 small-centered columns'>
+        <h3><span class='orange-shadow underline'><%= @goal.title %></span></h3>
+        <h5> <%= @goal.details %> </h5>
+      </div>
       <div class='row'>
         <% if current_user && current_user.groups.empty? %>
-        <div class='small-8 small-centered medium-6 medium-centered large-4 large-centered columns'>
+        <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>
           <h5><%= button_to 'Join a Circle To Accept', groups_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
         <% elsif current_user  %>
-          <div class='small-8 small-centered medium-6 medium-centered large-4 large-centered columns'>
+          <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>
             <%= form_tag aspirations_path( goal: { id: @goal.id, title: @goal.title, details: @goal.details }), method: :post do %>
               <%= collection_select(:group, :group_id, current_user.groups, :id, :name, class: 'grp-drpdwn') %>
               <%= submit_tag 'Accept', class: 'btn', method: :get %>
             <% end %>
           </div>
         <% else %>
-        <div class='small-8 small-centered medium-6 medium-centered large-4 large-centered columns'>
+        <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>
           <h5><%= button_to 'Sign Up', new_user_registration_path, { action: 'index', method: :get, class: 'btn' } %></h5>
         </div>
         <% end %>

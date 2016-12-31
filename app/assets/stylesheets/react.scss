@@ -8,8 +8,8 @@ $turquoise: #93E7FF;
   border-radius: 3vmin;
   background-color: $teal;
   float: none !important;
-  margin-bottom: 10vmax;
-  margin-top: 5vmax;
+  margin-bottom: 7vmax;
+  margin-top: 7vmax;
   max-height: 70%;
 }
 
@@ -39,7 +39,7 @@ $turquoise: #93E7FF;
   margin-left: 4vmin;
   margin-right: 4vmin;
   margin-top: auto;
-  border: 3px outset $turquoise;
+  border: 0.35vmin outset $turquoise !important;
   border-radius: 1vmin;
   display: inline-block;
   width: 20vmin;

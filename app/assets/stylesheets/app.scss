@@ -6,15 +6,13 @@ $small: 420px;
 $tiny: 350px;
 
 .wrapper {
-    min-height: 100%;
-    height: auto !important;
     height: 100%;
 }
 
 .content {
-  padding-bottom: 8vmax;
+  padding-bottom: 3vmax;
   @media screen and (max-width: $small) {
-    padding-bottom: 10vmax;
+    padding-bottom: 5vmax;
   }
 }
 

@@ -1,3 +1,5 @@
 TODO
 -turn circles index into a map view
--change avatar link to retrieve smaller pic
+-restyle aspiration show
+-add email support
+-paginate aspirations
