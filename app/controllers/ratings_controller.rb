@@ -5,8 +5,10 @@ class RatingsController < ApplicationController
   end
 
   def endorse
-    if Vote.where(user_id: current_user.id, aspiration_id: rating_params[:aspiration_id])
-      Vote.create(user: current_user, aspiration_id: rating_params[:aspiration_id] )
+    if !Vote.where(user_id: current_user.id, aspiration_id: rating_params[:aspiration_id])
+      vote = Vote.create(user: current_user, aspiration_id: rating_params[:aspiration_id] )
+      binding.pry
+      AspirationMailer.new_impact(vote)
     end
   end
 
