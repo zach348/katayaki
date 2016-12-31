@@ -60,8 +60,9 @@ class RateApp extends Component {
       url: '/endorse',
       data: {rating: { aspiration_id: id } },
       success: function(data){
+        app.disableBtns();
         app.getAspirations();
-      }
+        setTimeout(app.enableBtns.bind(app), 2200);      }
     });
   }
 
