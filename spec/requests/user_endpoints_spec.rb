@@ -1,4 +1,3 @@
-# spec/requests/api/v1/messages_spec.rb
 require 'rails_helper'
 require 'spec_helper'
 

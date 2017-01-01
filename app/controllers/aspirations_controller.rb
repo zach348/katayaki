@@ -58,6 +58,7 @@ class AspirationsController < ApplicationController
     markers = Aspiration.markers_for_users(users, current_user)
     respond_to do |format|
       format.json { render json: { markers: markers } }
+      format.html { render json: { markers: markers } }
     end
   end
 
