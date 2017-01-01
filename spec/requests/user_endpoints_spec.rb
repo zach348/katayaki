@@ -1,4 +1,3 @@
-# spec/requests/api/v1/messages_spec.rb
 require 'rails_helper'
 require 'spec_helper'
 
@@ -8,7 +7,7 @@ describe UsersController, type: :controller do
       user = FactoryGirl.create(:user)
       sign_in user
 
-      get 'location'
+      get :location
       hash = Hash(JSON.parse(response.body))
 
       expect(response).to be_success
