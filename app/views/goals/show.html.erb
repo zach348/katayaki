@@ -10,7 +10,7 @@
       <div class='row'>
         <% if current_user && current_user.groups.empty? %>
         <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>
-          <h5><%= button_to 'Join a Circle To Accept', groups_path, { action: 'index', method: :get, class: 'btn' } %>
+          <h5><%= button_to 'Join a Circle', groups_path, { action: 'index', method: :get, class: 'btn' } %>
         </div>
         <% elsif current_user  %>
           <div class='small-10 small-centered medium-8 medium-centered large-6 large-centered columns'>

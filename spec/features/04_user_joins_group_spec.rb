@@ -5,7 +5,7 @@ feature 'groups' do
   let!(:user) { FactoryGirl.create(:user) }
 
   scenario 'user joins existing circle' do
-    sign_in(user)
+    log_in(user)
     click_link 'Circles'
     select 'test_circle', from: 'group[group_id]'
     click_button 'Join Circle'
@@ -17,7 +17,7 @@ feature 'groups' do
   scenario 'user creates a new circle' do
     num_groups = Group.all.length
 
-    sign_in(user)
+    log_in(user)
     click_link 'Circles'
     fill_in 'group[name]', with: 'another_circle'
     click_button 'Form Circle'
