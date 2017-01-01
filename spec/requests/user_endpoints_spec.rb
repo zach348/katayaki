@@ -7,7 +7,7 @@ describe UsersController, type: :controller do
       user = FactoryGirl.create(:user)
       sign_in user
 
-      get 'location'
+      get :location
       hash = Hash(JSON.parse(response.body))
 
       expect(response).to be_success
