@@ -27,6 +27,23 @@ feature 'katayakies' do
     expect(page).to have_content('test_goal')
   end
 
+  scenario 'user attempts to accept existing katayaki' do
+    num_aspirations = Aspiration.all.length
+
+    log_in(user)
+    click_link 'Circles'
+    select 'test_circle', from: 'group[group_id]'
+    click_button 'Join Circle'
+    click_link 'Grow'
+    click_link 'test_goal'
+    click_button 'Accept'
+    click_link 'Grow'
+    click_link 'test_goal'
+    click_button 'Accept'
+
+    expect(page).to have_content('You have already accepted this seed')
+  end
+
 
   scenario 'user removes katayaki' do
     num_aspirations = Aspiration.all.length
