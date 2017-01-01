@@ -1,7 +1,7 @@
 # README
 
 ![Build Status](https://codeship.com/projects/5aecb580-6c95-0134-2387-2643ab6f7762/status?branch=master)
-<!-- ![Coverage Status](https://coveralls.io/repos/zach348/katayaki/badge.png) -->
+![Coverage Status](https://coveralls.io/repos/zach348/katayaki/badge.png)
 
 README
 Authors: Zachary Cutler
