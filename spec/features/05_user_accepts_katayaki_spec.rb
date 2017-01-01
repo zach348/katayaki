@@ -11,7 +11,7 @@ feature 'katayakies' do
   scenario 'user accepts trending katayaki' do
     num_aspirations = Aspiration.all.length
 
-    sign_in(user)
+    log_in(user)
     click_link 'Circles'
     select 'test_circle', from: 'group[group_id]'
     click_button 'Join Circle'
@@ -31,7 +31,7 @@ feature 'katayakies' do
   scenario 'user removes katayaki' do
     num_aspirations = Aspiration.all.length
 
-    sign_in(user)
+    log_in(user)
     visit aspiration_path(katayaki)
     click_button 'Remove'
 
@@ -40,7 +40,7 @@ feature 'katayakies' do
   end
 
   scenario 'unaffiliated user sees link to circles index on goal show' do
-    sign_in(new_user)
+    log_in(new_user)
 
     visit goal_path(goal)
     expect(page).to have_button('Join a Circle')

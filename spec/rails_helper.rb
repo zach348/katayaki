@@ -6,6 +6,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'devise'
+require 'database_cleaner'
 require 'capybara/poltergeist'
 
 Capybara.javascript_driver = :poltergeist
@@ -34,6 +36,9 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  #include devise controller helpers
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

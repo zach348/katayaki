@@ -8,7 +8,7 @@ feature 'katayakies' do
     num_aspirations = user.aspirations.count
     num_goals = Goal.count
 
-    sign_in(user)
+    log_in(user)
     click_link 'Circles'
     select 'test_circle', from: 'group[group_id]'
     click_button 'Join Circle'
