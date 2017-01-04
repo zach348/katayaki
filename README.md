@@ -11,10 +11,15 @@ Ruby version: 2.3.1
 System dependencies:
 
 brew install imagemagick
+
 brew install phantomjs
+
 brew install npm
+
 gem install bundler
+
 bundle
+
 npm install
 
 
@@ -42,12 +47,12 @@ How to run the test suite
 run test suite with rake
 
 
-Heroku Deployment
+#Heroku Deployment
 -configure Amazon S3 environment vars
 -ensure that node buildpack precedes ruby buildbpack
 -database setup: 'heroku run rake db:migrate'; 'heroku run rake db:seed';
 to reset the production db, run: 'heroku pg:reset'
 
 
-#Katayaki
+#Self
 Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
