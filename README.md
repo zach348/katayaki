@@ -4,7 +4,7 @@
 ![Coverage Status](https://coveralls.io/repos/zach348/katayaki/badge.png)
 
 #Self
-Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
+Self is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
 
 Authors: Zachary Cutler  
 Ruby version: 2.3.1  
