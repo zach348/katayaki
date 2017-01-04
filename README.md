@@ -11,12 +11,12 @@ Ruby version: 2.3.1
 
 ##System dependencies:
 
--brew install imagemagick  
--brew install phantomjs  
--brew install npm  
--gem install bundler  
--bundle  
--npm install  
+-```brew install imagemagick```
+-```brew install phantomjs```
+-```brew install npm```
+-```gem install bundler```
+-```bundle```
+-```npm install```
 
 
 ##To run the app locally:
@@ -52,6 +52,6 @@ run test suite with rake
 
 ####Database setup:
 
--'heroku run rake db:migrate'  
--heroku run rake db:seed'  
--to reset the production db, run: 'heroku pg:reset'
+-```heroku run rake db:migrate```
+-```heroku run rake db:seed```  
+-to reset the production db, run: ```heroku pg:reset```
