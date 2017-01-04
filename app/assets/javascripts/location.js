@@ -1,6 +1,6 @@
 function getLocation(callback) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(callback);
+        navigator.geolocation.watchPosition(callback);
     } else {
         return { coords: { longitude: null, latitude: null } }
     }
