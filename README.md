@@ -6,12 +6,10 @@
 #Self
 Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
 
-README  
-
 Authors: Zachary Cutler  
 Ruby version: 2.3.1  
 
-System dependencies:
+##System dependencies:
 
 -brew install imagemagick  
 -brew install phantomjs  
@@ -47,7 +45,7 @@ rails db:seed to seed the database
 run test suite with rake
 
 
-#Heroku Deployment
+###Heroku Deployment
 
 -configure Amazon S3 environment vars  
 -ensure that node buildpack precedes ruby buildbpack  
