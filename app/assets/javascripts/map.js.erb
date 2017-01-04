@@ -4,6 +4,9 @@ function buildMap(origin, options){
   origin = origin || { coords: { latitude: 4, longitude: 5 }};
   options = options || { zoom: 12, refreshAspirations: true, originMarker: true };
 
+  //check for default coordinates and reduce zoom if they have not been updated (e.g, location services denial)
+  if(origin.coords.latitude == 0 && origin.coords.longitude == 0){ options.zoom = 2;};
+
   gmap = new google.maps.Map(document.getElementById('map'), {
     center: { lat: origin.coords.latitude, lng: origin.coords.longitude },
     zoom: options.zoom
