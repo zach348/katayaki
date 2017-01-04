@@ -3,10 +3,13 @@
 ![Build Status](https://codeship.com/projects/5aecb580-6c95-0134-2387-2643ab6f7762/status?branch=master)
 ![Coverage Status](https://coveralls.io/repos/zach348/katayaki/badge.png)
 
-README
-Authors: Zachary Cutler
+#Self
+Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
 
-Ruby version: 2.3.1
+README  
+
+Authors: Zachary Cutler  
+Ruby version: 2.3.1  
 
 System dependencies:
 
@@ -18,36 +21,39 @@ System dependencies:
 -npm install  
 
 
-To run the app locally:
+##To run the app locally:
 
 run two concurrent processes for the rails and webpack servers ('npm start' and 'rails s' from the project's root directory)
 visit localhost:3000
 
 
-Configuration
+###Configuration
 
-You will need Amazon S3 keys and a resource bucket name in an .env file that correspond to a resource you have configured with AWS in order to utilize the cloud-based profile picture feature.
+You will need Amazon S3 keys and a resource bucket name in an .env file that correspond to a resource you have configured with AWS in order to utilize the cloud-based profile picture feature. You will also need an API key for the merriam webster collegiate web dicitonary interface.
 
-Further details can be found in Fog and Carrierwave documentation.
+Further details can be found in Fog, Carrierwave, and MW API documentation.
 
 
-Database creation
+###Database creation
 
 rake db:create && rake db:migrate to set up tables
 
-Database initialization
-rails db:seed to seed the database
-How to run the test suite
+###Database initialization
+
+rails db:seed to seed the database  
+
+###Test Suite
 
 run test suite with rake
 
 
 #Heroku Deployment
--configure Amazon S3 environment vars
--ensure that node buildpack precedes ruby buildbpack
--database setup: 'heroku run rake db:migrate'; 'heroku run rake db:seed';
-to reset the production db, run: 'heroku pg:reset'
 
+-configure Amazon S3 environment vars  
+-ensure that node buildpack precedes ruby buildbpack  
 
-#Self
-Katayaki is a Rails-based community platform that aggregates and anonymizes feedback on character goals chosen by the user. Users join or create online “circles” meant to mirror face-to-face communities and set goals within them.
+####Database setup:
+
+-'heroku run rake db:migrate'  
+-heroku run rake db:seed'  
+-to reset the production db, run: 'heroku pg:reset'
