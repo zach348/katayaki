@@ -86,30 +86,3 @@ VIRTUES.each do |virtue|
     Goal.create(title: name, details: details)
   end
 end
-
-5.times do |n|
-  User.create(first_name: 'User', last_name: 'User', email: "user#{n}@test.com", password: 'devise')
-end
-
-Group.create(name: 'Launch Academy')
-
-User.all.each do |user|
-  random_index = rand(Group.count)
-  group = Group.offset(random_index).first
-  Affiliation.create(user: user, group: group)
-  4.times do
-    goal_index = rand(Goal.count)
-    goal = Goal.offset(goal_index).first
-    group_index = rand(Group.count)
-    group = Group.offset(group_index).first
-    Aspiration.create(user: user, goal: goal, group: group)
-  end
-end
-
-40.times do
-  user_index = rand(User.count)
-  user = User.offset(user_index).first
-  aspiration_index = rand(Aspiration.count)
-  aspiration = Aspiration.offset(aspiration_index).first
-  Vote.create(user: user, aspiration: aspiration )
-end
