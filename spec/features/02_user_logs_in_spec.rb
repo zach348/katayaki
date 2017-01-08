@@ -3,6 +3,10 @@ require 'rails_helper'
 feature 'login' do
   let!(:user) { FactoryGirl.create(:user, email: 'user@test.com', password: 'password') }
 
+  before(:each) do
+   user.confirm
+  end
+
   scenario 'inauthenticated user attempts to log in' do
     visit root_path
     click_link 'Sign In'

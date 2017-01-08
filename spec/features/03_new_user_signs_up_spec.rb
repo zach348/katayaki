@@ -3,6 +3,10 @@ require 'rails_helper'
 feature 'new user sign up' do
   let!(:user) { FactoryGirl.create(:user) }
 
+  before(:each) do
+    user.confirm
+  end
+
   scenario 'new user signs up' do
     expect(User.all.last.email).to_not eq('testuser@test.com')
 
@@ -16,7 +20,6 @@ feature 'new user sign up' do
     fill_in 'user[password_confirmation]', with: 'password'
     click_button 'Sign up'
 
-    expect(page).to have_content('Welcome! You have signed up successfully')
     expect(User.all.last.email).to eq('testuser@test.com')
   end
 end
