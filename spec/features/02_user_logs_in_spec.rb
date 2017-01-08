@@ -15,7 +15,7 @@ feature 'login' do
   end
 
   scenario 'authenticated user attempts to log in' do
-    sign_in(user)
+    log_in(user)
 
     expect(page).to have_content('Signed in successfully')
   end
