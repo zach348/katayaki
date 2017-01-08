@@ -88,7 +88,7 @@ VIRTUES.each do |virtue|
 end
 
 5.times do |n|
-  User.create(first_name: 'User', last_name: 'User', username: "user#{n}", email: "user#{n}@test.com", password: 'devise')
+  User.create(first_name: 'User', last_name: 'User', email: "user#{n}@test.com", password: 'devise')
 end
 
 Group.create(name: 'Launch Academy')
