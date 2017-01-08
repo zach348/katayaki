@@ -3,6 +3,10 @@ require 'rails_helper'
 feature 'profile update' do
   let!(:user) { FactoryGirl.create(:user) }
 
+  before(:each) do
+    user.confirm
+  end
+
   scenario 'user can update their profile information' do
     log_in user
     visit root_path

@@ -8,6 +8,11 @@ feature 'katayakies' do
   let!(:katayaki_goal) { FactoryGirl.create(:goal, title: 'kat_goal') }
   let!(:katayaki) { FactoryGirl.create(:aspiration, goal: katayaki_goal, user: user, group: group) }
 
+  before(:each) do
+    user.confirm
+    new_user.confirm
+  end
+
   scenario 'user accepts trending katayaki' do
     num_aspirations = Aspiration.all.length
 

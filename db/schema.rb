@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217191507) do
+ActiveRecord::Schema.define(version: 20170108210438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,7 @@ ActiveRecord::Schema.define(version: 20161217191507) do
     t.string   "moderator",  default: "false", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["group_id"], name: "affiliations_group_id_ix", using: :btree
     t.index ["group_id"], name: "index_affiliations_on_group_id", using: :btree
-    t.index ["user_id"], name: "affiliations_user_id_ix", using: :btree
     t.index ["user_id"], name: "index_affiliations_on_user_id", using: :btree
   end
 
@@ -34,9 +32,7 @@ ActiveRecord::Schema.define(version: 20161217191507) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "votes_count", default: 0
-    t.index ["goal_id"], name: "aspiration_goal_id_ix", using: :btree
     t.index ["goal_id"], name: "index_aspirations_on_goal_id", using: :btree
-    t.index ["user_id"], name: "aspirations_user_id_ix", using: :btree
     t.index ["user_id"], name: "index_aspirations_on_user_id", using: :btree
   end
 
@@ -75,6 +71,10 @@ ActiveRecord::Schema.define(version: 20161217191507) do
     t.string   "avatar"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -84,9 +84,7 @@ ActiveRecord::Schema.define(version: 20161217191507) do
     t.integer  "aspiration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["aspiration_id"], name: "index_votes_on_aspiration_id", using: :btree
     t.index ["aspiration_id"], name: "votes_aspiration_id_ix", using: :btree
-    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
     t.index ["user_id"], name: "votes_user_id_ix", using: :btree
   end
 
