@@ -47,8 +47,9 @@ run test suite with rake
 
 ###Heroku Deployment
 
--configure Amazon S3 environment vars
--in order to use email features (impact notifications, confirmation emails, etc.) in production, you will need to set up a mailgun account and configure actionmailer appropriately; in development you can install the mailcatcher gem independent of the Gemfile to test email delivery
+-configure Amazon S3 environment vars  
+-configure MW environment vars
+-in order to use email features (impact notifications, confirmation emails, etc.) in production, you will need to set up a mailgun account and configure actionmailer/heroku environment vars appropriately; in development you can install the mailcatcher gem [independent of the Gemfile] to test email delivery
 
 ####Buildpacks
 -ensure that node buildpack precedes ruby buildbpack  
