@@ -45,7 +45,7 @@ rake db:seed to seed the database with initial goals
 run test suite with rake
 
 
-###Heroku Deployment
+##Heroku Deployment
 
 -configure Amazon S3 environment vars  
 -configure MW environment vars  
