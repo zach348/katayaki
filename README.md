@@ -38,7 +38,7 @@ rake db:create && rake db:migrate to set up tables
 
 ###Database initialization
 
-rails db:seed to seed the database  
+rake db:seed to seed the database with initial goals
 
 ###Test Suite
 
@@ -47,7 +47,10 @@ run test suite with rake
 
 ###Heroku Deployment
 
--configure Amazon S3 environment vars  
+-configure Amazon S3 environment vars
+-in order to use email features (impact notifications, confirmation emails, etc.) in production, you will need to set up a mailgun account and configure actionmailer appropriately; in development you can install the mailcatcher gem independent of the Gemfile to test email delivery
+
+####Buildpacks
 -ensure that node buildpack precedes ruby buildbpack  
 
 ####Database setup:
