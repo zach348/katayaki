@@ -81,28 +81,28 @@ class RateApp extends Component {
   render(){
     let aspiration = this.state.aspirations[0];
 
-    if(aspiration === undefined){
+    if(aspiration == undefined){
       return (
-        <div className='small-9 small-centered columns'></div>
-      );
-    }else{
-      let katayaki = <Katayaki btnsDisabled={this.state.disabled}
-                      key={String(aspiration.id)}
-                      endorse={() => this.endorse(aspiration.id)}
-                      next={() => this.next()}
-                      showDef={() => this.showDef()}
-                      defDisplayed={this.state.defDisplayed}
-                      info={aspiration}
-                      />
-      return (
-        <ReactCSSTransitionReplace
-          transitionName="cross-fade"
-          transitionEnterTimeout={2000}
-          transitionLeaveTimeout={800}>
-          {katayaki}
-        </ReactCSSTransitionReplace>
+        <div className='small-9 small-centered columns'>EMPTY</div>
       )
     }
+
+    let katayaki = <Katayaki btnsDisabled={this.state.disabled}
+                    key={String(aspiration.id)}
+                    endorse={() => this.endorse(aspiration.id)}
+                    next={() => this.next()}
+                    showDef={() => this.showDef()}
+                    defDisplayed={this.state.defDisplayed}
+                    info={aspiration}
+                    />
+    return (
+      <ReactCSSTransitionReplace
+        transitionName="cross-fade"
+        transitionEnterTimeout={2000}
+        transitionLeaveTimeout={800}>
+        {katayaki}
+      </ReactCSSTransitionReplace>
+    )
   }
 }
 
