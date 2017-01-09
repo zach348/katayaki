@@ -4,7 +4,7 @@ class AspirationMailer < ApplicationMailer
 
     mail(
       to: @vote.aspiration.user.email,
-      subject: "It grows!"
+      subject: "You're making an impact!"
     )
   end
 end
