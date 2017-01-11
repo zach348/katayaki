@@ -81,28 +81,39 @@ class RateApp extends Component {
   render(){
     let aspiration = this.state.aspirations[0];
 
-    if(aspiration === undefined){
+    if(aspiration == undefined){
       return (
-        <div className='small-9 small-centered columns'></div>
-      );
-    }else{
-      let katayaki = <Katayaki btnsDisabled={this.state.disabled}
-                      key={String(aspiration.id)}
-                      endorse={() => this.endorse(aspiration.id)}
-                      next={() => this.next()}
-                      showDef={() => this.showDef()}
-                      defDisplayed={this.state.defDisplayed}
-                      info={aspiration}
-                      />
-      return (
-        <ReactCSSTransitionReplace
-          transitionName="cross-fade"
-          transitionEnterTimeout={2000}
-          transitionLeaveTimeout={800}>
-          {katayaki}
-        </ReactCSSTransitionReplace>
+        <div className='small-9 small-centered large-7 large-centered columns'></div>
+      )
+    }else if(aspiration['goal'] == ''){
+      return(
+        <div className='row'>
+          <div className='katayaki small-9 small-centered large-7 large-centered columns'>
+            <div className="card">
+              <img src='https://s3.amazonaws.com/katayaki-avatars/uploads/stock/capybara-02.jpg' className='prof-img'></img>
+              <h4> So, there's no one left to support. Your friends must be pretty awesome. How about a picture of a Capybara, instead?</h4>
+            </div>
+          </div>
+        </div>
       )
     }
+
+    let katayaki = <Katayaki btnsDisabled={this.state.disabled}
+                    key={String(aspiration.id)}
+                    endorse={() => this.endorse(aspiration.id)}
+                    next={() => this.next()}
+                    showDef={() => this.showDef()}
+                    defDisplayed={this.state.defDisplayed}
+                    info={aspiration}
+                    />
+    return (
+      <ReactCSSTransitionReplace
+        transitionName="cross-fade"
+        transitionEnterTimeout={2000}
+        transitionLeaveTimeout={800}>
+        {katayaki}
+      </ReactCSSTransitionReplace>
+    )
   }
 }
 

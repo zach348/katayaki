@@ -9,7 +9,7 @@ describe AspirationsController, type: :controller do
       marked_user = FactoryGirl.create(:user)
       marked_user.confirm
       group = FactoryGirl.create(:group)
-      goal = FactoryGirl.create(:goal)
+      goal = FactoryGirl.create(:goal, title: 'goal title1')
       FactoryGirl.create(:affiliation, user: marked_user, group: group)
       FactoryGirl.create(:aspiration, group: group, goal: goal, user: marked_user)
 
@@ -45,7 +45,7 @@ describe AspirationsController, type: :controller do
       rated_user = FactoryGirl.create(:user)
       rated_user.confirm
       group = FactoryGirl.create(:group)
-      goal = FactoryGirl.create(:goal)
+      goal = FactoryGirl.create(:goal, title: 'goal title2')
       FactoryGirl.create(:affiliation, user: rated_user, group: group)
       FactoryGirl.create(:affiliation, user: user, group: group)
       FactoryGirl.create(:aspiration, group: group, goal: goal, user: rated_user)
@@ -60,6 +60,25 @@ describe AspirationsController, type: :controller do
       expect(aspiration['img_url']).to eq('default_avatar.png')
       expect(aspiration['goal']).to eq('goal title2')
       expect(aspiration['details']).to eq('detailsdetails')
+    end
+
+    it 'return hash with key *goal* and property of empty string when there is no one left to rate' do
+      user = FactoryGirl.create(:user)
+      user.confirm
+      rated_user = FactoryGirl.create(:user)
+      rated_user.confirm
+      group = FactoryGirl.create(:group)
+      goal = FactoryGirl.create(:goal, title: 'goal title2')
+      FactoryGirl.create(:affiliation, user: rated_user, group: group)
+      FactoryGirl.create(:affiliation, user: user, group: group)
+
+      sign_in user
+      get :index
+      aspirations = JSON.parse(response.body)
+      aspiration = aspirations.first
+
+      expect(aspirations.length).to eq(1)
+      expect(aspiration['goal']).to eq("")
     end
   end
 
