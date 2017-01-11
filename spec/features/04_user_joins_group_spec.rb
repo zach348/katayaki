@@ -5,7 +5,7 @@ feature 'groups' do
   let!(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
-   user.confirm
+    user.confirm
   end
 
   scenario 'user joins existing circle' do

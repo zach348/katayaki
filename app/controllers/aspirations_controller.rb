@@ -45,6 +45,9 @@ class AspirationsController < ApplicationController
     if Aspiration.aspiration_exists?(goal, user, group)
       flash[:notice] = 'You have already accepted this seed'
       redirect_to goals_path
+    elsif user.aspirations.count >= 4
+      flash[:notice] = 'Focus, Grasshopper.'
+      redirect_to user_path(user)
     elsif new_aspiration.save
       flash[:notice] = 'Seed Accepted'
       aspiration = Aspiration.where(user: user, goal: goal, group: group).first

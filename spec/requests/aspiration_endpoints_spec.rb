@@ -9,7 +9,7 @@ describe AspirationsController, type: :controller do
       marked_user = FactoryGirl.create(:user)
       marked_user.confirm
       group = FactoryGirl.create(:group)
-      goal = FactoryGirl.create(:goal)
+      goal = FactoryGirl.create(:goal, title: 'goal title1')
       FactoryGirl.create(:affiliation, user: marked_user, group: group)
       FactoryGirl.create(:aspiration, group: group, goal: goal, user: marked_user)
 
@@ -45,7 +45,7 @@ describe AspirationsController, type: :controller do
       rated_user = FactoryGirl.create(:user)
       rated_user.confirm
       group = FactoryGirl.create(:group)
-      goal = FactoryGirl.create(:goal)
+      goal = FactoryGirl.create(:goal, title: 'goal title2')
       FactoryGirl.create(:affiliation, user: rated_user, group: group)
       FactoryGirl.create(:affiliation, user: user, group: group)
       FactoryGirl.create(:aspiration, group: group, goal: goal, user: rated_user)
