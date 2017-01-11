@@ -11,18 +11,26 @@ class AspirationsController < ApplicationController
         format.json do
           data = []
           to_be_rated = Aspiration.rating_items_for(current_user, 1)
-          to_be_rated.each do |aspiration|
-            hashed = aspiration.to_hash
-            data.push(hashed)
+          if to_be_rated.empty?
+            data.push({goal: '' })
+          else
+            to_be_rated.each do |aspiration|
+              hashed = aspiration.to_hash
+              data.push(hashed)
+            end
           end
           render json: data
         end
         format.html do
           data = []
           to_be_rated = Aspiration.rating_items_for(current_user, 1)
-          to_be_rated.each do |aspiration|
-            hashed = aspiration.to_hash
-            data.push(hashed)
+          if to_be_rated.empty?
+            data.push({goal: '' })
+          else
+            to_be_rated.each do |aspiration|
+              hashed = aspiration.to_hash
+              data.push(hashed)
+            end
           end
           render json: data
         end

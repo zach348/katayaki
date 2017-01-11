@@ -83,7 +83,18 @@ class RateApp extends Component {
 
     if(aspiration == undefined){
       return (
-        <div className='small-9 small-centered columns'>EMPTY</div>
+        <div className='small-9 small-centered large-7 large-centered columns'></div>
+      )
+    }else if(aspiration['goal'] == ''){
+      return(
+        <div className='row'>
+          <div className='katayaki small-9 small-centered large-7 large-centered columns'>
+            <div className="card">
+              <img src='https://s3.amazonaws.com/katayaki-avatars/uploads/stock/capybara-02.jpg' className='prof-img'></img>
+              <h4> So, there's no one left to support. Your friends must be pretty awesome. How about a picture of a Capybara, instead?</h4>
+            </div>
+          </div>
+        </div>
       )
     }
 
