@@ -8,6 +8,11 @@ feature 'katayakies' do
   let!(:katayaki_goal) { FactoryGirl.create(:goal, title: 'kat_goal') }
   let!(:katayaki) { FactoryGirl.create(:aspiration, goal: katayaki_goal, user: user, group: group) }
 
+  before(:each) do
+    user.confirm
+    new_user.confirm
+  end
+
   scenario 'user accepts trending katayaki' do
     num_aspirations = Aspiration.all.length
 
@@ -42,6 +47,27 @@ feature 'katayakies' do
     click_button 'Accept'
 
     expect(page).to have_content('You have already accepted this seed')
+  end
+
+  scenario 'user attempts to accept more than 4 katayakis' do
+    3.times do |n|
+      goal = FactoryGirl.create(:goal)
+      FactoryGirl.create(:aspiration, user: user, goal: goal)
+    end
+
+    FactoryGirl.create(:goal, title: 'too_many')
+    num_aspirations = user.aspirations.count
+
+    log_in(user)
+    click_link 'Circles'
+    select 'test_circle', from: 'group[group_id]'
+    click_button 'Join Circle'
+    click_link 'Grow'
+    click_link 'too_many'
+    click_button 'Accept'
+
+    expect(page).to have_content('Focus, Grasshopper.')
+    expect(user.aspirations.count).to eq(num_aspirations)
   end
 
 

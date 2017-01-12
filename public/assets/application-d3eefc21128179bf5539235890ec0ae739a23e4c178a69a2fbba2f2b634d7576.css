@@ -48,16 +48,21 @@
 }
 
 /* line 22, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
+.upload-btn {
+  color: black;
+}
+
+/* line 26, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
 .devise-submit {
   margin-bottom: 10vmin !important;
   margin-top: 5vmin;
 }
 
-/* line 28, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
+/* line 32, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
 .edit-link a {
   color: #FFF;
 }
-/* line 30, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
+/* line 34, /Users/Admin/Desktop/Launch/challenges/katayaki/app/assets/stylesheets/devise.scss */
 .edit-link a:hover {
   color: #FFF;
 }

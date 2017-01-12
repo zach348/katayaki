@@ -11,18 +11,26 @@ class AspirationsController < ApplicationController
         format.json do
           data = []
           to_be_rated = Aspiration.rating_items_for(current_user, 1)
-          to_be_rated.each do |aspiration|
-            hashed = aspiration.to_hash
-            data.push(hashed)
+          if to_be_rated.empty?
+            data.push({goal: '' })
+          else
+            to_be_rated.each do |aspiration|
+              hashed = aspiration.to_hash
+              data.push(hashed)
+            end
           end
           render json: data
         end
         format.html do
           data = []
           to_be_rated = Aspiration.rating_items_for(current_user, 1)
-          to_be_rated.each do |aspiration|
-            hashed = aspiration.to_hash
-            data.push(hashed)
+          if to_be_rated.empty?
+            data.push({goal: '' })
+          else
+            to_be_rated.each do |aspiration|
+              hashed = aspiration.to_hash
+              data.push(hashed)
+            end
           end
           render json: data
         end
@@ -45,6 +53,9 @@ class AspirationsController < ApplicationController
     if Aspiration.aspiration_exists?(goal, user, group)
       flash[:notice] = 'You have already accepted this seed'
       redirect_to goals_path
+    elsif user.aspirations.count >= 4
+      flash[:notice] = 'Focus, Grasshopper.'
+      redirect_to user_path(user)
     elsif new_aspiration.save
       flash[:notice] = 'Seed Accepted'
       aspiration = Aspiration.where(user: user, goal: goal, group: group).first
