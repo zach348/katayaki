@@ -54,9 +54,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.1.0)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     carrierwave (1.0.0.beta)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -424,7 +421,6 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  capybara-webkit
   carrierwave (>= 1.0.0.beta, < 2.0)
   coffee-rails
   coveralls
@@ -459,4 +455,4 @@ DEPENDENCIES
   wordnik
 
 BUNDLED WITH
-   1.13.2
+   1.13.7
