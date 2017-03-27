@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :visitor_ip
 
   # removed for master branch
-  # before_filter :authenticate if Rails.env.production?
+  ## before_filter :authenticate if Rails.env.production?
 
 
   protected
