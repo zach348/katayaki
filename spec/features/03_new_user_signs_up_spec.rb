@@ -3,9 +3,6 @@ require 'rails_helper'
 feature 'new user sign up' do
   let!(:user) { FactoryGirl.create(:user) }
 
-  before(:each) do
-    user.confirm
-  end
 
   scenario 'new user signs up' do
     expect(User.all.last.email).to_not eq('testuser@test.com')

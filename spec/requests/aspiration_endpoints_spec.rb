@@ -5,9 +5,7 @@ describe AspirationsController, type: :controller do
   context 'markers' do
     it 'returns a json populated with markers when there are users in bounds' do
       user = FactoryGirl.create(:user)
-      user.confirm
       marked_user = FactoryGirl.create(:user)
-      marked_user.confirm
       group = FactoryGirl.create(:group)
       goal = FactoryGirl.create(:goal, title: 'goal title1')
       FactoryGirl.create(:affiliation, user: marked_user, group: group)
@@ -41,9 +39,7 @@ describe AspirationsController, type: :controller do
   context 'rating items' do
     it 'returns rating items for users in a shared group' do
       user = FactoryGirl.create(:user)
-      user.confirm
       rated_user = FactoryGirl.create(:user)
-      rated_user.confirm
       group = FactoryGirl.create(:group)
       goal = FactoryGirl.create(:goal, title: 'goal title2')
       FactoryGirl.create(:affiliation, user: rated_user, group: group)
@@ -64,9 +60,7 @@ describe AspirationsController, type: :controller do
 
     it 'return hash with key *goal* and property of empty string when there is no one left to rate' do
       user = FactoryGirl.create(:user)
-      user.confirm
       rated_user = FactoryGirl.create(:user)
-      rated_user.confirm
       group = FactoryGirl.create(:group)
       goal = FactoryGirl.create(:goal, title: 'goal title2')
       FactoryGirl.create(:affiliation, user: rated_user, group: group)

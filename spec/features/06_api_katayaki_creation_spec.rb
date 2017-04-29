@@ -4,10 +4,6 @@ feature 'katayakies' do
   let!(:group) { FactoryGirl.create(:group, name: 'test_circle')}
   let!(:user) { FactoryGirl.create(:user) }
 
-  before(:each) do
-    user.confirm
-  end
-
   scenario 'user searches for nonexistent goal and accepts katayaki' do
     num_aspirations = user.aspirations.count
     num_goals = Goal.count

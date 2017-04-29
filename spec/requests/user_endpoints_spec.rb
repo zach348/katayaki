@@ -5,7 +5,6 @@ describe UsersController, type: :controller do
   context 'location' do
     it 'returns a json object with key coords and subkeys latitude and longitude' do
       user = FactoryGirl.create(:user)
-      user.confirm
       sign_in user
 
       get :location
@@ -22,7 +21,6 @@ describe UsersController, type: :controller do
     it 'accepts json location params and updates user location in the database' do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       user = FactoryGirl.create(:user)
-      user.confirm
       user.latitude = 0
       user.longitude = 0
       sign_in user
