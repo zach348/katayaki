@@ -102,7 +102,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'www.self-app.io' }
+  config.action_mailer.default_url_options = { :host => 'www.katayaki.herokuapp.com' }
 
 
 end

@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "\"Self\" <no-reply@self-app.io>" 
+  default from: "\"Self\" <no-reply@katayaki.herokuapp.com>"
 end
